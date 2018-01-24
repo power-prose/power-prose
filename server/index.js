@@ -23,6 +23,7 @@ module.exports = app
  */
 if (process.env.NODE_ENV !== 'production') require('../secrets')
 
+
 // passport registration
 passport.serializeUser((user, done) => done(null, user.id))
 passport.deserializeUser((id, done) =>
@@ -84,11 +85,32 @@ const createApp = () => {
 
 const startListening = () => {
   // start listening (and create a 'server' object representing our server)
-  const server = app.listen(PORT, () => console.log(`Mixing it up on port ${PORT}`))
+  const server = app.listen(PORT, () => console.log(`Mixing it up on port ${PORT}`, process.env.GOOGLE_APPLICATION_CREDENTIALS))
 
   // set up our socket control center
   const io = socketio(server)
   require('./socket')(io)
+
+
+
+  //test to see if we authenticated google api key
+
+  // const Storage = require('@google-cloud/storage')
+  // const storage = Storage();
+  // storage
+  //   .getBuckets()
+  //   .then((results)=> {
+  //     console.log("RESULTS!!!!!!", results);
+  //     const buckets= results[0]
+  //     console.log("Buckets: ");
+  //     buckets.forEach((bucket) => {
+  //       console.log(bucket.name)
+  //     })
+  //   })
+  //   .catch(err => {
+  //     console.log("ERROR: ", err)
+  //   })
+
 }
 
 const syncDb = () => db.sync()
