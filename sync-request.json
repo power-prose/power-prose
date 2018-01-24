@@ -1,0 +1,14 @@
+{
+  "config": {
+    "encoding": "FLAC",
+    "sampleRateHertz": 16000,
+    "languageCode": "en-US",
+    "enableWordTimeOffsets": false
+  },
+  "audio": {
+    "uri":"gs://cloud-samples-tests/speech/brooklyn.flac"
+  }
+}
+
+
+// gcloud auth activate-service-account --key-file=/Users/hannahweber/Desktop/GH-senior-phase/capstone/Power-Prose-g-key.json
