@@ -1,9 +1,9 @@
+These are our norms
+
 Our own:
     Try to use semicolons
     Adding comments, re-formating is okay
     If you change something major (changing file structure, removing routes, etc.), let the group know beforehand
-
-
 
 What does this group do when two or more members disagree (ex. on a technical approach, a technology choice, etc)?
 Do you vote? Does the whole group get involved? Do you get someone else to decide?
@@ -16,7 +16,7 @@ Do you vote? Does the whole group get involved? Do you get someone else to decid
 What does this group do when a member is frustrated?
 What strategy do you use to talk about it? What do you do if you're the frustrated person? What do you do if you're the person someone is frustrated with? Imagine a situation where Person A thinks that Person B is not pulling their weight - write a script for how you think that conversation should go.
 
-    For the person who is frustrated, ask yourself why. Ask what your group can do for you to help. 
+    For the person who is frustrated, ask yourself why. Ask what your group can do for you to help.
     Differentiate between whether the frustration signals something that needs to change or if you are just exhausted.
 
     If it is an issue between two members, they should try to resolve it between themselves. If that isn't possible, then it can become a problem the group can address
@@ -32,7 +32,7 @@ Do we do it together? Do we require sign off from someone else?
 When does this group ask for help?
 After 10 minutes? 15? 20? After everybody's tried to solve the problem? What strategies do we use before we ask for help?
 
-    After 15 minutes we can ask for help, however we should ask other team members for help before we ask a fellow/instructor. 
+    After 15 minutes we can ask for help, however we should ask other team members for help before we ask a fellow/instructor.
 
     Strategies should include referring to previous lectures, workshops, documentation, stackoverflow, Google everything
 
@@ -41,12 +41,12 @@ Do members of a pair decide their own norms? Do they do things like keep a timer
 
     Members of pairs should follow this norms guideline. Timers are good idea, ~20 mins.
 
-    For a member(s) that is more comfortable with a concept, they should pair so that another member can learn from them instead of completing it on their own. Members that both feel confident in an area, should not pair together for that task. 
+    For a member(s) that is more comfortable with a concept, they should pair so that another member can learn from them instead of completing it on their own. Members that both feel confident in an area, should not pair together for that task.
 
 How does this group approach work "after hours" (i.e. after normal class hours and weekends)?
 Is it okay to work on your own after hours? How do we keep the group informed? Do we only work after hours when we can pair? When the entire group is present?
 
-    If someone strongly wants to work on a certain part of the project, she should not feel afraid to step up and express interest in working on that aspect. 
+    If someone strongly wants to work on a certain part of the project, she should not feel afraid to step up and express interest in working on that aspect.
 
     Have open communication if we want to work on it after hours.
 
