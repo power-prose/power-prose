@@ -19,3 +19,19 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+.on-button-container {
+  padding: 3em;
+}
+
+.on-button {
+  border-radius: 50%;
+  height: 300px;
+  width: 300px;
+  color: #363f4f;
+  font-size: 2.5em;
+  background: yellow;
+  border: none;
+  font-style: bold;
+  letter-spacing: .2em;
+}
