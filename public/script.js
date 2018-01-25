@@ -1,43 +1,91 @@
 const getUserMedia = require('getusermedia');
-const MicrophoneStream = require('microphone-stream');
+// const MicrophoneStream = require('microphone-stream');
+const WatsonSpeech = require('watson-speech');
 
-document.querySelector('.on-button').addEventListener('click', () => {
-  var micStream = new MicrophoneStream();
+const token = `0eLR4Oufd%2BgBFAQbyXb2dnERvojh6KOp6O22KTrIK85g%2F3xqJ3%2FoTU23mikujSecmpjKSmjxjmlChjSP9rFYm0ECeT3gU%2B%2BdS35Fn%2F1gFhX%2BsoJ3yRPp5sV1jw7WGZwOcW9c2Vw0%2BFea0uwjxXSKOCHoWOix5MdGnD0xNm2hGwMkLo7zg4oOWwYzT1kbqxYXdx93bueK4BC0M5VeQztiR%2BMU3NuQ3b4BYxBZESy2qKQGAWzFM5%2Ftwq2qSFv%2Bh8g2W6Q8N%2BOoihxaafrkchUIQ4ciahxhCGlbJPx0lQiOLCDXVuCOdZhjojQw1NPGx%2Bm005B1dmwUzJlC3UT2%2Fvy2hHdSkHuwP%2FC819GcGEN%2BN%2B80FdLXvgzauCCCyGdr4HJ7ocGLkJIDFYH28fTErqA8z8QcGyJvnOEhQdfF0mtYNuZ3Iwv3qctm%2BGX9z%2Fr9Kw3iBK1dvr%2Fm9Dvt9DWQT1nyyC%2FyiUkaQaeiocQ576WOeznJampOxYsVQyhtPkuNweq8jPocC9ZJICBp7Nb5NGeTjoTH7vd29RHM05JZJbw6t0O7Q3Hf6h5wH%2FlcCu5qTv6%2BFrAF34SUdNVut26w1Op74zUQXXONGjnDGxBlpHB1r97wwxiogZhd70PhI7Jkt5%2FiYO9kwD0sUt3Ge6oSsNsVg4pEzCA15g7SLeIjP4YRHv%2Fw4zU94ksZk%2Bk0E23E%2Fe5ZCr3%2BkK1p2ZntYQEbAfPlwBq%2FBODflC4K5%2F3DUJcq72Xfgv%2F6zPxMqqPI6OuT4cWZ2qQPiecZCJbeOuWhTYcsWKxpJo5tnMfFeGWv5i02sPDgbD2Q3EiFiwj9ZuXDc%2FOM8cGPxBoJRwZlMZ2YSB2LeKHCfySLTNN9avyLYXD86SS4uaCtSwXVDmRik26kx6ewO2zWWAEarz7yruclTWHRvWyeWnry%2Bl8Re1kJFoWVf69Sjo6Q1bPhsYGQtKoNSYsAG6IMVzEAG0dSmPgurmP8IvQiU4wC1NG7mHkOuawyahQ%3D`
+// const wsURI = 'wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize'
+//   + '?watson-token=' + token
+//   + '&model=es-ES_BroadbandModel';
+// var websocket = new WebSocket(wsURI);
+//
+// websocket.onopen = function(evt) { onOpen(evt) };
+// websocket.onclose = function(evt) { onClose(evt) };
+// websocket.onmessage = function(evt) { onMessage(evt) };
+// websocket.onerror = function(evt) { onError(evt) };
+//
+// function onOpen(evt) {
+//   var message = {
+//     'action': 'start',
+//     'content-type': 'audio/l16;rate=22050'
+//   };
+//   websocket.send(JSON.stringify(message));
+// }
+//
+// function onMessage(evt) {
+//   console.log(evt.data);
+// }
 
-  navigator.mediaDevices.getUserMedia({ audio: true })
-    .then(function(stream) {
-      console.log(stream)
-      micStream.setStream(stream);
-      console.log('!!!!!!', micStream)
-    }).catch(function(error) {
-      console.log(error);
-    });
+document.querySelector('.on-button').addEventListener('click', (event) => {
+  let stream = WatsonSpeech.SpeechToText.recognizeMicrophone({
+   token,
+   object_mode: false
+ });
 
-  // get Buffers (Essentially a Uint8Array DataView of the same Float32 values)
-  micStream.on('data', function(chunk) {
-    console.log('!!!!chunk', chunk)
-    // Optionally convert the Buffer back into a Float32Array
-    // (This actually just creates a new DataView - the underlying audio data is not copied or modified.)
-    var raw = MicrophoneStream.toRaw(chunk)
-    console.log('!!!!!', raw)
-    //...
+ stream.setEncoding('utf8'); // get text instead of Buffers for on data events
 
-    // note: if you set options.objectMode=true, the `data` event will output AudioBuffers instead of Buffers
-   });
+ stream.on('data', function(data) {
+   console.log(data);
+ });
 
-  // or pipe it to another stream
-  // micStream.pipe(/*...*/);
+ stream.on('error', function(err) {
+     console.log(err);
+ });
 
-  // It also emits a format event with various details (frequency, channels, etc)
-  micStream.on('format', function(format) {
-    console.log(format);
+document.querySelector('.stop-button').addEventListener('click', () => {
+  stream.stop.bind(stream)
+  })
+  .catch(function(error) {
+   console.log(error);
   });
-
-  // Stop when ready
-  // document.getElementById('.on-button').addEventListener('click', () => {
-  //   micStream.stop();
-  // };
 })
+
+
+
+
+
+
+
+// document.querySelector('.on-button').addEventListener('click', (event) => {
+//   var micStream = new MicrophoneStream();
+//   // websocket.open()
+//
+//   navigator.mediaDevices.getUserMedia({ audio: true })
+//     .then(function(stream) {
+//       console.log(stream)
+//       micStream.setStream(stream);
+//     }).catch(function(error) {
+//       console.log(error);
+//     });
+//
+//   // get Buffers (Essentially a Uint8Array DataView of the same Float32 values)
+//   micStream.on('data', function(chunk) {
+//     // console.log('!!!!chunk', chunk);
+//     let blob = new Blob(chunk);
+//     console.log(blob)
+//     websocket.send(blob);
+//    });
+//
+//   // It also emits a format event with various details (frequency, channels, etc)
+//   micStream.on('format', function(format) {
+//     console.log(format);
+//   });
+//
+//   // Stop when ready
+//   document.querySelector('.stop-button').addEventListener('click', () => {
+//     micStream.stop();
+//     websocket.send(JSON.stringify({ 'action': 'stop' }))
+//   })
+// })
 
 
 
