@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { withRouter, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Login, Signup } from './components';
-import { me } from './store';
-import { NavBar, RecordButtons } from './';
+import { Login, Signup, NavBar, RecordButtons } from './';
+import { me } from '../store';
+
 
 class UserInterface extends Component {
 
@@ -23,6 +23,7 @@ class UserInterface extends Component {
                         {/* Routes placed here are available to all visitors */}
                         <Route path="/login" component={Login} />
                         <Route path="/signup" component={Signup} />
+                        <Route path="/" component={RecordButtons} />
                         {
                             isLoggedIn &&
                             <Switch>

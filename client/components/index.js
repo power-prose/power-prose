@@ -6,3 +6,6 @@
 //export {default as Main} from './main'
 //export {default as UserHome} from './user-home'
 export {Login, Signup} from './auth-form'
+export {default as UserInterface} from './UserInterface.js'
+export {default as NavBar} from './NavBar.js'
+export {default as RecordButtons } from './RecordButtons.js'
