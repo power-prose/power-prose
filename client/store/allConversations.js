@@ -7,7 +7,7 @@ const defaultConversations = [];
 const setAllConversations = conversations => ({type: SET_ALL_CONVERSATIONS, conversations});
 
 export const fetchAllConversations = (userId) => dispatch =>
-axios.get(`/api/conversations/${userId}`)
+axios.get(`/api/conversations/user/${userId}`)
 .then(res => dispatch(setAllConversations(res.data)))
 .catch(error);
 
@@ -18,4 +18,4 @@ export default function (state = defaultConversations, action) {
     default:
       return state
   }
-}
+};

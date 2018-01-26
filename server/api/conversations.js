@@ -12,7 +12,7 @@ router.get('/:conversationId', (req, res, next) => {
     .catch(next)
 })
 
-router.get('/:userId', (req, res, next) => {
+router.get('/user/:userId', (req, res, next) => {
   Conversation.findAll({
     where: {
       userId: req.params.userId
