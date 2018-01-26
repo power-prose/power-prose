@@ -1,4 +1,4 @@
-const { User, WatchWord, db } = require('../server/db/models')
+const { User, WatchWord, Conversation, db } = require('../server/db/models')
 
 const users = [{
   email: '12345@gmail.com',
@@ -44,7 +44,33 @@ const watchWords = [{
   wordOrPhrase: 'I would just like to say'
 }, {
   wordOrPhrase: 'I’m not sure but'
-}]
+}];
+
+const conversations = [{
+  name: 'Report phone call',
+  length: 34
+} , {
+  name: 'Quarterly report presentation with board',
+  length: 62
+} , {
+  name: 'Buyers meeting',
+  length: 44
+} , {
+  name: 'Phone call with direct reports',
+  length: 23
+} , {
+  name: 'Potential partnership phone call',
+  length: 31
+} , {
+  name: 'Presentation practice',
+  length: 15
+} , {
+  name: 'Technical interview practice',
+  length: 33
+} , {
+  name: 'Meeting with architects',
+  length: 42
+}];
 
 const seed = () =>
   Promise.all(users.map(user =>
@@ -53,6 +79,10 @@ const seed = () =>
   .then(() =>
   Promise.all(watchWords.map(watchWord =>
     WatchWord.create(watchWord))
+  ))
+  .then(() =>
+  Promise.all(conversations.map(conversation =>
+    Conversation.create(conversation))
   ))
 
 const main = () => {
