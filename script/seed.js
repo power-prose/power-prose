@@ -1,4 +1,4 @@
-const { User, WatchWord, Conversation, db } = require('../server/db/models')
+const { User, WatchWord, Conversation, WatchWordOccurrence, db } = require('../server/db/models')
 
 const users = [{
   email: '12345@gmail.com',
@@ -72,6 +72,62 @@ const conversations = [{
   length: 42
 }];
 
+const watchWordOccurrences = [{
+  wordOrPhrase: 'I’m no expert but',
+  countOfTimesUsed: 2
+} , {
+  wordOrPhrase: 'Just',
+  countOfTimesUsed: 14
+} , {
+  wordOrPhrase: 'Does that make sense?',
+  countOfTimesUsed: 3
+} , {
+  wordOrPhrase: 'Am I making sense?',
+  countOfTimesUsed: 2
+} , {
+  wordOrPhrase: 'I’m sorry',
+  countOfTimesUsed: 4
+} , {
+  wordOrPhrase: 'I would just like to say',
+  countOfTimesUsed: 1
+} , {
+  wordOrPhrase: 'I’m not sure but',
+  countOfTimesUsed: 4
+} , {
+  wordOrPhrase: 'I’m no expert but',
+  countOfTimesUsed: 3
+} , {
+  wordOrPhrase: 'Just',
+  countOfTimesUsed: 5
+} , {
+  wordOrPhrase: 'Does that make sense?',
+  countOfTimesUsed: 2
+} , {
+  wordOrPhrase: 'Am I making sense?',
+  countOfTimesUsed: 1
+} , {
+  wordOrPhrase: 'I’m sorry',
+  countOfTimesUsed: 6
+} , {
+  wordOrPhrase: 'I would just like to say',
+  countOfTimesUsed: 3
+} , {
+  wordOrPhrase: 'I’m not sure but',
+  countOfTimesUsed: 4
+} , {
+  wordOrPhrase: 'I’m no expert but',
+  countOfTimesUsed: 3
+} , {
+  wordOrPhrase: 'Just',
+  countOfTimesUsed: 4
+} , {
+  wordOrPhrase: 'Does that make sense?',
+  countOfTimesUsed: 3
+} , {
+  wordOrPhrase: 'Am I making sense?',
+  countOfTimesUsed: 2
+}];
+
 const seed = () =>
   Promise.all(users.map(user =>
     User.create(user))
@@ -84,6 +140,10 @@ const seed = () =>
   Promise.all(conversations.map(conversation =>
     Conversation.create(conversation))
   ))
+  .then(() =>
+  Promise.all(watchWordOccurrences.map(watchWordOccurrence =>
+    WatchWordOccurrence.create(watchWordOccurrence))
+  ));
 
 const main = () => {
   console.log('Syncing db...');
