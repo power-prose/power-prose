@@ -7,7 +7,7 @@ module.exports = router
 const sttAuthService = new watson.AuthorizationV1(
   Object.assign(
     {
-      username: process.env.SPEECH_TO_TEXT_USERNAME, // or hard-code credentials here
+      username: process.env.SPEECH_TO_TEXT_USERNAME,
       password: process.env.SPEECH_TO_TEXT_PASSWORD
     },
     vcapServices.getCredentials('speech_to_text') // pulls credentials from environment in bluemix, otherwise returns {}
