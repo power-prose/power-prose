@@ -1,5 +1,5 @@
 const User = require('./user')
-const WatchWord = require('./watchWords')
+const WatchWord = require('./watchWord')
 const db = require('../db.js')
 
 // model associations
