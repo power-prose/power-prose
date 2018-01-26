@@ -7,4 +7,5 @@ module.exports = router;
 router.get('/:userId', (req, res, next) => {
   User.findById(req.params.userId, { include: [WatchWord, Conversation] })
     .then(user => res.json(user))
-})
+    .catch(next)
+});
