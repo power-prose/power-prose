@@ -33,7 +33,7 @@ const users = [{
 const seed = () =>
   Promise.all(users.map(user =>
     User.create(user))
-  );
+  )
 
 const main = () => {
   console.log('Syncing db...');
