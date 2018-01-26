@@ -1,4 +1,4 @@
-const { User, WatchWord, Conversation, WatchWordOccurrence, db } = require('../server/db/models')
+const { User, WatchWord, Conversation, WatchWordOccurrence, Snippet, db } = require('../server/db/models')
 
 const users = [{
   email: '12345@gmail.com',
@@ -31,19 +31,19 @@ const users = [{
 }];
 
 const watchWords = [{
-  wordOrPhrase: 'I’m no expert but'
+  wordOrPhrase: 'i’m no expert but'
 }, {
-  wordOrPhrase: 'Just'
+  wordOrPhrase: 'just'
 }, {
-  wordOrPhrase: 'Does that make sense?'
+  wordOrPhrase: 'does that make sense'
 }, {
-  wordOrPhrase: 'Am I making sense?'
+  wordOrPhrase: 'am i making sense'
 }, {
-  wordOrPhrase: 'I’m sorry'
+  wordOrPhrase: 'i’m sorry'
 }, {
-  wordOrPhrase: 'I would just like to say'
+  wordOrPhrase: 'i would just like to say'
 }, {
-  wordOrPhrase: 'I’m not sure but'
+  wordOrPhrase: 'i’m not sure but'
 }];
 
 const conversations = [{
@@ -73,59 +73,71 @@ const conversations = [{
 }];
 
 const watchWordOccurrences = [{
-  wordOrPhrase: 'I’m no expert but',
+  wordOrPhrase: 'i’m no expert but',
   countOfTimesUsed: 2
 } , {
-  wordOrPhrase: 'Just',
-  countOfTimesUsed: 14
-} , {
-  wordOrPhrase: 'Does that make sense?',
+  wordOrPhrase: 'just',
   countOfTimesUsed: 3
 } , {
-  wordOrPhrase: 'Am I making sense?',
+  wordOrPhrase: 'does that make sense',
+  countOfTimesUsed: 3
+} , {
+  wordOrPhrase: 'am I making sense',
   countOfTimesUsed: 2
 } , {
-  wordOrPhrase: 'I’m sorry',
+  wordOrPhrase: 'i’m sorry',
   countOfTimesUsed: 4
 } , {
-  wordOrPhrase: 'I would just like to say',
+  wordOrPhrase: 'i would just like to say',
   countOfTimesUsed: 1
 } , {
-  wordOrPhrase: 'I’m not sure but',
+  wordOrPhrase: 'i’m not sure but',
   countOfTimesUsed: 4
 } , {
-  wordOrPhrase: 'I’m no expert but',
+  wordOrPhrase: 'i’m no expert but',
   countOfTimesUsed: 3
 } , {
-  wordOrPhrase: 'Just',
+  wordOrPhrase: 'just',
   countOfTimesUsed: 5
 } , {
-  wordOrPhrase: 'Does that make sense?',
+  wordOrPhrase: 'does that make sense',
   countOfTimesUsed: 2
 } , {
-  wordOrPhrase: 'Am I making sense?',
+  wordOrPhrase: 'am i making sense',
   countOfTimesUsed: 1
 } , {
-  wordOrPhrase: 'I’m sorry',
+  wordOrPhrase: 'i’m sorry',
   countOfTimesUsed: 6
 } , {
-  wordOrPhrase: 'I would just like to say',
+  wordOrPhrase: 'i would just like to say',
   countOfTimesUsed: 3
 } , {
-  wordOrPhrase: 'I’m not sure but',
+  wordOrPhrase: 'i’m not sure but',
   countOfTimesUsed: 4
 } , {
-  wordOrPhrase: 'I’m no expert but',
+  wordOrPhrase: 'i’m no expert but',
   countOfTimesUsed: 3
 } , {
-  wordOrPhrase: 'Just',
+  wordOrPhrase: 'just',
   countOfTimesUsed: 4
 } , {
-  wordOrPhrase: 'Does that make sense?',
+  wordOrPhrase: 'does that make sense',
   countOfTimesUsed: 3
 } , {
-  wordOrPhrase: 'Am I making sense?',
+  wordOrPhrase: 'am I making sense',
   countOfTimesUsed: 2
+}];
+
+const snippets = [{
+  text: ' ... i’m no expert but I think we might want to consider ...'
+} , {
+  text: '... i’m no expert but what I would suggest is ... '
+} , {
+  text: '... i just want to say that i’m on board with that ...'
+} , {
+  text: '... i’m just not sure that’s the best approach'
+} , {
+  text: ' ... i’m just not sure that’s the way to go'
 }];
 
 const seed = () =>
@@ -143,6 +155,10 @@ const seed = () =>
   .then(() =>
   Promise.all(watchWordOccurrences.map(watchWordOccurrence =>
     WatchWordOccurrence.create(watchWordOccurrence))
+  ))
+  .then(() =>
+  Promise.all(snippets.map(snippet =>
+    Snippet.create(snippet))
   ));
 
 const main = () => {
