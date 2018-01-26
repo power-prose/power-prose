@@ -12,6 +12,16 @@ router.get('/:conversationId', (req, res, next) => {
     .catch(next)
 })
 
+router.get('/:userId', (req, res, next) => {
+  Conversation.findAll({
+    where: {
+      userId: req.params.userId
+    }
+  })
+  .then(conversations => res.json(conversations))
+  .catch(next)
+})
+
 router.post('/', (req, res, next) => {
   Conversation.create(req.body)
     .then(conversation => res.json(conversation)) // in the event that we want to send this to the front end
