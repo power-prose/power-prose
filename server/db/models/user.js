@@ -2,8 +2,6 @@ const crypto = require('crypto');
 const Sequelize = require('sequelize');
 const db = require('../db');
 
-module.exports = User;
-
 const User = db.define('user', {
   email: {
     type: Sequelize.STRING,
@@ -32,6 +30,8 @@ const User = db.define('user', {
     }
   }
 });
+
+module.exports = User;
 
 User.prototype.correctPassword = function (candidatePwd) {
   return User.encryptPassword(candidatePwd, this.salt) === this.password

@@ -1,12 +1,12 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
 
-module.exports = WatchWords;
-
-const WatchWords = db.define('watchWords', {
+const WatchWord = db.define('watchWords', {
   wordOrPhrase: {
     type: Sequelize.STRING,
     unique: true,
     allowNull: false
   }
-})
+});
+
+module.exports = WatchWord;

@@ -1,4 +1,4 @@
-const { User, db } = require('../server/db/models')
+const { User, WatchWord, db } = require('../server/db/models')
 
 const users = [{
   email: '12345@gmail.com',
@@ -30,10 +30,30 @@ const users = [{
   lastName: 'Stiller'
 }];
 
+const watchWords = [{
+  wordOrPhrase: 'I’m no expert but'
+}, {
+  wordOrPhrase: 'Just'
+}, {
+  wordOrPhrase: 'Does that make sense?'
+}, {
+  wordOrPhrase: 'Am I making sense?'
+}, {
+  wordOrPhrase: 'I’m sorry'
+}, {
+  wordOrPhrase: 'I would just like to say'
+}, {
+  wordOrPhrase: 'I’m not sure but'
+}]
+
 const seed = () =>
   Promise.all(users.map(user =>
     User.create(user))
   )
+  .then(() =>
+  Promise.all(watchWords.map(watchWord =>
+    WatchWord.create(watchWord))
+  ))
 
 const main = () => {
   console.log('Syncing db...');
