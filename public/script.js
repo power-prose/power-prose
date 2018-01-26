@@ -1,4 +1,3 @@
-
 const WatsonSpeech = require("watson-speech");
 const axios = require("axios");
 

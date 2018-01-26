@@ -1,14 +1,11 @@
-const router = require('express').Router()
-const {User} = require('../db/models')
-module.exports = router
+const router = require('express').Router();
+const { User, WatchWord, Conversation } = require('../db/models');
 
-router.get('/', (req, res, next) => {
-  User.findAll({
-    // explicitly select only the id and email fields - even though
-    // users' passwords are encrypted, it won't help if we just
-    // send everything to anyone who asks!
-    attributes: ['id', 'email']
-  })
-    .then(users => res.json(users))
+module.exports = router;
+
+// get a single user by id, eagerly loading watchWords and conversations
+router.get('/:userId', (req, res, next) => {
+  User.findById(req.params.userId, { include: [WatchWord, Conversation] })
+    .then(user => res.json(user))
     .catch(next)
-})
+});

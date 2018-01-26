@@ -1,51 +1,181 @@
-/**
- * Welcome to the seed file! This seed file uses a newer language feature called...
- *
- *                  -=-= ASYNC...AWAIT -=-=
- *
- * Async-await is a joy to use! Read more about it in the MDN docs:
- *
- * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function
- *
- * Now that you've got the main idea, check it out in practice below!
- */
-const db = require('../server/db')
-const {User} = require('../server/db/models')
+const { User, WatchWord, Conversation, WatchWordOccurrence, Snippet, db } = require('../server/db/models')
 
-async function seed () {
-  await db.sync({force: true})
-  console.log('db synced!')
-  // Whoa! Because we `await` the promise that db.sync returns, the next line will not be
-  // executed until that promise resolves!
+const users = [{
+  email: '12345@gmail.com',
+  password: 'testpassword1',
+  salt: 'not_sure?',
+  googleId: '12345',
+  firstName: 'Jacquelyn',
+  lastName: 'Wax'
+}, {
+  email: '23456@gmail.com',
+  password: 'testpassword2',
+  salt: 'not_sure?',
+  googleId: '23455',
+  firstName: 'Hannah',
+  lastName: 'Weber'
+}, {
+  email: '34567@gmail.com',
+  password: 'testpassword3',
+  salt: 'not_sure?',
+  googleId: '34567',
+  firstName: 'Ann',
+  lastName: 'Layman'
+} , {
+  email: '45678@gmail.com',
+  password: 'testpassword4',
+  salt: 'not_sure?',
+  googleId: '45678',
+  firstName: 'Lyssa',
+  lastName: 'Stiller'
+}];
 
-  const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
-  ])
-  // Wowzers! We can even `await` on the right-hand side of the assignment operator
-  // and store the result that the promise resolves to in a variable! This is nice!
-  console.log(`seeded ${users.length} users`)
-  console.log(`seeded successfully`)
-}
+const watchWords = [{
+  wordOrPhrase: 'i’m no expert but'
+}, {
+  wordOrPhrase: 'just'
+}, {
+  wordOrPhrase: 'does that make sense'
+}, {
+  wordOrPhrase: 'am i making sense'
+}, {
+  wordOrPhrase: 'i’m sorry'
+}, {
+  wordOrPhrase: 'i would just like to say'
+}, {
+  wordOrPhrase: 'i’m not sure but'
+}];
 
-// Execute the `seed` function
-// `Async` functions always return a promise, so we can use `catch` to handle any errors
-// that might occur inside of `seed`
-seed()
-  .catch(err => {
-    console.error(err.message)
-    console.error(err.stack)
-    process.exitCode = 1
-  })
-  .then(() => {
-    console.log('closing db connection')
-    db.close()
-    console.log('db connection closed')
-  })
+const conversations = [{
+  name: 'Report phone call',
+  length: 34
+} , {
+  name: 'Quarterly report presentation with board',
+  length: 62
+} , {
+  name: 'Buyers meeting',
+  length: 44
+} , {
+  name: 'Phone call with direct reports',
+  length: 23
+} , {
+  name: 'Potential partnership phone call',
+  length: 31
+} , {
+  name: 'Presentation practice',
+  length: 15
+} , {
+  name: 'Technical interview practice',
+  length: 33
+} , {
+  name: 'Meeting with architects',
+  length: 42
+}];
 
-/*
- * note: everything outside of the async function is totally synchronous
- * The console.log below will occur before any of the logs that occur inside
- * of the async function
- */
-console.log('seeding...')
+const watchWordOccurrences = [{
+  wordOrPhrase: 'i’m no expert but',
+  countOfTimesUsed: 2
+} , {
+  wordOrPhrase: 'just',
+  countOfTimesUsed: 3
+} , {
+  wordOrPhrase: 'does that make sense',
+  countOfTimesUsed: 3
+} , {
+  wordOrPhrase: 'am I making sense',
+  countOfTimesUsed: 2
+} , {
+  wordOrPhrase: 'i’m sorry',
+  countOfTimesUsed: 4
+} , {
+  wordOrPhrase: 'i would just like to say',
+  countOfTimesUsed: 1
+} , {
+  wordOrPhrase: 'i’m not sure but',
+  countOfTimesUsed: 4
+} , {
+  wordOrPhrase: 'i’m no expert but',
+  countOfTimesUsed: 3
+} , {
+  wordOrPhrase: 'just',
+  countOfTimesUsed: 5
+} , {
+  wordOrPhrase: 'does that make sense',
+  countOfTimesUsed: 2
+} , {
+  wordOrPhrase: 'am i making sense',
+  countOfTimesUsed: 1
+} , {
+  wordOrPhrase: 'i’m sorry',
+  countOfTimesUsed: 6
+} , {
+  wordOrPhrase: 'i would just like to say',
+  countOfTimesUsed: 3
+} , {
+  wordOrPhrase: 'i’m not sure but',
+  countOfTimesUsed: 4
+} , {
+  wordOrPhrase: 'i’m no expert but',
+  countOfTimesUsed: 3
+} , {
+  wordOrPhrase: 'just',
+  countOfTimesUsed: 4
+} , {
+  wordOrPhrase: 'does that make sense',
+  countOfTimesUsed: 3
+} , {
+  wordOrPhrase: 'am I making sense',
+  countOfTimesUsed: 2
+}];
+
+const snippets = [{
+  text: ' ... i’m no expert but I think we might want to consider ...'
+} , {
+  text: '... i’m no expert but what I would suggest is ... '
+} , {
+  text: '... i just want to say that i’m on board with that ...'
+} , {
+  text: '... i’m just not sure that’s the best approach'
+} , {
+  text: ' ... i’m just not sure that’s the way to go'
+}];
+
+const seed = () =>
+  Promise.all(users.map(user =>
+    User.create(user))
+  )
+  .then(() =>
+  Promise.all(watchWords.map(watchWord =>
+    WatchWord.create(watchWord))
+  ))
+  .then(() =>
+  Promise.all(conversations.map(conversation =>
+    Conversation.create(conversation))
+  ))
+  .then(() =>
+  Promise.all(watchWordOccurrences.map(watchWordOccurrence =>
+    WatchWordOccurrence.create(watchWordOccurrence))
+  ))
+  .then(() =>
+  Promise.all(snippets.map(snippet =>
+    Snippet.create(snippet))
+  ));
+
+const main = () => {
+  console.log('Syncing db...');
+  db.sync({force: true})
+    .then(() => {
+      console.log('Seeding databse...');
+      return seed();
+    })
+    .catch(err => {
+      console.log('Error while seeding');
+      console.log(err.stack);
+    })
+    .then(() => {
+      db.close();
+      return null;
+    });
+};
+
+main();
