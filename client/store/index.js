@@ -8,7 +8,7 @@ import allConversations from './allConversations'
 import chosenConversation from './chosenConversation'
 import snippets from './snippets'
 
-const reducer = combineReducers({ user, watchWords, allConversations, chosenConservation, snippets })
+const reducer = combineReducers({ user, watchWords, allConversations, chosenConversation, snippets })
 const middleware = composeWithDevTools(applyMiddleware(
   thunkMiddleware,
   createLogger({collapsed: true})
