@@ -1,17 +1,15 @@
 import React from 'react';
 import connect from 'react-redux';
 import { withRouter } from 'react-router-dom';
-// import { fetchCurrentWatchWords } from store;
-// we need to decide when we want to fetch watchWords from store; we can do it when this component mounts but we may want to load all data when the NavBar component mounts or something like that
+
 
 const WatchWords = (props) => {
   const { watchWords } = props
 
   return (
-    <div>
-      This is the WatchWords component.
-      It has access to an array of all watch words from state.
-    </div>
+    return (
+      <h1>I am the WatchWords component. My job is to render a list of all watch words. I have access to all those words through props.<h1>
+    )
   )
 };
 
@@ -22,8 +20,6 @@ const mapState = (state) => {
   }
 };
 
-const mapDispatch = (dispatch) => {
-  return {};
-};
+const mapDispatch = null;
 
 export default withRouter(connect(mapState, mapDispatch)(WatchWords));
