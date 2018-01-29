@@ -1,16 +1,19 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { analyzeText } from "../utils";
+import { postNewConvo } from "../store/index";
 const WatsonSpeech = require("watson-speech");
 const axios = require("axios");
-const request = require('request');
-import { postNewConvo } from '../store';
 
+const request = require('request');
 
 class RecordButtons extends Component {
   constructor(props) {
     super(props);
-    // this.state = { text: "" };
+    this.state = {
+      text: "",
+      tones: []
+    };
     this.handleStart = this.handleStart.bind(this);
     this.handleStop = this.handleStop.bind(this);
     this.handleResults = this.handleResults.bind(this);
@@ -50,14 +53,15 @@ class RecordButtons extends Component {
   }
 
   handleUpdate(data) {
-    let updatedText = this.props.currentConversation.text + data;
+    let updatedText = this.state.text + data;
     this.setState({ text: updatedText });
+    console.log(updatedText);
   }
 
   handleStop() {
     this.stream.stop = this.stream.stop.bind(this.stream);
     this.stream.stop();
-    console.log(this.stream)
+    //make form appear
 
   }
 
@@ -74,7 +78,7 @@ class RecordButtons extends Component {
   }
 
   handleTone() {
-    axios.post('/api/toneAnalyzer/analyze', {speechText: this.state.text})
+    axios.post('/api/toneAnalyzer/analyze', { speechText: this.state.text })
       .then(res => {
         console.log(res.data);
       })
@@ -107,15 +111,24 @@ class RecordButtons extends Component {
   }
 }
 
-const mapState = (state, ownProps) => {
-  return {
-    currentConversation: state.currentConversation
-  };
+const mapState = state => {
+  return {};
 };
 
 //need to create a conversation in db with appropriate data
-const mapDispatch = (dispatch, ownProps) => {
-  return dispatch(postNewConvo(newConversation));
+const mapDispatch = dispatch => {
+  return {
+    handleSubmit(event) {
+      event.preventDefault();
+      const convoData = {
+        //make a form show up that takes input and on that handlesubmit
+        name: event.target.value,
+        tones: this.state.tones
+        //eventually pass in time
+      }
+
+    }
+  }
 };
 
 export default connect(mapState)(RecordButtons);
