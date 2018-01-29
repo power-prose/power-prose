@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { setChosenConversation } from 'store';
+import { setChosenConversation } from '../store';
 
 
 const ListOfConversations = (props) => {
@@ -9,7 +9,7 @@ const ListOfConversations = (props) => {
 
   return (
     <div>
-      <h1>I am the ListofConversations component. My job is to render a list of all conversations associated with the currentUser. I have access to all those conversations through props.<h1>
+      <h1>I am the ListofConversations component. My job is to render a list of all conversations associated with the currentUser. I have access to all those conversations through props.</h1>
       {
         conversations && conversations.map(conversation => {
           return (

@@ -1,5 +1,5 @@
 import React from 'react';
-import connect from 'react-redux';
+import {connect} from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 
@@ -7,7 +7,7 @@ const WatchWords = (props) => {
   const { watchWords } = props
 
   return (
-    <h1>I am the WatchWords component. My job is to render a list of all watch words. I have access to all those words through props.<h1>
+    <h1>I am the WatchWords component. My job is to render a list of all watch words. I have access to all those words through props.</h1>
   )
 };
 

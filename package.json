@@ -32,6 +32,7 @@
     "history": "^4.6.3",
     "microphone-stream": "^4.1.3",
     "morgan": "^1.8.1",
+    "net": "^1.0.2",
     "passport": "^0.3.2",
     "passport-google-oauth": "^1.0.0",
     "pg": "^6.1.2",
@@ -46,6 +47,7 @@
     "redux-thunk": "^2.2.0",
     "sequelize": "^4.3.1",
     "socket.io": "^2.0.3",
+    "tls": "0.0.1",
     "vcap_services": "^0.3.4",
     "watson-developer-cloud": "^3.0.5",
     "watson-speech": "^0.34.1"
