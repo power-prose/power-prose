@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { setChosenConversation } from '../store';
+import { fetchChosenConversation } from '../store';
 
 
 const ListOfConversations = (props) => {
@@ -14,7 +14,7 @@ const ListOfConversations = (props) => {
         conversations && conversations.map(conversation => {
           return (
             <div key={conversation.id}>
-              <Link onClick={handleClick} to={ `/conversations/${conversation.id}`}>{ conversation.name + ', ' + conversation.date }</Link>
+              <Link onClick={(e) => handleClick(e, conversation.id)} to={ `/conversations/${conversation.id}`}>{ conversation.name + ', ' + conversation.date }</Link>
             </div>
           )
         })
@@ -31,9 +31,9 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    handleClick(event, conversation) {
+    handleClick(event, conversationId) {
       event.preventDefault()
-      dispatch(setChosenConversation(conversation))
+      dispatch(fetchChosenConversation(conversationId))
     }
   }
 };

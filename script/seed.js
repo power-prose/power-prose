@@ -48,16 +48,16 @@ const watchWords = [{
 
 const conversations = [{
   name: 'Report phone call',
-  length: 34
+  length: 34, userId: 1
 } , {
   name: 'Quarterly report presentation with board',
-  length: 62
+  length: 62, userId: 1
 } , {
   name: 'Buyers meeting',
-  length: 44
+  length: 44, userId: 1
 } , {
   name: 'Phone call with direct reports',
-  length: 23
+  length: 23, userId: 1
 } , {
   name: 'Potential partnership phone call',
   length: 31

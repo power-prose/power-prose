@@ -2,16 +2,17 @@ import React, { Component } from 'react';
 import { withRouter, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {WatchWords, SingleConversationView, Speak, AllConversationsView} from './';
-import { me } from '../store';
+import { me, fetchAllConversations, fetchInitialConversation } from '../store';
 
 
 class LoggedInHome extends Component {
 
     componentDidMount() {
         this.props.loadInitialData()
+        this.props.fetchConversations(this.props.user.id)
     }
     render() {
-
+        console.log('PROPS!!!!', this.props);
         return (
             <div>
 
@@ -32,7 +33,7 @@ class LoggedInHome extends Component {
 
 const mapState = (state) => {
     return {
-        isLoggedIn: !!state.user.id
+        user: state.user
     }
 }
 
@@ -40,7 +41,12 @@ const mapDispatch = (dispatch) => {
     return {
         loadInitialData() {
             dispatch(me())
+        },
+        fetchConversations (userId){
+            dispatch(fetchAllConversations(userId))
+            dispatch(fetchInitialConversation(userId))
         }
+
     }
 }
 
