@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { logout } from '../store';
 
 const NavBar = (props) => {
-    const { handleClick, isLoggedIn } = props
+    const { handleClick, isLoggedIn } = props;
 
     return (
         <div>
