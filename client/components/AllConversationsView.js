@@ -7,8 +7,8 @@ import {AllConversationsData} from './';
 const AllConversationsView = (props) => {
 
   return (
-    <div>
-    <h1>I am the AllConversationsView component. My job is to render data related to all conversations.</h1>
+    <div className="container-right container-vertical">
+    <h1>I am the AllConversationsView component</h1>
     <AllConversationsData />
     </div>
   )

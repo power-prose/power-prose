@@ -8,8 +8,8 @@ const ListOfConversations = (props) => {
   const { conversations, handleClick } = props;
 
   return (
-    <div>
-      <h1>I am the ListofConversations component. My job is to render a list of all conversations associated with the currentUser. I have access to all those conversations through props.</h1>
+    <div className="container-horizontal">
+      <p>I am the ListofConversations component</p>
       {
         conversations && conversations.map(conversation => {
           return (

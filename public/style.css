@@ -1,4 +1,6 @@
 body {
+  padding-left: 0.5%;
+  padding-right: 0.5%;
   font-family: sans-serif;
 }
 
@@ -34,4 +36,29 @@ form div {
   border: none;
   font-style: bold;
   letter-spacing: .2em;
+}
+
+.container-horizontal {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding-top: 3%;
+  /*padding-left: 1%;*/
+}
+
+.container-vertical {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+  padding-top: 3%;
+  /*padding-left: 1%;*/
+}
+
+#container-watch-words {
+  flex: 1;
+}
+
+.container-right {
+  flex: 2;
 }

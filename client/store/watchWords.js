@@ -9,7 +9,7 @@ const setCurrentWatchWords = watchWords => ({type: SET_CURRENT_WATCHWORDS, watch
 export const fetchCurrentWatchWords = () => dispatch =>
   axios.get('/api/watchWords')
     .then(res => dispatch(setCurrentWatchWords(res.data)))
-    .catch(error);
+    .catch(error => console.log(error));
 
 export default function (state = defaultWatchWords, action) {
   switch (action.type) {
@@ -18,4 +18,4 @@ export default function (state = defaultWatchWords, action) {
     default:
       return state
   }
-};
+}

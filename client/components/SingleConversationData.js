@@ -7,7 +7,9 @@ const SingleConversationData = (props) => {
   const { conversation } = props;
 
   return (
-    <h1>I am the SingleConversationData component. My job is to render data related to a conversation that the user has chosen. I have access to this conversartion through props.</h1>
+    <div className="container-horizontal">
+    <p>I am the SingleConversationData component. My job is to render data related to a conversation that the user has chosen. I have access to this conversartion through props.</p>
+    </div>
   )
 };
 
