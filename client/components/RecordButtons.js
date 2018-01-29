@@ -4,6 +4,8 @@ import { analyzeText } from "../utils";
 const WatsonSpeech = require("watson-speech");
 const axios = require("axios");
 
+const request = require('request');
+
 class RecordButtons extends Component {
   constructor(props) {
     super(props);
@@ -12,9 +14,13 @@ class RecordButtons extends Component {
     this.handleStop = this.handleStop.bind(this);
     this.handleResults = this.handleResults.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this);
+
+    this.handleTone = this.handleTone.bind(this);
+
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+  }
 
   handleStart() {
     const handleUpdate = this.handleUpdate;
@@ -28,16 +34,16 @@ class RecordButtons extends Component {
         });
         this.stream.setEncoding("utf8"); // get text instead of Buffers for on data events
 
-        this.stream.on("data", function(data) {
+        this.stream.on("data", function (data) {
           console.log(data);
           handleUpdate(data);
         });
 
-        this.stream.on("error", function(err) {
+        this.stream.on("error", function (err) {
           console.log(err);
         });
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log(error);
       });
   }
@@ -64,6 +70,13 @@ class RecordButtons extends Component {
     console.log(analyzeText(this.state.text, watchWords));
   }
 
+  handleTone() {
+    axios.post('/api/toneAnalyzer/analyze', {speechText: this.state.text})
+      .then(res => {
+        console.log(res.data);
+      })
+  }
+
   render() {
     return (
       <div>
@@ -82,6 +95,9 @@ class RecordButtons extends Component {
           <button className="result-button" onClick={this.handleResults}>
             RESULTS
           </button>
+          <button className="result-button" onClick={this.handleTone}>
+            TONE
+        </button>
         </div>
       </div>
     );

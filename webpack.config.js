@@ -2,6 +2,9 @@ const LiveReloadPlugin = require('webpack-livereload-plugin')
 const isDev = process.env.NODE_ENV === 'development'
 
 module.exports = {
+  node: {
+    fs: 'empty'
+  },
   entry: './client/index.js',
   output: {
     path: __dirname,
