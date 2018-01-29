@@ -140,6 +140,10 @@ const snippets = [{
   text: ' ... i’m just not sure that’s the way to go'
 }];
 
+// const tones = [{
+//   conversationId: 1, joy: 0.8, anger: 0.7
+// }]
+
 const seed = () =>
   Promise.all(users.map(user =>
     User.create(user))
@@ -159,6 +163,10 @@ const seed = () =>
   .then(() =>
   Promise.all(snippets.map(snippet =>
     Snippet.create(snippet))
+  // ))
+  // .then(() =>
+  // Promise.all(tones.map(tone =>
+  //   tone.create(tone))
   ));
 
 const main = () => {
