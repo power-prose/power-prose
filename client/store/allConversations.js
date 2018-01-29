@@ -21,10 +21,25 @@ axios.get(`/api/conversations/user/${userId}`)
 .then(res => dispatch(setAllConversations(res.data)))
 .catch(error);
 
-export const postNewConvo = (newConversation) => dispatch =>
-axios.post(`/api/conversations`, newConversation)
-.then(res => dispatch(postNewConversation(res.data)))
-.catch(error);
+export function postNewConvo(conversation) {
+  return function thunk(dispatch) {
+    console.log("IS IT HERE?",conversation )
+      return axios.post(`/api/conversations`, conversation)
+          .then(res => res.data)
+          .then(newConversation => {
+              const action = postNewConversation(newConversation);
+              dispatch(action);
+              //history.push(`/products`);
+          })
+          .catch(error => console.log(error));
+  };
+}
+
+// export const postNewConvo = (newConversation) => dispatch =>
+// console.log("!!! IT WORKED", newConversation)
+// axios.post(`/api/conversations`, newConversation) 
+// .then(res => dispatch(postNewConversation(res.data)))
+// .catch(error);
 
 
 export default function (state = initialConversationState, action) {

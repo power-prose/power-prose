@@ -144,6 +144,7 @@ const mapDispatch = dispatch => {
         tones: []
         //eventually pass in time
       }
+      console.log("convo data", convodata)
       dispatch(postNewConvo(convoData))
     }
   }
