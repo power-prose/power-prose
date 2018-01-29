@@ -3,13 +3,14 @@ import { connect } from "react-redux";
 import { analyzeText } from "../utils";
 const WatsonSpeech = require("watson-speech");
 const axios = require("axios");
-
 const request = require('request');
+import { postNewConvo } from '../store';
+
 
 class RecordButtons extends Component {
   constructor(props) {
     super(props);
-    this.state = { text: "" };
+    // this.state = { text: "" };
     this.handleStart = this.handleStart.bind(this);
     this.handleStop = this.handleStop.bind(this);
     this.handleResults = this.handleResults.bind(this);
@@ -49,13 +50,15 @@ class RecordButtons extends Component {
   }
 
   handleUpdate(data) {
-    let updatedText = this.state.text + data;
+    let updatedText = this.props.currentConversation.text + data;
     this.setState({ text: updatedText });
   }
 
   handleStop() {
     this.stream.stop = this.stream.stop.bind(this.stream);
     this.stream.stop();
+    console.log(this.stream)
+
   }
 
   handleResults() {
@@ -104,13 +107,15 @@ class RecordButtons extends Component {
   }
 }
 
-const mapState = state => {
-  return {};
+const mapState = (state, ownProps) => {
+  return {
+    currentConversation: state.currentConversation
+  };
 };
 
 //need to create a conversation in db with appropriate data
-const mapDispatch = dispatch => {
-  return {};
+const mapDispatch = (dispatch, ownProps) => {
+  return dispatch(postNewConvo(newConversation));
 };
 
 export default connect(mapState)(RecordButtons);

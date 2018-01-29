@@ -23,9 +23,11 @@ router.get('/user/:userId', (req, res, next) => {
 })
 
 router.post('/', (req, res, next) => {
+  let conversationData = req.body
+  if (req.user) {
+    conversationData.userId = req.user.id
+  }
   Conversation.create(req.body)
     .then(conversation => res.json(conversation)) // in the event that we want to send this to the front end
     .catch(next)
 })
-
-

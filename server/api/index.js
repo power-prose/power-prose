@@ -4,7 +4,7 @@ module.exports = router;
 
 router.use('/speech-to-text', require('./watson-auth'));
 router.use('/users', require('./users'));
-router.use('/watchWords', require('./watchWords'));
+router.use('/watchWords', require('./watchwords'));
 router.use('/conversations', require('./conversations'));
 router.use('/watchWordOccurrences', require('./watchWordOccurrences'));
 
