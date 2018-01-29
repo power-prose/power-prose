@@ -13,3 +13,4 @@ export {default as Speak} from './Speak';
 export {default as AllConversationsView} from './AllConversationsView';
 export {default as AllConversationsData} from './AllConversationsData';
 export {default as LoggedInHome} from './LoggedInHome';
+export {default as RecordingNameForm} from './RecordingNameForm';

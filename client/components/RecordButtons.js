@@ -12,7 +12,8 @@ class RecordButtons extends Component {
     super(props);
     this.state = {
       text: "",
-      tones: []
+      tones: [],
+      preSubmit: false
     };
     this.handleStart = this.handleStart.bind(this);
     this.handleStop = this.handleStop.bind(this);
@@ -61,6 +62,7 @@ class RecordButtons extends Component {
   handleStop() {
     this.stream.stop = this.stream.stop.bind(this.stream);
     this.stream.stop();
+    this.setState({preSubmit: true})
     //make form appear
 
   }
@@ -106,6 +108,21 @@ class RecordButtons extends Component {
             TONE
         </button>
         </div>
+        <div>
+          {this.state.preSubmit &&
+          <div>
+            <form onSubmit = {this.handleSubmit}>
+              <label htmlFor="Name">Title your recording</label>
+              <input
+                type = "text"
+                name = "recordingName"
+                placeholder = "Title your Recording"
+              />
+              <button>Submit</button>
+            </form>
+        </div>
+        }
+        </div>
       </div>
     );
   }
@@ -120,15 +137,32 @@ const mapDispatch = dispatch => {
   return {
     handleSubmit(event) {
       event.preventDefault();
+      console.log(event.target.recordingName.value)
       const convoData = {
         //make a form show up that takes input and on that handlesubmit
-        name: event.target.value,
-        tones: this.state.tones
+        name: event.target.recordingName.value,
+        tones: []
         //eventually pass in time
       }
-
+      dispatch(postNewConvo(convoData))
     }
   }
 };
 
-export default connect(mapState)(RecordButtons);
+export default connect(mapState, mapDispatch)(RecordButtons);
+
+// const RecordingNameForm = (props) => {
+//   return (
+//     <div>
+//     <form onSubmit = {props.handleSubmit}>
+//       <label htmlFor="Name">Title your recording</label>
+//       <input
+//         type = "text"
+//         name = "recordingName"
+//         placeholder = "Title your Recording"
+//       />
+//       <button>Submit</button>
+//     </form>
+//   </div>
+//   )
+// }
