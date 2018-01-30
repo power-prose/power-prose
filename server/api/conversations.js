@@ -1,12 +1,12 @@
-const router = require("express").Router();
-const { Conversation, WatchWordOccurrence, Snippet } = require("../db/models");
+const router = require('express').Router();
+const { Conversation, WatchWordOccurrence, Snippet, Tone } = require('../db/models');
 
 module.exports = router;
 
 // get a single conversation with all associated watchWordOccurences and snippets
 router.get("/:conversationId", (req, res, next) => {
   Conversation.findById(req.params.conversationId, {
-    include: [{ model: WatchWordOccurrence, include: [{ model: Snippet }] }]
+    include: [{model: WatchWordOccurrence, include: [{model: Snippet}]}, {model: Tone}]
   })
     .then(conversation => {
       req.session.chosenConversation = conversation;
@@ -54,5 +54,5 @@ router.get("/user/:userId/chosen", (req, res, next) => {
 router.post("/", (req, res, next) => {
   Conversation.create(req.body)
     .then(conversation => res.json(conversation)) // in the event that we want to send this to the front end
-    .catch(next);
+    .catch(next)
 });

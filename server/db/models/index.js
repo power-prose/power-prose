@@ -3,6 +3,7 @@ const WatchWord = require('./watchWord');
 const Conversation = require('./conversation');
 const WatchWordOccurrence = require('./watchWordOccurrence');
 const Snippet = require('./snippet')
+const Tone = require('./tone');
 const db = require('../db.js');
 
 // ***** all models and the db are required to and exported from this file so that anytime a module needs a model, we can require it from 'db/models' ***** //
@@ -30,6 +31,8 @@ WatchWordOccurrence.belongsTo(Conversation);
 WatchWordOccurrence.hasMany(Snippet);
 Snippet.belongsTo(WatchWordOccurrence);
 
+Conversation.hasMany(Tone);
+
 module.exports = {
-  User, WatchWord, Conversation, WatchWordOccurrence, Snippet, db
+  User, WatchWord, Conversation, WatchWordOccurrence, Snippet, Tone, db
 };
