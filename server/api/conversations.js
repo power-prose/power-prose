@@ -7,15 +7,18 @@ const toneAnalysis = require('../utils/toneAnalysis');
 module.exports = router;
 
 // get a single conversation with all associated watchWordOccurences and snippets
-router.get('/:conversationId', (req, res, next) => {
+router.get("/:conversationId", (req, res, next) => {
   Conversation.findById(req.params.conversationId, {
     include: [{ model: WatchWordOccurrence, include: [{ model: Snippet }] }, { model: Tone }]
   })
-    .then(conversations => res.json(conversations))
-    .catch(next)
-})
+    .then(conversation => {
+      req.session.chosenConversation = conversation;
+      res.json(conversation);
+    })
+    .catch(next);
+});
 
-router.get('/user/:userId', (req, res, next) => {
+router.get("/user/:userId", (req, res, next) => {
   Conversation.findAll({
     where: {
       userId: req.params.userId
@@ -24,16 +27,6 @@ router.get('/user/:userId', (req, res, next) => {
     .then(conversations => res.json(conversations))
     .catch(next)
 })
-
-// router.post('/', (req, res, next) => {
-//   let conversationData = req.body
-//   if (req.user) {
-//     conversationData.userId = req.user.id
-//   }
-//   Conversation.create(req.body)
-//     .then(conversation => res.status(201).json(conversation))
-//     .catch(next)
-// })
 
 router.post('/', (req, res, next) => {
   if (!req.user) {
@@ -84,4 +77,31 @@ router.post('/', (req, res, next) => {
 
 
 })
+
+
+router.get("/user/:userId/chosen", (req, res, next) => {
+  if (req.session.chosenConversation) {
+    res.json(req.session.chosenConversation);
+  } else {
+    Conversation.findAll({
+      where: {
+        userId: req.params.userId
+      }
+    })
+      .then(conversations => {
+        let max = Math.max(
+          ...conversations.map(conversation => conversation.id)
+        );
+        return Conversation.findById(max, {
+          include: [
+            { model: WatchWordOccurrence, include: [{ model: Snippet }] }
+          ]
+        });
+      })
+      .then(conversation => {
+        req.session.chosenConversation = conversation;
+        res.json(conversation);
+      });
+  }
+});
 

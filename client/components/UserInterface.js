@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { withRouter, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
-import { Login, Signup, NavBar, LoggedOutHome, LoggedInHome } from "./";
+import { Login, Signup, NavBar, LoggedOutHome, LoggedInHome, Footer } from "./";
 import { me } from "../store";
 import RecordButtons from "./RecordButtons";
 
@@ -15,10 +15,9 @@ class UserInterface extends Component {
     return (
       <div>
         <NavBar />
-        <main>
+        <div className="container-horizontal">
           <Switch>
             {/* Routes placed here are available to all visitors */}
-            <Route path="/" component={RecordButtons} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
 
@@ -26,8 +25,10 @@ class UserInterface extends Component {
             <Route path="/" component={LoggedOutHome} />
             {/* Displays our Login component as a fallback */}
             <Route component={Login} />
+
           </Switch>
-        </main>
+        </div>
+        <Footer />
       </div>
     );
   }

@@ -7,7 +7,12 @@ const WatchWords = (props) => {
   const { watchWords } = props
 
   return (
-    <h1>I am the WatchWords component. My job is to render a list of all watch words. I have access to all those words through props.</h1>
+    <div id="container-watch-words" className="container-vertical">
+    <p>I AM THE WATCHWORDS COMPONENT</p>
+    <ul>
+    {watchWords.map(word => <li key={word.id}>{word.wordOrPhrase}</li>)}
+    </ul>
+    </div>
   )
 };
 

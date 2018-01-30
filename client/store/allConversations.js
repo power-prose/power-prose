@@ -23,7 +23,7 @@ export const setRecordedText = (text) => ({type: SET_RECORDED_TEXT, text})
 export const fetchAllConversations = (userId) => dispatch =>
 axios.get(`/api/conversations/user/${userId}`)
 .then(res => dispatch(setAllConversations(res.data)))
-.catch(error);
+.catch(error => console.log(error));
 
 export function postNewConvo(conversation) {
   return function thunk(dispatch) {
