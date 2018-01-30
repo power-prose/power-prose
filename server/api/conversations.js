@@ -93,9 +93,7 @@ router.get("/user/:userId/chosen", (req, res, next) => {
           ...conversations.map(conversation => conversation.id)
         );
         return Conversation.findById(max, {
-          include: [
-            { model: WatchWordOccurrence, include: [{ model: Snippet }] }
-          ]
+          include: [Tone, WatchWord]
         });
       })
       .then(conversation => {
