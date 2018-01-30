@@ -31,19 +31,19 @@ const users = [{
 }];
 
 const watchWords = [{
-  wordOrPhrase: 'i’m no expert but'
+  wordOrPhrase: 'I’m no expert but'
 }, {
-  wordOrPhrase: 'just'
+  wordOrPhrase: 'Just'
 }, {
-  wordOrPhrase: 'does that make sense'
+  wordOrPhrase: 'Does that make sense'
 }, {
-  wordOrPhrase: 'am i making sense'
+  wordOrPhrase: 'Am i making sense'
 }, {
-  wordOrPhrase: 'i’m sorry'
+  wordOrPhrase: 'I’m sorry'
 }, {
-  wordOrPhrase: 'i would just like to say'
+  wordOrPhrase: 'I would just like to say'
 }, {
-  wordOrPhrase: 'i’m not sure but'
+  wordOrPhrase: 'I’m not sure but'
 }];
 
 const conversations = [{
@@ -60,16 +60,40 @@ const conversations = [{
   length: 23, userId: 1
 } , {
   name: 'Potential partnership phone call',
-  length: 31
+  length: 31, userId: 2
 } , {
   name: 'Presentation practice',
-  length: 15
+  length: 15, userId: 2
 } , {
   name: 'Technical interview practice',
-  length: 33
+  length: 33, userId: 2
 } , {
   name: 'Meeting with architects',
-  length: 42
+  length: 42, userId: 2
+} , {
+  name: 'Report phone call',
+  length: 34, userId: 3
+} , {
+  name: 'Quarterly report presentation with board',
+  length: 62, userId: 3
+} , {
+  name: 'Buyers meeting',
+  length: 44, userId: 3
+} , {
+  name: 'Phone call with direct reports',
+  length: 23, userId: 3
+} , {
+  name: 'Potential partnership phone call',
+  length: 31, userId: 4
+} , {
+  name: 'Presentation practice',
+  length: 15, userId: 4
+} , {
+  name: 'Technical interview practice',
+  length: 33, userId: 4
+} , {
+  name: 'Meeting with architects',
+  length: 42, userId: 4
 }];
 
 const watchWordOccurrences = [{
