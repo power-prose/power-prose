@@ -1,5 +1,7 @@
 import axios from 'axios';
 import store from '../store';
+import {fetchChosenConversation} from './chosenConversation';
+
 
 const SET_ALL_CONVERSATIONS = "SET_ALL_CONVERSATIONS";
 
@@ -9,7 +11,6 @@ const SET_RECORDED_TEXT = "SET_RECORDED_TEXT"
 
 const initialConversationState = {
   defaultConversations: [],
-  currentConversation: {},
   recordedText: ''
 }
 
@@ -32,6 +33,7 @@ export function postNewConvo(conversation) {
         .then(res => res.data)
         .then(newConversation => {
           const action = postNewConversation(newConversation);
+          dispatch(fetchChosenConversation(newConversation.id))
           dispatch(action);
           //history.push(`/`);
         })
@@ -46,8 +48,7 @@ export default function (state = initialConversationState, action) {
 
     case POST_NEW_CONVERSATION: {
       const allConversations = [...state.defaultConversations, action.conversation]
-      return Object.assign({}, state, {defaultConversations: allConversations,
-      currentConversation: action.conversation})
+      return Object.assign({}, state, {defaultConversations: allConversations})
     }
 
     case SET_RECORDED_TEXT:

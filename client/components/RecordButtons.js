@@ -60,7 +60,6 @@ class RecordButtons extends Component {
     this.stream.stop();
     this.setState({ preSubmit: true })
     //make form appear
-
   }
 
   render() {
@@ -112,7 +111,7 @@ const mapDispatch = (dispatch) => {
         //eventually pass in time
       }
       dispatch(postNewConvo(conversationData))
-    }, 
+    },
     dispatchText(text) {
       dispatch(setRecordedText(text));
     }
