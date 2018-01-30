@@ -34,6 +34,7 @@ router.post('/', (req, res, next) => {
     return;
   }
   let conversationData = req.body
+  debugger
 
   // get all of the conversation data out of the request
   const conversationName = conversationData.name;
@@ -48,6 +49,7 @@ router.post('/', (req, res, next) => {
   // determine the tones of the text
 
   toneAnalysis.analyzeTone(conversationText, (tones) => {
+    debugger
     let createdConversation;
     //save conversation with all watch words and tones included
     Conversation.create({
@@ -55,7 +57,9 @@ router.post('/', (req, res, next) => {
       length: conversationLengthTime,
       userId: conversationUserId
     })
+    
     .then(newConversation => {
+      debugger
       createdConversation = newConversation
       tones.conversationId = newConversation.id
       return Tone.create(tones)
@@ -64,7 +68,9 @@ router.post('/', (req, res, next) => {
       const wordCountsArray = Object.keys(counts).map(word => {
         return {wordOrPhrase: word, countOfTimesUsed: counts[word], conversationId: createdConversation.id}
       })
+      debugger
       WatchWordOccurrence.bulkCreate(wordCountsArray)
+      
       // for each word and count, create a new instance in the database along with conversationId
     })
     .then(() => {
