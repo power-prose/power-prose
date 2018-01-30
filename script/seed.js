@@ -1,4 +1,4 @@
-const { User, WatchWord, Conversation, WatchWordOccurrence, Snippet, db } = require('../server/db/models')
+const { User, WatchWord, Conversation, WatchWordOccurrence, Tone, Snippet, db } = require('../server/db/models')
 
 const users = [{
   email: '12345@gmail.com',
@@ -430,6 +430,80 @@ const watchWordOccurrences = [{
   conversationId: 8
 }];
 
+const tones = [{
+  anger: .1,
+  fear: .6,
+  joy: .7,
+  sadness: .5,
+  analytical: .6,
+  confident: .2,
+  tentative: .6
+  conversationId: 1
+} , {
+  anger: .1,
+  fear: .6,
+  joy: .7,
+  sadness: .5,
+  analytical: .6,
+  confident: .2,
+  tentative: .6
+  conversationId: 2
+} , {
+  anger: .1,
+  fear: .6,
+  joy: .7,
+  sadness: .5,
+  analytical: .6,
+  confident: .2,
+  tentative: .6
+  conversationId: 3
+} , {
+  anger: .3,
+  fear: .7,
+  joy: .3,
+  sadness: .4,
+  analytical: .4,
+  confident: .2,
+  tentative: .5
+  conversationId: 4
+} , {
+  anger: .2,
+  fear: .3,
+  joy: .6,
+  sadness: .5,
+  analytical: .8,
+  confident: .3,
+  tentative: .4
+  conversationId: 5
+} , {
+  anger: .1,
+  fear: .2,
+  joy: .4,
+  sadness: .4,
+  analytical: .2,
+  confident: .3,
+  tentative: .4
+  conversationId: 6
+} , {
+  anger: .1,
+  fear: .6,
+  joy: .6,
+  sadness: .4,
+  analytical: .8,
+  confident: .3,
+  tentative: .8
+  conversationId: 7
+} , {
+  anger: .1,
+  fear: .6,
+  joy: .7,
+  sadness: .5,
+  analytical: .6,
+  confident: .2,
+  tentative: .6
+  conversationId: 8
+}];
+
 const snippets = [{
   text: ' ... i’m no expert but I think we might want to consider ...'
 } , {
@@ -461,6 +535,10 @@ const seed = () =>
   .then(() =>
   Promise.all(watchWordOccurrences.map(watchWordOccurrence =>
     WatchWordOccurrence.create(watchWordOccurrence))
+  ))
+  .then(() =>
+  Promise.all(tones.map(tone =>
+    Tone.create(tone))
   ))
   .then(() =>
   Promise.all(snippets.map(snippet =>
