@@ -3,6 +3,7 @@ import { withRouter, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import { Login, Signup, NavBar, LoggedOutHome, LoggedInHome, Footer } from "./";
 import { me } from "../store";
+import RecordButtons from "./RecordButtons";
 
 class UserInterface extends Component {
   componentDidMount() {
@@ -17,7 +18,6 @@ class UserInterface extends Component {
         <div className="container-horizontal">
           <Switch>
             {/* Routes placed here are available to all visitors */}
-
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
 

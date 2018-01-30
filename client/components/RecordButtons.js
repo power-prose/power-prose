@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { analyzeText } from "../utils";
+import { postNewConvo, setRecordedText } from "../store";
 const WatsonSpeech = require("watson-speech");
 const axios = require("axios");
 
@@ -9,14 +9,14 @@ const request = require('request');
 class RecordButtons extends Component {
   constructor(props) {
     super(props);
-    this.state = { text: "" };
+    this.state = {
+      text: "",
+      tones: [],
+      preSubmit: false
+    };
     this.handleStart = this.handleStart.bind(this);
     this.handleStop = this.handleStop.bind(this);
-    this.handleResults = this.handleResults.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this);
-
-    this.handleTone = this.handleTone.bind(this);
-
   }
 
   componentDidMount() {
@@ -51,30 +51,16 @@ class RecordButtons extends Component {
   handleUpdate(data) {
     let updatedText = this.state.text + data;
     this.setState({ text: updatedText });
+    this.props.dispatchText(updatedText)
+    console.log(updatedText);
   }
 
   handleStop() {
     this.stream.stop = this.stream.stop.bind(this.stream);
     this.stream.stop();
-  }
+    this.setState({ preSubmit: true })
+    //make form appear
 
-  handleResults() {
-    let watchWords = [
-      "I'm no expert",
-      "just",
-      "Does that make sense",
-      "like",
-      "I'm not sure",
-      "sorry"
-    ];
-    console.log(analyzeText(this.state.text, watchWords));
-  }
-
-  handleTone() {
-    axios.post('/api/toneAnalyzer/analyze', {speechText: this.state.text})
-      .then(res => {
-        console.log(res.data);
-      })
   }
 
   render() {
@@ -92,12 +78,19 @@ class RecordButtons extends Component {
           </button>
         </div>
         <div>
-          <button className="result-button" onClick={this.handleResults}>
-            RESULTS
-          </button>
-          <button className="result-button" onClick={this.handleTone}>
-            TONE
-        </button>
+          {this.state.preSubmit &&
+            <div>
+              <form onSubmit={this.props.handleSubmit}>
+                <label htmlFor="Name">Title your recording</label>
+                <input
+                  type="text"
+                  name="recordingName"
+                  placeholder="Title your Recording"
+                />
+                <button type="submit">Submit</button>
+              </form>
+            </div>
+          }
         </div>
       </div>
     );
@@ -109,8 +102,22 @@ const mapState = state => {
 };
 
 //need to create a conversation in db with appropriate data
-const mapDispatch = dispatch => {
-  return {};
+const mapDispatch = (dispatch) => {
+  return {
+    handleSubmit(event) {
+      event.preventDefault();
+      const conversationData = {
+        name: event.target.recordingName.value,
+        lengthTime: "300",
+        //eventually pass in time
+      }
+      dispatch(postNewConvo(conversationData))
+    }, 
+    dispatchText(text) {
+      dispatch(setRecordedText(text));
+    }
+  }
 };
 
-export default connect(mapState)(RecordButtons);
+export default connect(mapState, mapDispatch)(RecordButtons);
+
