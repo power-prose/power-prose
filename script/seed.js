@@ -44,6 +44,10 @@ const watchWords = [{
   wordOrPhrase: 'I would just like to say'
 }, {
   wordOrPhrase: 'I’m not sure but'
+}, {
+  wordOrPhrase: 'I would just like to ask'
+} , {
+  wordOrPhrase: 'I was wondering'
 }];
 
 const conversations = [{
