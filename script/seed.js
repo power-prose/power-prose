@@ -137,105 +137,297 @@ const watchWordOccurrences = [{
   countOfTimesUsed: 3,
   conversationId: 1
 } , {
-  wordOrPhrase: 'just',
+  watchWordId: 3,
   countOfTimesUsed: 5,
   conversationId: 2
 } , {
-  wordOrPhrase: 'does that make sense',
+  watchWordId: 2,
   countOfTimesUsed: 2,
   conversationId: 2
 } , {
-  wordOrPhrase: 'am i making sense',
+  watchWordId: 4,
   countOfTimesUsed: 1,
   conversationId: 2
 } , {
-  wordOrPhrase: 'i’m sorry',
+  watchWordId: 5,
   countOfTimesUsed: 6,
   conversationId: 2
 } , {
-  wordOrPhrase: 'i would just like to say',
+  watchWordId: 6,
   countOfTimesUsed: 3,
   conversationId: 2
 } , {
-  wordOrPhrase: 'i’m not sure but',
+  watchWordId: 7,
   countOfTimesUsed: 4,
   conversationId: 2
 } , {
-  wordOrPhrase: 'i’m no expert but',
+  watchWordId: 1,
   countOfTimesUsed: 3,
   conversationId: 2
 } , {
-  wordOrPhrase: 'just',
+  watchWordId: 3,
   countOfTimesUsed: 4,
   conversationId: 3
 } , {
-  wordOrPhrase: 'does that make sense',
+  watchWordId: 2,
   countOfTimesUsed: 2,
   conversationId: 3
 } , {
-  wordOrPhrase: 'am I making sense',
+  watchWordId: 4,
   countOfTimesUsed: 2,
   conversationId: 3
 } , {
-  wordOrPhrase: 'i’m sorry',
+  watchWordId: 5,
   countOfTimesUsed: 3,
   conversationId: 3
 } , {
-  wordOrPhrase: 'i would just like to say',
+  watchWordId: 6,
   countOfTimesUsed: 6,
   conversationId: 3
 } , {
-  wordOrPhrase: 'i’m not sure but',
+  watchWordId: 7,
   countOfTimesUsed: 4,
   conversationId: 3
 } , {
-  wordOrPhrase: 'i’m no expert but',
+  watchWordId: 1,
   countOfTimesUsed: 1,
   conversationId: 3
 } , , {
-  wordOrPhrase: 'i would just like to ask',
+  watchWordId: 8,
   countOfTimesUsed: 1,
   conversationId: 3
 } , {
-  wordOrPhrase: 'i was wondering',
+  watchWordId: 9,
   countOfTimesUsed: 1,
   conversationId: 3
-} , , {
-  wordOrPhrase: 'just',
+} , {
+  watchWordId: 3,
   countOfTimesUsed: 4,
   conversationId: 3
 } , {
-  wordOrPhrase: 'does that make sense',
+  watchWordId: 2,
   countOfTimesUsed: 2,
   conversationId: 3
 } , {
-  wordOrPhrase: 'am I making sense',
+  watchWordId: 4,
   countOfTimesUsed: 2,
   conversationId: 3
 } , {
-  wordOrPhrase: 'i’m sorry',
+  watchWordId: 5,
   countOfTimesUsed: 3,
   conversationId: 3
 } , {
-  wordOrPhrase: 'i would just like to say',
+  watchWordId: 6,
   countOfTimesUsed: 6,
   conversationId: 3
 } , {
-  wordOrPhrase: 'i’m not sure but',
+  watchWordId: 7,
   countOfTimesUsed: 4,
   conversationId: 3
 } , {
-  wordOrPhrase: 'i’m no expert but',
-  countOfTimesUsed: 1,
-  conversationId: 3
-} , , {
-  wordOrPhrase: 'i would just like to ask',
+  watchWordId: 1,
   countOfTimesUsed: 1,
   conversationId: 3
 } , {
-  wordOrPhrase: 'i was wondering',
+  watchWordId: 8,
   countOfTimesUsed: 1,
   conversationId: 3
+} , {
+  watchWordId: 9,
+  countOfTimesUsed: 1,
+  conversationId: 3
+} , {
+  watchWordId: 3,
+  countOfTimesUsed: 4,
+  conversationId: 3
+} , {
+  watchWordId: 2,
+  countOfTimesUsed: 2,
+  conversationId: 3
+} , {
+  watchWordId: 4,
+  countOfTimesUsed: 2,
+  conversationId: 3
+} , {
+  watchWordId: 5,
+  countOfTimesUsed: 3,
+  conversationId: 3
+} , {
+  watchWordId: 6,
+  countOfTimesUsed: 6,
+  conversationId: 3
+} , {
+  watchWordId: 7,
+  countOfTimesUsed: 4,
+  conversationId: 3
+} , {
+  watchWordId: 1,
+  countOfTimesUsed: 1,
+  conversationId: 3
+} , , {
+  watchWordId: 8,
+  countOfTimesUsed: 1,
+  conversationId: 3
+} , {
+  watchWordId: 9,
+  countOfTimesUsed: 1,
+  conversationId: 3
+} , {
+  watchWordId: 3,
+  countOfTimesUsed: 2,
+  conversationId: 4
+} , {
+  watchWordId: 2,
+  countOfTimesUsed: 1,
+  conversationId: 4
+} , {
+  watchWordId: 4,
+  countOfTimesUsed: 1,
+  conversationId: 4
+} , {
+  watchWordId: 5,
+  countOfTimesUsed: 4,
+  conversationId: 4
+} , {
+  watchWordId: 6,
+  countOfTimesUsed: 2,
+  conversationId: 4
+} , {
+  watchWordId: 7,
+  countOfTimesUsed: 2,
+  conversationId: 4
+} , {
+  watchWordId: 1,
+  countOfTimesUsed: 3,
+  conversationId: 4
+} , {
+  watchWordId: 8,
+  countOfTimesUsed: 1,
+  conversationId: 4
+} , {
+  watchWordId: 9,
+  countOfTimesUsed: 2,
+  conversationId: 4
+} , {
+  watchWordId: 3,
+  countOfTimesUsed: 3,
+  conversationId: 5
+} , {
+  watchWordId: 2,
+  countOfTimesUsed: 4,
+  conversationId: 5
+} , {
+  watchWordId: 4,
+  countOfTimesUsed: 1,
+  conversationId: 5
+} , {
+  watchWordId: 6,
+  countOfTimesUsed: 2,
+  conversationId: 5
+} , {
+  watchWordId: 7,
+  countOfTimesUsed: 1,
+  conversationId: 5
+} , {
+  watchWordId: 1,
+  countOfTimesUsed: 2,
+  conversationId: 5
+} , {
+  watchWordId: 9,
+  countOfTimesUsed: 1,
+  conversationId: 5
+} , {
+  watchWordId: 2,
+  countOfTimesUsed: 3,
+  conversationId: 6
+} , {
+  watchWordId: 4,
+  countOfTimesUsed: 2,
+  conversationId: 6
+} , {
+  watchWordId: 5,
+  countOfTimesUsed: 2,
+  conversationId: 6
+} , {
+  watchWordId: 6,
+  countOfTimesUsed: 3,
+  conversationId: 6
+} , {
+  watchWordId: 1,
+  countOfTimesUsed: 4,
+  conversationId: 6
+} , {
+  watchWordId: 8,
+  countOfTimesUsed: 2,
+  conversationId: 6
+} , {
+  watchWordId: 9,
+  countOfTimesUsed: 3,
+  conversationId: 6
+} , {
+  watchWordId: 3,
+  countOfTimesUsed: 3,
+  conversationId: 7
+} , {
+  watchWordId: 2,
+  countOfTimesUsed: 1,
+  conversationId: 7
+} , {
+  watchWordId: 4,
+  countOfTimesUsed: 2,
+  conversationId: 7
+} , {
+  watchWordId: 5,
+  countOfTimesUsed: 3,
+  conversationId: 7
+} , {
+  watchWordId: 6,
+  countOfTimesUsed: 6,
+  conversationId: 7
+} , {
+  watchWordId: 7,
+  countOfTimesUsed: 4,
+  conversationId: 7
+} , {
+  watchWordId: 1,
+  countOfTimesUsed: 2,
+  conversationId: 7
+} , {
+  watchWordId: 9,
+  countOfTimesUsed: 3,
+  conversationId: 7
+} , {
+  watchWordId: 3,
+  countOfTimesUsed: 2,
+  conversationId: 8
+} , {
+  watchWordId: 2,
+  countOfTimesUsed: 1,
+  conversationId: 8
+} , {
+  watchWordId: 4,
+  countOfTimesUsed: 2,
+  conversationId: 8
+} , {
+  watchWordId: 5,
+  countOfTimesUsed: 5,
+  conversationId: 8
+} , {
+  watchWordId: 6,
+  countOfTimesUsed: 1,
+  conversationId: 8
+} , {
+  watchWordId: 7,
+  countOfTimesUsed: 4,
+  conversationId: 8
+} , {
+  watchWordId: 1,
+  countOfTimesUsed: 2,
+  conversationId: 8
+} , {
+  watchWordId: 8,
+  countOfTimesUsed: 2,
+  conversationId: 8
 }];
 
 const snippets = [{

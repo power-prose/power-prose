@@ -31,7 +31,8 @@ WatchWord.belongsToMany(Conversation, {through: WatchWordOccurrence})
 WatchWordOccurrence.hasMany(Snippet);
 Snippet.belongsTo(WatchWordOccurrence);
 
-Conversation.hasMany(Tone);
+Conversation.hasOne(Tone);
+Tone.belongsTo(Conversation);
 
 module.exports = {
   User, WatchWord, Conversation, WatchWordOccurrence, Snippet, Tone, db
