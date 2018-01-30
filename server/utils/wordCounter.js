@@ -1,14 +1,15 @@
-const defaultWatchWords = [
-    //do database query to get the watch words 
-    "I'm no expert",
-    "just",
-    "Does that make sense",
-    "like",
-    "I'm not sure",
-    "sorry"
-];
+const axios = require('axios');
 
-const countWords = (spokenText, watchWords = defaultWatchWords) => {
+const countWords = (spokenText) => {
+    let watchwords;
+
+    axios.get('/api/watchwords', { proxy: { host: '127.0.0.1', port: 8080 } })
+      .then(res => res.data)
+      .then(words => {
+        watchWords = words.map(word => word.wordOrPhrase)
+      })
+      .catch(er => console.log(err))
+
     let regWords = watchWords.map(word => {
         return { word: word, regex: new RegExp(word, 'gi') };
     })
