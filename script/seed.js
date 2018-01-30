@@ -32,19 +32,19 @@ const users = [{
 
 const watchWords = [{
   wordOrPhrase: 'I’m no expert but'
-}, {
+} , {
   wordOrPhrase: 'Just'
-}, {
+} , {
   wordOrPhrase: 'Does that make sense'
-}, {
+} , {
   wordOrPhrase: 'Am i making sense'
-}, {
+} , {
   wordOrPhrase: 'I’m sorry'
-}, {
+} , {
   wordOrPhrase: 'I would just like to say'
-}, {
+} , {
   wordOrPhrase: 'I’m not sure but'
-}, {
+} , {
   wordOrPhrase: 'I would just like to ask'
 } , {
   wordOrPhrase: 'I was wondering'
@@ -202,78 +202,6 @@ const watchWordOccurrences = [{
   conversationId: 3
 } , {
   watchWordId: 3,
-  countOfTimesUsed: 4,
-  conversationId: 3
-} , {
-  watchWordId: 2,
-  countOfTimesUsed: 2,
-  conversationId: 3
-} , {
-  watchWordId: 4,
-  countOfTimesUsed: 2,
-  conversationId: 3
-} , {
-  watchWordId: 5,
-  countOfTimesUsed: 3,
-  conversationId: 3
-} , {
-  watchWordId: 6,
-  countOfTimesUsed: 6,
-  conversationId: 3
-} , {
-  watchWordId: 7,
-  countOfTimesUsed: 4,
-  conversationId: 3
-} , {
-  watchWordId: 1,
-  countOfTimesUsed: 1,
-  conversationId: 3
-} , {
-  watchWordId: 8,
-  countOfTimesUsed: 1,
-  conversationId: 3
-} , {
-  watchWordId: 9,
-  countOfTimesUsed: 1,
-  conversationId: 3
-} , {
-  watchWordId: 3,
-  countOfTimesUsed: 4,
-  conversationId: 3
-} , {
-  watchWordId: 2,
-  countOfTimesUsed: 2,
-  conversationId: 3
-} , {
-  watchWordId: 4,
-  countOfTimesUsed: 2,
-  conversationId: 3
-} , {
-  watchWordId: 5,
-  countOfTimesUsed: 3,
-  conversationId: 3
-} , {
-  watchWordId: 6,
-  countOfTimesUsed: 6,
-  conversationId: 3
-} , {
-  watchWordId: 7,
-  countOfTimesUsed: 4,
-  conversationId: 3
-} , {
-  watchWordId: 1,
-  countOfTimesUsed: 1,
-  conversationId: 3
-} , , {
-  watchWordId: 8,
-  countOfTimesUsed: 1,
-  conversationId: 3
-} , {
-  watchWordId: 9,
-  countOfTimesUsed: 1,
-  conversationId: 3
-} , {
-  watchWordId: 3,
   countOfTimesUsed: 2,
   conversationId: 4
 } , {
@@ -428,6 +356,78 @@ const watchWordOccurrences = [{
   watchWordId: 8,
   countOfTimesUsed: 2,
   conversationId: 8
+} , {
+  watchWordId: 3,
+  countOfTimesUsed: 4,
+  conversationId: 9
+} , {
+  watchWordId: 2,
+  countOfTimesUsed: 2,
+  conversationId: 9
+} , {
+  watchWordId: 4,
+  countOfTimesUsed: 2,
+  conversationId: 9
+} , {
+  watchWordId: 5,
+  countOfTimesUsed: 3,
+  conversationId: 9
+} , {
+  watchWordId: 6,
+  countOfTimesUsed: 6,
+  conversationId: 9
+} , {
+  watchWordId: 7,
+  countOfTimesUsed: 4,
+  conversationId: 9
+} , {
+  watchWordId: 1,
+  countOfTimesUsed: 1,
+  conversationId: 9
+} , {
+  watchWordId: 8,
+  countOfTimesUsed: 1,
+  conversationId: 9
+} , {
+  watchWordId: 9,
+  countOfTimesUsed: 1,
+  conversationId: 9
+} , {
+  watchWordId: 3,
+  countOfTimesUsed: 4,
+  conversationId: 10
+} , {
+  watchWordId: 2,
+  countOfTimesUsed: 2,
+  conversationId: 10
+} , {
+  watchWordId: 4,
+  countOfTimesUsed: 2,
+  conversationId: 10
+} , {
+  watchWordId: 5,
+  countOfTimesUsed: 3,
+  conversationId: 10
+} , {
+  watchWordId: 6,
+  countOfTimesUsed: 6,
+  conversationId: 10
+} , {
+  watchWordId: 7,
+  countOfTimesUsed: 4,
+  conversationId: 10
+} , {
+  watchWordId: 1,
+  countOfTimesUsed: 1,
+  conversationId: 10
+} , {
+  watchWordId: 8,
+  countOfTimesUsed: 1,
+  conversationId: 10
+} , {
+  watchWordId: 9,
+  countOfTimesUsed: 1,
+  conversationId: 10
 }];
 
 const tones = [{
@@ -437,7 +437,7 @@ const tones = [{
   sadness: .5,
   analytical: .6,
   confident: .2,
-  tentative: .6
+  tentative: .6,
   conversationId: 1
 } , {
   anger: .1,
@@ -446,7 +446,7 @@ const tones = [{
   sadness: .5,
   analytical: .6,
   confident: .2,
-  tentative: .6
+  tentative: .6,
   conversationId: 2
 } , {
   anger: .1,
@@ -455,7 +455,7 @@ const tones = [{
   sadness: .5,
   analytical: .6,
   confident: .2,
-  tentative: .6
+  tentative: .6,
   conversationId: 3
 } , {
   anger: .3,
@@ -464,7 +464,7 @@ const tones = [{
   sadness: .4,
   analytical: .4,
   confident: .2,
-  tentative: .5
+  tentative: .5,
   conversationId: 4
 } , {
   anger: .2,
@@ -473,7 +473,7 @@ const tones = [{
   sadness: .5,
   analytical: .8,
   confident: .3,
-  tentative: .4
+  tentative: .4,
   conversationId: 5
 } , {
   anger: .1,
@@ -482,7 +482,7 @@ const tones = [{
   sadness: .4,
   analytical: .2,
   confident: .3,
-  tentative: .4
+  tentative: .4,
   conversationId: 6
 } , {
   anger: .1,
@@ -491,7 +491,7 @@ const tones = [{
   sadness: .4,
   analytical: .8,
   confident: .3,
-  tentative: .8
+  tentative: .8,
   conversationId: 7
 } , {
   anger: .1,
@@ -500,8 +500,26 @@ const tones = [{
   sadness: .5,
   analytical: .6,
   confident: .2,
-  tentative: .6
+  tentative: .6,
   conversationId: 8
+} , {
+  anger: .7,
+  fear: .3,
+  joy: .3,
+  sadness: .3,
+  analytical: .7,
+  confident: .4,
+  tentative: .5,
+  conversationId: 9
+} , {
+  anger: .4,
+  fear: .4,
+  joy: .8,
+  sadness: .4,
+  analytical: .7,
+  confident: .4,
+  tentative: .5,
+  conversationId: 10
 }];
 
 const snippets = [{
@@ -515,10 +533,6 @@ const snippets = [{
 } , {
   text: ' ... i’m just not sure that’s the way to go'
 }];
-
-// const tones = [{
-//   conversationId: 1, joy: 0.8, anger: 0.7
-// }]
 
 const seed = () =>
   Promise.all(users.map(user =>
