@@ -3,7 +3,7 @@ const { WatchWordOccurrence, Snippet } = require('../db/models');
 
 module.exports = router;
 
-// get a single watchWordOccurences with all associated snippets
+// get a single watchWordOccurence with all associated snippets
 router.get('/:watchWordOccurrenceId', (req, res, next) => {
   WatchWordOccurrence.findById(req.params.watchWordOccurrenceId, { include: [Snippet] })
     .then(watchWordOccurrences => res.json(watchWordOccurrences))

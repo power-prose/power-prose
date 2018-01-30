@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Conversation, WatchWordOccurrence, Snippet, Tone } = require('../db/models');
+const { Conversation, WatchWord, WatchWordOccurrence, Snippet, Tone } = require('../db/models');
 const wordCounter = require('../utils/wordCounter');
 
 const toneAnalysis = require('../utils/toneAnalysis');
@@ -9,7 +9,7 @@ module.exports = router;
 // get a single conversation with all associated watchWordOccurences and snippets
 router.get("/:conversationId", (req, res, next) => {
   Conversation.findById(req.params.conversationId, {
-    include: [{ model: WatchWordOccurrence, include: [{ model: Snippet }] }, { model: Tone }]
+    include: [Tone, WatchWord]
   })
     .then(conversation => {
       req.session.chosenConversation = conversation;
@@ -22,7 +22,7 @@ router.get("/user/:userId", (req, res, next) => {
   Conversation.findAll({
     where: {
       userId: req.params.userId
-    }
+    }, include: [Tone, WatchWord]
   })
     .then(conversations => res.json(conversations))
     .catch(next)
@@ -46,7 +46,7 @@ router.post('/', (req, res, next) => {
   console.log("these the counts", counts);
 
   // determine the tones of the text
-  
+
   toneAnalysis.analyzeTone(conversationText, (tones) => {
     let createdConversation;
     //save conversation with all watch words and tones included
@@ -104,4 +104,3 @@ router.get("/user/:userId/chosen", (req, res, next) => {
       });
   }
 });
-

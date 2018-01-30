@@ -28,8 +28,8 @@ WatchWord.belongsToMany(Conversation, {through: WatchWordOccurrence})
 
 // a watchWordOccurrence can have many snippets (the number of snippets will be equivalent to the occurence's countOfTimesUsed field), and every snippet belongs to a WatchWordOccurence
 // every snippet instance now has a foreignkey watchWordOccurrenceId
-WatchWordOccurrence.hasMany(Snippet);
-Snippet.belongsTo(WatchWordOccurrence);
+// WatchWordOccurrence.hasMany(Snippet);
+// Snippet.belongsTo(WatchWordOccurrence);
 
 Conversation.hasOne(Tone);
 Tone.belongsTo(Conversation);

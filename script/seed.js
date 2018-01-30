@@ -522,17 +522,17 @@ const tones = [{
   conversationId: 10
 }];
 
-const snippets = [{
-  text: ' ... i’m no expert but I think we might want to consider ...'
-} , {
-  text: '... i’m no expert but what I would suggest is ... '
-} , {
-  text: '... i just want to say that i’m on board with that ...'
-} , {
-  text: '... i’m just not sure that’s the best approach'
-} , {
-  text: ' ... i’m just not sure that’s the way to go'
-}];
+// const snippets = [{
+//   text: ' ... i’m no expert but I think we might want to consider ...'
+// } , {
+//   text: '... i’m no expert but what I would suggest is ... '
+// } , {
+//   text: '... i just want to say that i’m on board with that ...'
+// } , {
+//   text: '... i’m just not sure that’s the best approach'
+// } , {
+//   text: ' ... i’m just not sure that’s the way to go'
+// }];
 
 const seed = () =>
   Promise.all(users.map(user =>
@@ -554,14 +554,11 @@ const seed = () =>
   Promise.all(tones.map(tone =>
     Tone.create(tone))
   ))
-  .then(() =>
-  Promise.all(snippets.map(snippet =>
-    Snippet.create(snippet))
-  // ))
   // .then(() =>
-  // Promise.all(tones.map(tone =>
-  //   tone.create(tone))
-  ));
+  // Promise.all(snippets.map(snippet =>
+  //   Snippet.create(snippet))
+  // ));
+
 
 const main = () => {
   console.log('Syncing db...');
