@@ -101,59 +101,141 @@ const conversations = [{
 }];
 
 const watchWordOccurrences = [{
-  wordOrPhrase: 'i’m no expert but',
-  countOfTimesUsed: 2
+  watchWordId: 1,
+  countOfTimesUsed: 1,
+  conversationId: 1
+} , {
+  watchWordId: 3,
+  countOfTimesUsed: 4,
+  conversationId: 1
+} , {
+  watchWordId: 2,
+  countOfTimesUsed: 3,
+  conversationId: 1
+} , {
+  watchWordId: 4,
+  countOfTimesUsed: 2,
+  conversationId: 1
+} , {
+  watchWordId: 5,
+  countOfTimesUsed: 6,
+  conversationId: 1
+} , {
+  watchWordId: 6,
+  countOfTimesUsed: 1,
+  conversationId: 1
+} , {
+  watchWordId: 7,
+  countOfTimesUsed: 2,
+  conversationId: 1
+} , {
+  watchWordId: 8,
+  countOfTimesUsed: 1,
+  conversationId: 1
+} , {
+  watchWordId: 9,
+  countOfTimesUsed: 3,
+  conversationId: 1
 } , {
   wordOrPhrase: 'just',
-  countOfTimesUsed: 3
+  countOfTimesUsed: 5,
+  conversationId: 2
 } , {
   wordOrPhrase: 'does that make sense',
-  countOfTimesUsed: 3
-} , {
-  wordOrPhrase: 'am I making sense',
-  countOfTimesUsed: 2
-} , {
-  wordOrPhrase: 'i’m sorry',
-  countOfTimesUsed: 4
-} , {
-  wordOrPhrase: 'i would just like to say',
-  countOfTimesUsed: 1
-} , {
-  wordOrPhrase: 'i’m not sure but',
-  countOfTimesUsed: 4
-} , {
-  wordOrPhrase: 'i’m no expert but',
-  countOfTimesUsed: 3
-} , {
-  wordOrPhrase: 'just',
-  countOfTimesUsed: 5
-} , {
-  wordOrPhrase: 'does that make sense',
-  countOfTimesUsed: 2
+  countOfTimesUsed: 2,
+  conversationId: 2
 } , {
   wordOrPhrase: 'am i making sense',
-  countOfTimesUsed: 1
+  countOfTimesUsed: 1,
+  conversationId: 2
 } , {
   wordOrPhrase: 'i’m sorry',
-  countOfTimesUsed: 6
+  countOfTimesUsed: 6,
+  conversationId: 2
 } , {
   wordOrPhrase: 'i would just like to say',
-  countOfTimesUsed: 3
+  countOfTimesUsed: 3,
+  conversationId: 2
 } , {
   wordOrPhrase: 'i’m not sure but',
-  countOfTimesUsed: 4
+  countOfTimesUsed: 4,
+  conversationId: 2
 } , {
   wordOrPhrase: 'i’m no expert but',
-  countOfTimesUsed: 3
+  countOfTimesUsed: 3,
+  conversationId: 2
 } , {
   wordOrPhrase: 'just',
-  countOfTimesUsed: 4
+  countOfTimesUsed: 4,
+  conversationId: 3
 } , {
   wordOrPhrase: 'does that make sense',
-  countOfTimesUsed: 3
+  countOfTimesUsed: 2,
+  conversationId: 3
 } , {
   wordOrPhrase: 'am I making sense',
-  countOfTimesUsed: 2
+  countOfTimesUsed: 2,
+  conversationId: 3
+} , {
+  wordOrPhrase: 'i’m sorry',
+  countOfTimesUsed: 3,
+  conversationId: 3
+} , {
+  wordOrPhrase: 'i would just like to say',
+  countOfTimesUsed: 6,
+  conversationId: 3
+} , {
+  wordOrPhrase: 'i’m not sure but',
+  countOfTimesUsed: 4,
+  conversationId: 3
+} , {
+  wordOrPhrase: 'i’m no expert but',
+  countOfTimesUsed: 1,
+  conversationId: 3
+} , , {
+  wordOrPhrase: 'i would just like to ask',
+  countOfTimesUsed: 1,
+  conversationId: 3
+} , {
+  wordOrPhrase: 'i was wondering',
+  countOfTimesUsed: 1,
+  conversationId: 3
+} , , {
+  wordOrPhrase: 'just',
+  countOfTimesUsed: 4,
+  conversationId: 3
+} , {
+  wordOrPhrase: 'does that make sense',
+  countOfTimesUsed: 2,
+  conversationId: 3
+} , {
+  wordOrPhrase: 'am I making sense',
+  countOfTimesUsed: 2,
+  conversationId: 3
+} , {
+  wordOrPhrase: 'i’m sorry',
+  countOfTimesUsed: 3,
+  conversationId: 3
+} , {
+  wordOrPhrase: 'i would just like to say',
+  countOfTimesUsed: 6,
+  conversationId: 3
+} , {
+  wordOrPhrase: 'i’m not sure but',
+  countOfTimesUsed: 4,
+  conversationId: 3
+} , {
+  wordOrPhrase: 'i’m no expert but',
+  countOfTimesUsed: 1,
+  conversationId: 3
+} , , {
+  wordOrPhrase: 'i would just like to ask',
+  countOfTimesUsed: 1,
+  conversationId: 3
+} , {
+  wordOrPhrase: 'i was wondering',
+  countOfTimesUsed: 1,
+  conversationId: 3
 }];
 
 const snippets = [{
