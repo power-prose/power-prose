@@ -1,20 +1,24 @@
 import axios from 'axios';
+import store from '../store';
 
 const SET_ALL_CONVERSATIONS = "SET_ALL_CONVERSATIONS";
 
-const POST_NEW_CONVERSATION = "POST_NEW_CONVERSATION"
+const POST_NEW_CONVERSATION = "POST_NEW_CONVERSATION";
+
+const SET_RECORDED_TEXT = "SET_RECORDED_TEXT"
 
 const initialConversationState = {
   defaultConversations: [],
-  currentConversation: {
-    // tones: [],
-    // text: ''
-  }
+  currentConversation: {}, 
+  recordedText: ''
 }
 
 const setAllConversations = conversations => ({type: SET_ALL_CONVERSATIONS, conversations});
-
 const postNewConversation = conversation => ({type: POST_NEW_CONVERSATION, conversation})
+export const setRecordedText = (text) => ({type: SET_RECORDED_TEXT, text})
+
+
+
 
 export const fetchAllConversations = (userId) => dispatch =>
 axios.get(`/api/conversations/user/${userId}`)
@@ -23,24 +27,17 @@ axios.get(`/api/conversations/user/${userId}`)
 
 export function postNewConvo(conversation) {
   return function thunk(dispatch) {
-    console.log("IS IT HERE?",conversation )
-      return axios.post(`/api/conversations`, conversation)
-          .then(res => res.data)
-          .then(newConversation => {
-              const action = postNewConversation(newConversation);
-              dispatch(action);
-              //history.push(`/products`);
-          })
-          .catch(error => console.log(error));
+    conversation.text = store.getState().allConversations.recordedText;
+    return axios.post(`/api/conversations`, conversation)
+        .then(res => res.data)
+        .then(newConversation => {
+          const action = postNewConversation(newConversation);
+          dispatch(action);
+          //history.push(`/`);
+        })
+        .catch(error => console.log(error));
   };
 }
-
-// export const postNewConvo = (newConversation) => dispatch =>
-// console.log("!!! IT WORKED", newConversation)
-// axios.post(`/api/conversations`, newConversation) 
-// .then(res => dispatch(postNewConversation(res.data)))
-// .catch(error);
-
 
 export default function (state = initialConversationState, action) {
   switch (action.type) {
@@ -52,6 +49,10 @@ export default function (state = initialConversationState, action) {
       return Object.assign({}, state, {defaultConversations: allConversations,
       currentConversation: action.conversation})
     }
+
+    case SET_RECORDED_TEXT:
+      return Object.assign({}, state, {recordedText: action.text})
+
     default:
       return state
   }
