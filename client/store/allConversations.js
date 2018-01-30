@@ -9,7 +9,7 @@ const SET_RECORDED_TEXT = "SET_RECORDED_TEXT"
 
 const initialConversationState = {
   defaultConversations: [],
-  currentConversation: {}, 
+  currentConversation: {},
   recordedText: ''
 }
 
@@ -42,7 +42,7 @@ export function postNewConvo(conversation) {
 export default function (state = initialConversationState, action) {
   switch (action.type) {
     case SET_ALL_CONVERSATIONS:
-      return action.conversations
+      return Object.assign({}, state, {defaultConversations: action.conversations})
 
     case POST_NEW_CONVERSATION: {
       const allConversations = [...state.defaultConversations, action.conversation]
