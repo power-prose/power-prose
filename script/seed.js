@@ -48,52 +48,52 @@ const watchWords = [{
 
 const conversations = [{
   name: 'Report phone call',
-  length: 34, userId: 1
+  length: 34, userId: 1, date: '2018-01-29 20:16:52.64-05'
 } , {
   name: 'Quarterly report presentation with board',
-  length: 62, userId: 1
+  length: 62, userId: 1, date: '2017-12-21 15:16:52.64-05'
 } , {
   name: 'Buyers meeting',
-  length: 44, userId: 1
+  length: 44, userId: 1, date: '2017-12-07 14:16:52.64-05'
 } , {
   name: 'Phone call with direct reports',
-  length: 23, userId: 1
+  length: 23, userId: 1, date: '2017-11-29 15:16:52.64-05'
 } , {
   name: 'Potential partnership phone call',
-  length: 31, userId: 2
+  length: 31, userId: 1, date: '2017-11-13 17:16:52.64-05'
 } , {
   name: 'Presentation practice',
-  length: 15, userId: 2
+  length: 15, userId: 1, date: '2017-10-23 15:16:52.64-05'
 } , {
   name: 'Technical interview practice',
-  length: 33, userId: 2
+  length: 33, userId: 1, date: '2017-10-13 17:16:52.64-05'
 } , {
   name: 'Meeting with architects',
-  length: 42, userId: 2
+  length: 42, userId: 1, date: '2017-9-29 11:16:52.64-05'
 } , {
   name: 'Report phone call',
-  length: 34, userId: 3
+  length: 34, userId: 2, date: '2018-01-22 20:16:52.64-05'
 } , {
   name: 'Quarterly report presentation with board',
-  length: 62, userId: 3
+  length: 62, userId: 2, date: '2017-12-23 15:16:52.64-05'
 } , {
   name: 'Buyers meeting',
-  length: 44, userId: 3
+  length: 44, userId: 2, date: '2017-12-05 14:16:52.64-05'
 } , {
   name: 'Phone call with direct reports',
-  length: 23, userId: 3
+  length: 23, userId: 2, date: '2017-11-24 15:16:52.64-05'
 } , {
   name: 'Potential partnership phone call',
-  length: 31, userId: 4
+  length: 31, userId: 2, date: '2017-11-12 17:16:52.64-05'
 } , {
   name: 'Presentation practice',
-  length: 15, userId: 4
+  length: 15, userId: 2, date: '2017-10-13 15:16:52.64-05'
 } , {
   name: 'Technical interview practice',
-  length: 33, userId: 4
+  length: 33, userId: 2, date: '2017-10-01 17:16:52.64-05'
 } , {
   name: 'Meeting with architects',
-  length: 42, userId: 4
+  length: 42, userId: 2, date: '2017-9-27 11:16:52.64-05'
 }];
 
 const watchWordOccurrences = [{
