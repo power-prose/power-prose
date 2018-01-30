@@ -1,45 +1,97 @@
-import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { logout } from '../store';
+import React from "react";
+import { NavLink, withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import { logout } from "../store";
 
-const NavBar = (props) => {
-    const { handleClick, isLoggedIn } = props;
+const NavBar = props => {
+  const { handleClick, isLoggedIn } = props;
 
-    return (
-        <div>
-            <h1>Power Prose</h1>
-            {
-                isLoggedIn
-                    ? <div>
-                        {/* The navbar will show these links after you log in */}
-                        <Link to="/">Home</Link>
-                        <a href="#" onClick={handleClick}>Logout</a>
-                    </div>
-                    : <div>
-                        {/* The navbar will show these links before you log in */}
-                        <Link to="/login">Login</Link>
-                        <Link to="/signup">Sign Up</Link>
-                    </div>
-            }
+  const loggedOutNav = (
+    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <NavLink className="navbar-brand" to="/">
+        Power Prose
+      </NavLink>
+      <button
+        className="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span className="navbar-toggler-icon" />
+      </button>
+      <div className="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul className="navbar-nav mr-auto" />
+        <NavLink className="nav-link" to="/login">
+          Login
+        </NavLink>
+        <NavLink className="nav-link" to="/signup">
+          Sign Up
+        </NavLink>
+      </div>
+    </nav>
+  );
 
-        </div>
-    )
+  const loggedInNav = (
+    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <NavLink className="navbar-brand" to="/">
+        Power Prose
+      </NavLink>
+      <button
+        className="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span className="navbar-toggler-icon" />
+      </button>
+      <div className="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul className="navbar-nav mr-auto">
+          <li className="nav-item">
+            <NavLink className="nav-link" to="/speak">
+              Speak
+            </NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink className="nav-link" to="/single-conversation">
+              Single Conversation
+            </NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink className="nav-link" to="/all-conversations">
+              All Conversations
+            </NavLink>
+          </li>
+        </ul>
+        <a className="nav-link" onClick={handleClick} href="#">
+          Logout<span className="sr-only">(current)</span>
+        </a>
+      </div>
+    </nav>
+  );
 
-}
+  const nav = isLoggedIn ? loggedInNav : loggedOutNav;
 
-const mapState = (state) => {
-    return {
-        isLoggedIn: !!state.user.id
+  return nav;
+};
+
+const mapState = state => {
+  return {
+    isLoggedIn: !!state.user.id
+  };
+};
+
+const mapDispatch = dispatch => {
+  return {
+    handleClick() {
+      dispatch(logout());
     }
-}
+  };
+};
 
-const mapDispatch = (dispatch) => {
-    return {
-      handleClick () {
-        dispatch(logout())
-      }
-    }
-  }
-
-  export default withRouter(connect(mapState, mapDispatch)(NavBar))
+export default withRouter(connect(mapState, mapDispatch)(NavBar));

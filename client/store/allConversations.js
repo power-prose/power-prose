@@ -9,7 +9,7 @@ const setAllConversations = conversations => ({type: SET_ALL_CONVERSATIONS, conv
 export const fetchAllConversations = (userId) => dispatch =>
 axios.get(`/api/conversations/user/${userId}`)
 .then(res => dispatch(setAllConversations(res.data)))
-.catch(error);
+.catch(error => console.log(error));
 
 export default function (state = defaultConversations, action) {
   switch(action.type) {
@@ -18,4 +18,4 @@ export default function (state = defaultConversations, action) {
     default:
       return state
   }
-};
+}

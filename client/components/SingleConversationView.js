@@ -1,15 +1,12 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import { SingleConversationData, ListOfConversations } from "./";
-import { connect } from "react-redux";
 
 const SingleConversationView = props => {
   return (
-    <div>
+    <div className="container-vertical container-right">
       <h1>
-        I am the SingleConversationView component. My job is to render data
-        related to a conversation that the user has chosen. I have access to
-        this conversartion through props.
+        I am the SingleConversationView component
       </h1>
       <SingleConversationData />
       <ListOfConversations />
