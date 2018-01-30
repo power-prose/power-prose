@@ -10,6 +10,10 @@ const Conversation = db.define('conversation', {
   length: {
     type: Sequelize.INTEGER,
     allowNull: false
+  },
+  date: {
+    type: Sequelize.DATE,
+    allowNull: false
   }
 },
 {
