@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Conversation, WatchWord, WatchWordOccurrence, Tone } = require('../db/models');
+const { Conversation, WatchWord, WatchWordOccurrence, Tone, Snippet } = require('../db/models');
 const wordCounter = require('../utils/wordCounter');
 
 const toneAnalysis = require('../utils/toneAnalysis');
@@ -9,7 +9,7 @@ module.exports = router;
 // get a single conversation with all associated watchWordOccurences and snippets
 router.get("/:conversationId", (req, res, next) => {
   Conversation.findById(req.params.conversationId, {
-    include: [Tone, WatchWord]
+    include: [Tone, WatchWord, Snippet]
   })
     .then(conversation => {
       req.session.chosenConversation = conversation;
@@ -22,7 +22,7 @@ router.get("/user/:userId", (req, res, next) => {
   Conversation.findAll({
     where: {
       userId: req.params.userId
-    }, include: [Tone, WatchWord]
+    }, include: [Tone, WatchWord, Snippet]
   })
     .then(conversations => res.json(conversations))
     .catch(next)
@@ -93,8 +93,6 @@ router.post('/', (req, res, next) => {
     })
   })
 
-
-
 router.get("/user/:userId/chosen", (req, res, next) => {
   if (req.session.chosenConversation) {
     res.json(req.session.chosenConversation);
@@ -109,7 +107,7 @@ router.get("/user/:userId/chosen", (req, res, next) => {
           ...conversations.map(conversation => conversation.id)
         );
         return Conversation.findById(max, {
-          include: [Tone, WatchWord]
+          include: [Tone, WatchWord, Snippet]
         });
       })
       .then(conversation => {
