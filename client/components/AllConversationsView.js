@@ -8,7 +8,6 @@ const AllConversationsView = (props) => {
 
   return (
     <div className="container-right container-vertical">
-    <h1>I am the AllConversationsView component</h1>
     <AllConversationsData />
     </div>
   )
