@@ -1,15 +1,17 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import {AllConversationsData} from './';
-
-
+import {AllConversationsData, WatchWords} from './';
+import RaisedButton from 'material-ui/RaisedButton';
 
 const AllConversationsView = (props) => {
 
   return (
+    <div className="container-horizontal">
+        <WatchWords />
+  <RaisedButton label="Default" />        
     <div className="container-right container-vertical">
-    <h1>I am the AllConversationsView component</h1>
     <AllConversationsData />
+    </div>
     </div>
   )
 

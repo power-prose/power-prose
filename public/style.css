@@ -1,7 +1,7 @@
 body {
   padding-left: 0.5%;
   padding-right: 0.5%;
-  font-family: sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 a {
@@ -41,7 +41,7 @@ form div {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  padding-top: 3%;
+  padding-top: 1%;
   /*padding-left: 1%;*/
 }
 
@@ -50,7 +50,7 @@ form div {
   flex-direction: column;
   justify-content: space-around;
   align-items: flex-start;
-  padding-top: 3%;
+  padding-top: 1%;
   /*padding-left: 1%;*/
 }
 
@@ -60,4 +60,5 @@ form div {
 
 .container-right {
   flex: 2;
+  padding-left: 1.5%;
 }

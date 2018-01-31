@@ -10,9 +10,9 @@ class RecordButtons extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: "",
-      preSubmit: false,
-      hasStarted: false
+      text: "", // we may not need to maintain this on local state
+      tones: [],
+      preSubmit: false
     };
     this.handleStart = this.handleStart.bind(this);
     this.handleStop = this.handleStop.bind(this);
@@ -24,11 +24,12 @@ class RecordButtons extends Component {
   componentDidMount() {
   }
 
+  // handleStart = () => // we can do this instead of binding in the constructor
   handleStart() {
     const startTime = new Date();
     this.props.dispatchStartTime(startTime);
     const handleUpdate = this.handleUpdate;
-    axios
+    axios // consider moving axios request to the store; we need to send in the ability to handle the update
       .get("/api/speech-to-text/token")
       .then(res => res.data)
       .then(token => {
@@ -48,7 +49,7 @@ class RecordButtons extends Component {
         });
       })
       .catch(function (error) {
-        console.log(error);
+        console.log(error); // display errors to user with error component
       });
   }
 
@@ -66,9 +67,14 @@ class RecordButtons extends Component {
 
     this.stream.stop = this.stream.stop.bind(this.stream);
     this.stream.stop();
+<<<<<<< HEAD
     this.setState({ preSubmit: true, hasStarted: false })
     console.log("!!!", this.state.hasStarted)
     //make form appear
+=======
+    this.setState({ preSubmit: true })
+    // make form appear
+>>>>>>> 5185dc1e9bfa7d07e6077c57c0d5ff1403dcf1fd
   }
 
 
@@ -118,19 +124,25 @@ class RecordButtons extends Component {
 }
 
 const mapState = state => {
-  return {};
+  return {}; // pull in text from state.allConversations.text and then send it to the thunkcreator re lines below
 };
 
 //need to create a conversation in db with appropriate data
 const mapDispatch = (dispatch) => {
   return {
+    // send conversation to thunk with the text on it already & change thunk creator accordingly
     handleSubmit(event) {
       event.preventDefault();
 
       const conversationData = {
         name: event.target.recordingName.value,
+<<<<<<< HEAD
         //lengthTime: "300",
         //eventually pass in time
+=======
+        lengthTime: "300",
+        // eventually pass in time
+>>>>>>> 5185dc1e9bfa7d07e6077c57c0d5ff1403dcf1fd
       }
       dispatch(postNewConvo(conversationData))
     },
@@ -147,4 +159,3 @@ const mapDispatch = (dispatch) => {
 };
 
 export default connect(mapState, mapDispatch)(RecordButtons);
-

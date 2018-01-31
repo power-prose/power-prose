@@ -23,7 +23,7 @@ class LoggedInHome extends Component {
 
         return (
             <div className="container-horizontal">
-                <WatchWords />
+
                 <Switch>
                     <Route path="/speak" component={Speak} />
                     <Route
@@ -34,7 +34,7 @@ class LoggedInHome extends Component {
                         path="/all-conversations"
                         component={AllConversationsView}
                     />
-                    <Route component={SingleConversationView} />
+                    <Route component={Speak} />
                 </Switch>
             </div>
         );
