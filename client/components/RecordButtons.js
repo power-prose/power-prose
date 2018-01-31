@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { postNewConvo, setRecordedText } from "../store";
+import { postNewConvo, setRecordedText, setConvoStartTime, setConvoEndTime } from "../store";
 const WatsonSpeech = require("watson-speech");
 const axios = require("axios");
 
@@ -10,8 +10,6 @@ class RecordButtons extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: "", // we may not need to maintain this on local state
-      tones: [],
       preSubmit: false
     };
     this.handleStart = this.handleStart.bind(this);
@@ -24,6 +22,8 @@ class RecordButtons extends Component {
 
   // handleStart = () => // we can do this instead of binding in the constructor
   handleStart() {
+    const startTime = new Date();
+    this.props.dispatchStartTime(startTime);
     const handleUpdate = this.handleUpdate;
     axios // consider moving axios request to the store; we need to send in the ability to handle the update
       .get("/api/speech-to-text/token")
@@ -57,6 +57,9 @@ class RecordButtons extends Component {
   }
 
   handleStop() {
+    const endTime = new Date();
+    this.props.dispatchEndTime(endTime)
+
     this.stream.stop = this.stream.stop.bind(this.stream);
     this.stream.stop();
     this.setState({ preSubmit: true })
@@ -107,15 +110,22 @@ const mapDispatch = (dispatch) => {
     // send conversation to thunk with the text on it already & change thunk creator accordingly
     handleSubmit(event) {
       event.preventDefault();
+
       const conversationData = {
         name: event.target.recordingName.value,
-        lengthTime: "300",
-        // eventually pass in time
+        //lengthTime: "300",
+        //eventually pass in time
       }
       dispatch(postNewConvo(conversationData))
     },
     dispatchText(text) {
       dispatch(setRecordedText(text));
+    },
+    dispatchStartTime(startTime) {
+      dispatch(setConvoStartTime(startTime));
+    },
+    dispatchEndTime(endTime) {
+      dispatch(setConvoEndTime(endTime))
     }
   }
 };
