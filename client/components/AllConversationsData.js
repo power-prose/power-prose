@@ -3,6 +3,9 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import {LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from 'recharts';
 import Toggle from 'material-ui/Toggle';
+import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import FlatButton from 'material-ui/FlatButton';
+
 
 const styles = {
   block: {
@@ -10,6 +13,7 @@ const styles = {
   },
   toggle: {
     marginBottom: 16,
+    fontSize: 14
   },
   thumbOff: {
     backgroundColor: '#ffcccc',
@@ -26,6 +30,13 @@ const styles = {
   labelStyle: {
     color: 'red',
   },
+  paperStyle: {
+    height: 100,
+    width: 100,
+    margin: 20,
+    textAlign: 'center',
+    display: 'inline-block',
+  }
 };
 
 export class AllConversationsData extends Component {
@@ -80,6 +91,13 @@ export class AllConversationsData extends Component {
 
     return (
       <div className="container-horizontal">
+        <Card>
+          <CardHeader
+            title="Filter Your WatchWords"
+          />
+          <CardText>
+
+
         <div style={styles.block}>
           {
             watchWords.length && watchWords.map(watchWord => (
@@ -92,6 +110,8 @@ export class AllConversationsData extends Component {
             ))
           }
         </div>
+            </CardText>
+        </Card>
           <LineChart width={1000} height={500} data={this.createChartData()}
                 margin={{top: 5, right: 30, left: 20, bottom: 5}}>
            <XAxis dataKey="name"/>
