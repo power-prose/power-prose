@@ -45,6 +45,8 @@ router.post('/', (req, res, next) => {
   let savedWordFrequencies;
   let createdConversation;
   let savedTones;
+  let savedToneSentences;
+  
   // get the counts of the watch words
   wordCounter.countWords(conversationText)
     // save wordFrequencies for later
@@ -53,10 +55,12 @@ router.post('/', (req, res, next) => {
       savedWordFrequencies = wordFrequencies
       return toneAnalysis.analyzeTone(conversationText);
     })
-    // take analyzed tones we get back and save for later
+    // take analyzed tones we get back and the sentences and save for later
     // create conversation instance using info from the body in the request
     .then(tones => {
-      savedTones = tones;
+      savedTones = tones.processedTones;
+      debugger
+      savedToneSentences = tones.tentativeSentences;
       return Conversation.create({
         name: conversationName,
         length: conversationLengthTime,
@@ -69,8 +73,25 @@ router.post('/', (req, res, next) => {
     .then(newConversation => {
       createdConversation = newConversation
       savedTones.conversationId = newConversation.id
-      return Tone.create(savedTones)
+      return Tone.create(savedTones) // create row of tones
     })
+    // save tones so we can later get the conversation id off of that row where we created the tones- will use in created the wordOccurrences instances
+    .then(createdTones => {
+      debugger
+      //tonesRow = createdTones;
+      // right now we know that all of the savedToneSentences pertain to tentative tones, will have to update later if we want more than one tone
+      const toneSentencesObjects = savedToneSentences.map(function(sentence) {
+        debugger
+        return {
+          sentence,
+          toneName: 'tentative', //later we may just want tone id, could update model to include id instead of name
+          conversationId: createdConversation.id
+        }
+      })
+      return ToneSentence.bulkCreate(toneSentencesObjects)
+    })
+
+
     // create array based on the wordFrequencies created from the function in util wordCount file (above)
     // create a watchwordoccurrence for each watchWord found
     .then(() => {

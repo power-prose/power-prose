@@ -19,12 +19,24 @@ const analyzeTone = (conversationText) => {
         }
     })
     .then(response => {
-        debugger
-        const processedTones = {};
+        let toneData = {}
+
+        let processedTones = {};
+        let tentativeSentences = [];
+
         response.data.document_tone.tones.forEach(tone => {
             processedTones[tone.tone_id] = tone.score
         })
-        return processedTones;
+        toneData.processedTones = processedTones;
+        response.data.sentences_tone.forEach(function(sentence) {
+            sentence.tones.forEach(function(tone) {
+                if (tone.tone_id === "tentative") {
+                    tentativeSentences.push(sentence.text)
+                }
+            })
+        })
+        toneData.tentativeSentences = tentativeSentences;
+        return toneData;
     })
     .catch(error => {
         console.log(error)
