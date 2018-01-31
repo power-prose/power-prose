@@ -18,6 +18,7 @@ class RecordButtons extends Component {
     this.handleStop = this.handleStop.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this);
     this.togglePlay = this.togglePlay.bind(this);
+   // this.toggleSubmit = this.toggleSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -70,26 +71,31 @@ class RecordButtons extends Component {
     //make form appear
   }
 
+
   togglePlay = () => {
-    console.log("before:", this.state.hasStarted)
-    console.log("later:", this.state.hasStarted)
     if (!this.state.hasStarted) this.handleStart()
     else this.handleStop()
   }
 
+  // toggleSubmit = () => {
+  //   this.setState({preSubmit: false})
+  // }
+
   render() {
+    let buttonColor = this.state.hasStarted ? 'red' : 'yellow'
     return (
       <div>
         <h1>Record Buttons Here</h1>
         <div className="on-button-container">
-          <button className="on-button" onClick={this.handleStart}>START
-            {/* {this.state.hasStarted ? "STOP" : "START"} */}
+          <button
+          className="on-button" style={{backgroundColor: buttonColor}}
+          onClick={this.togglePlay}>{this.state.hasStarted ? 'STOP' : 'START'}
           </button>
         </div>
         <div>
-          <button className="stop-button" onClick={this.handleStop}>
+          {/* <button className="stop-button" onClick={this.handleStop}>
             STOP
-          </button>
+          </button> */}
         </div>
         <div>
           {this.state.preSubmit &&
@@ -101,7 +107,7 @@ class RecordButtons extends Component {
                   name="recordingName"
                   placeholder="Title your Recording"
                 />
-                <button type="submit">Submit</button>
+                <button type="submit" >Submit</button>
               </form>
             </div>
           }
@@ -120,7 +126,6 @@ const mapDispatch = (dispatch) => {
   return {
     handleSubmit(event) {
       event.preventDefault();
-      this.setState({preSubmit: false})
 
       const conversationData = {
         name: event.target.recordingName.value,
