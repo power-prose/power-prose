@@ -37,7 +37,7 @@ const watchWords = [{
 } , {
   wordOrPhrase: 'Does that make sense'
 } , {
-  wordOrPhrase: 'Am i making sense'
+  wordOrPhrase: 'Am I making sense'
 } , {
   wordOrPhrase: 'I’m sorry'
 } , {
