@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Conversation, WatchWord, WatchWordOccurrence, Snippet, Tone } = require('../db/models');
+const { Conversation, WatchWord, WatchWordOccurrence, Tone } = require('../db/models');
 const wordCounter = require('../utils/wordCounter');
 
 const toneAnalysis = require('../utils/toneAnalysis');
@@ -34,7 +34,7 @@ router.post('/', (req, res, next) => {
     return;
   }
   let conversationData = req.body
-  debugger
+
 
   // get all of the conversation data out of the request
   const conversationName = conversationData.name;
@@ -43,45 +43,49 @@ router.post('/', (req, res, next) => {
   const conversationUserId = req.user.id;
 
   // get the counts of the watch words
-  const counts = wordCounter.countWords(conversationText)
-  console.log("these the counts", counts);
+  wordCounter.countWords(conversationText)
+    .then(wordFrequencies => {
+      toneAnalysis.analyzeTone(conversationText, (tones) => {
 
-  // determine the tones of the text
+        let createdConversation;
+        //save conversation with all watch words and tones included
+        Conversation.create({
+          name: conversationName,
+          length: conversationLengthTime,
+          userId: conversationUserId
+        })
 
-  toneAnalysis.analyzeTone(conversationText, (tones) => {
-    debugger
-    let createdConversation;
-    //save conversation with all watch words and tones included
-    Conversation.create({
-      name: conversationName,
-      length: conversationLengthTime,
-      userId: conversationUserId
-    })
-    
-    .then(newConversation => {
-      debugger
-      createdConversation = newConversation
-      tones.conversationId = newConversation.id
-      return Tone.create(tones)
-    })
-    .then(() => {
-      const wordCountsArray = Object.keys(counts).map(word => {
-        return {wordOrPhrase: word, countOfTimesUsed: counts[word], conversationId: createdConversation.id}
+          .then(newConversation => {
+
+            createdConversation = newConversation
+            tones.conversationId = newConversation.id
+            return Tone.create(tones)
+          })
+          // i need to include the watchWordId to pass into the bulCreate, which i need to get from the table of watchWords
+
+          //first find the id of each watchWord
+          .then(() => {
+            const wordCountsArray = Object.keys(wordFrequencies).map(wordId => {
+              //first find the id of each watchWord
+              return {
+                countOfTimesUsed: wordFrequencies[wordId],
+                watchWordId: +wordId,
+                conversationId: createdConversation.id
+              }
+            })
+
+            WatchWordOccurrence.bulkCreate(wordCountsArray)
+
+            // for each word and count, create a new instance in the database along with conversationId
+          })
+          .then(() => {
+            return Conversation.findById(createdConversation.id, { include: [{ all: true }] })
+          })
+          .then(conversation => {
+            res.status(201).json(conversation)
+          })
       })
-      debugger
-      WatchWordOccurrence.bulkCreate(wordCountsArray)
-      
-      // for each word and count, create a new instance in the database along with conversationId
     })
-    .then(() => {
-      return Conversation.findById(createdConversation.id, { include: [{ all: true }] })
-    })
-    .then(conversation => {
-      res.status(201).json(conversation)
-    })
-  })
-
-
 })
 
 

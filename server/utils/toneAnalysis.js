@@ -11,6 +11,7 @@ const analyzeTone = (conversationText, onSuccess) => {
 
     data.text = conversationText;
     request.post({
+        // request does not return a promise
         url: toneUrl,
         json: data,
         auth: {
