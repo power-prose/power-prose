@@ -11,11 +11,13 @@ class RecordButtons extends Component {
     super(props);
     this.state = {
       text: "",
-      preSubmit: false
+      preSubmit: false,
+      hasStarted: false
     };
     this.handleStart = this.handleStart.bind(this);
     this.handleStop = this.handleStop.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this);
+    this.togglePlay = this.togglePlay.bind(this);
   }
 
   componentDidMount() {
@@ -51,9 +53,10 @@ class RecordButtons extends Component {
 
   handleUpdate(data) {
     let updatedText = this.state.text + data;
-    this.setState({ text: updatedText });
+    this.setState({ text: updatedText, hasStarted: true });
     this.props.dispatchText(updatedText)
     console.log(updatedText);
+    console.log('@@@', this.state.hasStarted)
   }
 
   handleStop() {
@@ -62,8 +65,16 @@ class RecordButtons extends Component {
 
     this.stream.stop = this.stream.stop.bind(this.stream);
     this.stream.stop();
-    this.setState({ preSubmit: true })
+    this.setState({ preSubmit: true, hasStarted: false })
+    console.log("!!!", this.state.hasStarted)
     //make form appear
+  }
+
+  togglePlay = () => {
+    console.log("before:", this.state.hasStarted)
+    console.log("later:", this.state.hasStarted)
+    if (!this.state.hasStarted) this.handleStart()
+    else this.handleStop()
   }
 
   render() {
@@ -71,8 +82,8 @@ class RecordButtons extends Component {
       <div>
         <h1>Record Buttons Here</h1>
         <div className="on-button-container">
-          <button className="on-button" onClick={this.handleStart}>
-            START
+          <button className="on-button" onClick={this.handleStart}>START
+            {/* {this.state.hasStarted ? "STOP" : "START"} */}
           </button>
         </div>
         <div>
@@ -109,6 +120,7 @@ const mapDispatch = (dispatch) => {
   return {
     handleSubmit(event) {
       event.preventDefault();
+      this.setState({preSubmit: false})
 
       const conversationData = {
         name: event.target.recordingName.value,
