@@ -19,6 +19,7 @@ const analyzeTone = (conversationText) => {
         }
     })
     .then(response => {
+        debugger
         const processedTones = {};
         response.data.document_tone.tones.forEach(tone => {
             processedTones[tone.tone_id] = tone.score

@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Conversation, WatchWord, WatchWordOccurrence, Tone, Snippet } = require('../db/models');
+const { Conversation, WatchWord, WatchWordOccurrence, Tone, Snippet, ToneSentence } = require('../db/models');
 const wordCounter = require('../utils/wordCounter');
 
 const toneAnalysis = require('../utils/toneAnalysis');
@@ -9,7 +9,7 @@ module.exports = router;
 // get a single conversation with all associated watchWordOccurences and snippets
 router.get("/:conversationId", (req, res, next) => {
   Conversation.findById(req.params.conversationId, {
-    include: [Tone, WatchWord, Snippet]
+    include: [Tone, WatchWord, Snippet, ToneSentence]
   })
     .then(conversation => {
       req.session.chosenConversation = conversation;
