@@ -1,7 +1,5 @@
 import axios from 'axios';
 import store from '../store';
-import {fetchChosenConversation} from './chosenConversation';
-
 
 const SET_ALL_CONVERSATIONS = "SET_ALL_CONVERSATIONS";
 const POST_NEW_CONVERSATION = "POST_NEW_CONVERSATION";
@@ -24,9 +22,9 @@ export const setConvoEndTime = (time) => ({type: SET_CONVO_END_TIME, time})
 
 
 export const fetchAllConversations = (userId) => dispatch =>
-axios.get(`/api/conversations/user/${userId}`)
-.then(res => dispatch(setAllConversations(res.data)))
-.catch(error => console.log(error));
+  axios.get(`/api/conversations/user/${userId}`)
+    .then(res => dispatch(setAllConversations(res.data)))
+    .catch(error => console.log(error));
 
 export function postNewConvo(conversation) {
   return function thunk(dispatch) {
@@ -36,7 +34,6 @@ export function postNewConvo(conversation) {
         .then(res => res.data)
         .then(newConversation => {
           const action = postNewConversation(newConversation);
-          dispatch(fetchChosenConversation(newConversation.id))
           dispatch(action);
           //history.push(`/`);
         })
@@ -51,7 +48,8 @@ export default function (state = initialConversationState, action) {
 
     case POST_NEW_CONVERSATION: {
       const allConversations = [...state.defaultConversations, action.conversation]
-      return Object.assign({}, state, {defaultConversations: allConversations})
+      return Object.assign({}, state, {defaultConversations: allConversations,
+      currentConversation: action.conversation})
     }
 
     case SET_RECORDED_TEXT:

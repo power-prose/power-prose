@@ -68,9 +68,11 @@ const NavBar = props => {
             </NavLink>
           </li>
         </ul>
-        <a className="nav-link" onClick={handleClick} href="#">
-          Logout<span className="sr-only">(current)</span>
-        </a>
+
+        <NavLink className="nav-link" onClick={handleClick} to="/">
+          Logout
+        </NavLink>
+
       </div>
     </nav>
   );

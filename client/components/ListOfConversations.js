@@ -6,10 +6,9 @@ import { fetchChosenConversation } from '../store';
 
 const ListOfConversations = (props) => {
   const { conversations, handleClick } = props;
-  console.log("CONVERSATIONS!!!!", conversations);
+
   return (
     <div className="container-horizontal">
-      <p>I am the ListofConversations component</p>
       {
         conversations && conversations.map(conversation => {
           return (

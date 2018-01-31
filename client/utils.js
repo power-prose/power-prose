@@ -1,5 +1,3 @@
-
-
 export const analyzeText = (spokenText, watchWords) => {
   let regWords = watchWords.map(word => {
     return {word: word, regex: new RegExp(word, 'gi')};

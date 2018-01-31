@@ -7,14 +7,21 @@ const WatchWords = (props) => {
   const { watchWords } = props
 
   return (
-    <div id="container-watch-words" className="container-vertical">
-    <p>I AM THE WATCHWORDS COMPONENT</p>
-    <ul>
-    {watchWords.map(word => <li key={word.id}>{word.wordOrPhrase}</li>)}
-    </ul>
+    <div id="container-watch-words" className="card">
+    <div className="card-header">Your watch words and phrases</div>
+      <ul className="list-group list-group-flush">
+        {watchWords.map(word => <li className="list-group-item" key={word.id}>{word.wordOrPhrase}</li>)}
+      </ul>
     </div>
   )
 };
+
+
+
+
+
+
+
 
 // as a stretch feature in the future, this field will be populated with watchWords associated with the currentUser on state, rather than all watchWords in the database
 const mapState = (state) => {

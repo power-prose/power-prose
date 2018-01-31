@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { withRouter, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
-import { Login, Signup, NavBar, LoggedOutHome, LoggedInHome, Footer } from "./";
+import { AllConversationsCarousel, Login, Signup, NavBar, LoggedOutHome, LoggedInHome, Footer } from "./";
 import { me } from "../store";
 import RecordButtons from "./RecordButtons";
 
