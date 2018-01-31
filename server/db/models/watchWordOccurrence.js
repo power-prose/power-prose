@@ -1,15 +1,11 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
 
-const WatchWordOccurence = db.define('watchWordOccurence', {
-  wordOrPhrase: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
+const WatchWordOccurrence = db.define('watchWordOccurrence', {
   countOfTimesUsed: {
     type: Sequelize.INTEGER,
     allowNull: false
   }
 });
 
-module.exports = WatchWordOccurence;
+module.exports = WatchWordOccurrence;

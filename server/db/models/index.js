@@ -23,15 +23,16 @@ Conversation.belongsTo(User);
 
 // a conversation can have many watchWordOccurences, and every watchWordOccurence belongs to one conversation
 // every watchWordOccurrence instance now has a foreignkey conversationId
-Conversation.hasMany(WatchWordOccurrence);
-WatchWordOccurrence.belongsTo(Conversation);
+Conversation.belongsToMany(WatchWord, {through: WatchWordOccurrence});
+WatchWord.belongsToMany(Conversation, {through: WatchWordOccurrence})
 
 // a watchWordOccurrence can have many snippets (the number of snippets will be equivalent to the occurence's countOfTimesUsed field), and every snippet belongs to a WatchWordOccurence
 // every snippet instance now has a foreignkey watchWordOccurrenceId
-WatchWordOccurrence.hasMany(Snippet);
-Snippet.belongsTo(WatchWordOccurrence);
+// WatchWordOccurrence.hasMany(Snippet);
+// Snippet.belongsTo(WatchWordOccurrence);
 
-Conversation.hasMany(Tone);
+Conversation.hasOne(Tone);
+Tone.belongsTo(Conversation);
 
 module.exports = {
   User, WatchWord, Conversation, WatchWordOccurrence, Snippet, Tone, db
