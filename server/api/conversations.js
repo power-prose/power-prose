@@ -42,51 +42,57 @@ router.post('/', (req, res, next) => {
   const conversationLengthTime = conversationData.lengthTime;
   const conversationUserId = req.user.id;
 
+  let savedWordFrequencies;
+  let createdConversation;
+  let savedTones;
   // get the counts of the watch words
   wordCounter.countWords(conversationText)
+    // save wordFrequencies for later
+    // kick off tone analysis from util function file
     .then(wordFrequencies => {
-      toneAnalysis.analyzeTone(conversationText, (tones) => {
-
-        let createdConversation;
-        //save conversation with all watch words and tones included
-        Conversation.create({
-          name: conversationName,
-          length: conversationLengthTime,
-          userId: conversationUserId
-        })
-
-          .then(newConversation => {
-
-            createdConversation = newConversation
-            tones.conversationId = newConversation.id
-            return Tone.create(tones)
-          })
-          // i need to include the watchWordId to pass into the bulCreate, which i need to get from the table of watchWords
-
-          //first find the id of each watchWord
-          .then(() => {
-            const wordCountsArray = Object.keys(wordFrequencies).map(wordId => {
-              //first find the id of each watchWord
-              return {
-                countOfTimesUsed: wordFrequencies[wordId],
-                watchWordId: +wordId,
-                conversationId: createdConversation.id
-              }
-            })
-
-            WatchWordOccurrence.bulkCreate(wordCountsArray)
-
-            // for each word and count, create a new instance in the database along with conversationId
-          })
-          .then(() => {
-            return Conversation.findById(createdConversation.id, { include: [{ all: true }] })
-          })
-          .then(conversation => {
-            res.status(201).json(conversation)
-          })
-      })
+      savedWordFrequencies = wordFrequencies
+      return toneAnalysis.analyzeTone(conversationText);
     })
-})
+    // take analyzed tones we get back and save for later
+    // create conversation instance using info from the body in the request
+    .then(tones => {
+      savedTones = tones;
+      return Conversation.create({
+        name: conversationName,
+        length: conversationLengthTime,
+        userId: conversationUserId
+      });
+    })
+    // save newConversation for use later
+    // add conversation id from newly created conversation to tones object
+    // create tone instance from analyzed tones
+    .then(newConversation => {
+      createdConversation = newConversation
+      savedTones.conversationId = newConversation.id
+      return Tone.create(savedTones)
+    })
+    // create array based on the wordFrequencies created from the function in util wordCount file (above)
+    // create a watchwordoccurrence for each watchWord found
+    .then(() => {
+      const wordCountsArray = Object.keys(savedWordFrequencies).map(wordId => {
+        return {
+          countOfTimesUsed: savedWordFrequencies[wordId],
+          watchWordId: +wordId,
+          conversationId: createdConversation.id
+        }
+      })
+      return WatchWordOccurrence.bulkCreate(wordCountsArray)
+    })
+    // find the conversation that was just created by its id and eagerly load all associations
+    .then(() => {
+      return Conversation.findById(createdConversation.id, { include: [{ all: true }] })
+    })
+    // send the convo back to the client
+    .then(conversation => {
+      res.status(201).json(conversation)
+    })
+  })
+
 
 
 router.get("/user/:userId/chosen", (req, res, next) => {
