@@ -8,7 +8,7 @@ const WatchWords = (props) => {
 
   return (
     <div id="container-watch-words" className="card">
-    <div className="card-header">You are currently tracking these watch words and phrases</div>
+    <div className="card-header">Your watch words and phrases</div>
       <ul className="list-group list-group-flush">
         {watchWords.map(word => <li className="list-group-item" key={word.id}>{word.wordOrPhrase}</li>)}
       </ul>
