@@ -13,7 +13,8 @@ const Conversation = db.define('conversation', {
   },
   date: {
     type: Sequelize.DATE,
-    allowNull: false
+    allowNull: true,
+    defaultValue: '2018-01-29 20:16:52.64-05'
   }
 },
 {
