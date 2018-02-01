@@ -55,8 +55,17 @@ form div {
   /*padding-left: 1%;*/
 }
 
+.container-allconversations {
+  margin-top: -3%;
+  margin-right: 2%
+}
+
 #container-watch-words {
   flex: 1;
+}
+
+.container-watchwords {
+  margin-top: 3%;
 }
 
 .container-right {
