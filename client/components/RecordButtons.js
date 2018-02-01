@@ -5,6 +5,9 @@ import { postNewConvo, setRecordedText, setConvoStartTime, setConvoEndTime } fro
 const WatsonSpeech = require("watson-speech");
 const axios = require("axios");
 
+
+// TODO: undefined gets logged out whenever microphone picks up speech....
+
 const request = require('request');
 
 class RecordButtons extends Component {
@@ -12,7 +15,7 @@ class RecordButtons extends Component {
     super(props);
     this.state = {
       preSubmit: false,
-      text: ''
+      text: ""
     };
     this.handleStart = this.handleStart.bind(this);
     this.handleStop = this.handleStop.bind(this);
@@ -40,7 +43,7 @@ class RecordButtons extends Component {
         this.stream.setEncoding("utf8"); // get text instead of Buffers for on data events
 
         this.stream.on("data", function (data) {
-          console.log(data);
+          //console.log(data);
           handleUpdate(data);
         });
 

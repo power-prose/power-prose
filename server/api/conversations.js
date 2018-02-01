@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Conversation, WatchWord, WatchWordOccurrence, Tone, Snippet } = require('../db/models');
+const { Conversation, WatchWord, WatchWordOccurrence, Tone, Snippet, ToneSentence } = require('../db/models');
 const wordCounter = require('../utils/wordCounter');
 
 const toneAnalysis = require('../utils/toneAnalysis');
@@ -9,7 +9,7 @@ module.exports = router;
 // get a single conversation with all associated watchWordOccurences and snippets
 router.get("/:conversationId", (req, res, next) => {
   Conversation.findById(req.params.conversationId, {
-    include: [Tone, WatchWord, Snippet]
+    include: [Tone, WatchWord, Snippet, ToneSentence]
   })
     .then(conversation => {
       req.session.chosenConversation = conversation;
@@ -45,6 +45,8 @@ router.post('/', (req, res, next) => {
   let savedWordFrequencies;
   let createdConversation;
   let savedTones;
+  let savedToneSentences;
+  
   // get the counts of the watch words
   wordCounter.countWords(conversationText)
     // save wordFrequencies for later
@@ -53,10 +55,11 @@ router.post('/', (req, res, next) => {
       savedWordFrequencies = wordFrequencies
       return toneAnalysis.analyzeTone(conversationText);
     })
-    // take analyzed tones we get back and save for later
+    // take analyzed tones we get back and the sentences and save for later
     // create conversation instance using info from the body in the request
     .then(tones => {
-      savedTones = tones;
+      savedTones = tones.processedTones;
+      savedToneSentences = tones.tentativeSentences;
       return Conversation.create({
         name: conversationName,
         length: conversationLengthTime,
@@ -69,8 +72,22 @@ router.post('/', (req, res, next) => {
     .then(newConversation => {
       createdConversation = newConversation
       savedTones.conversationId = newConversation.id
-      return Tone.create(savedTones)
+      return Tone.create(savedTones) // create row of tones
     })
+    .then(createdTones => {
+      //tonesRow = createdTones;
+      // right now we know that all of the savedToneSentences pertain to tentative tone, will have to change later if we want more than one tone
+      const toneSentencesObjects = savedToneSentences.map(function(sentence) {
+        return {
+          sentence,
+          toneName: 'tentative', //later we may just want tone id, could update model to include id instead of name
+          conversationId: createdConversation.id
+        }
+      })
+      return ToneSentence.bulkCreate(toneSentencesObjects)
+    })
+
+
     // create array based on the wordFrequencies created from the function in util wordCount file (above)
     // create a watchwordoccurrence for each watchWord found
     .then(() => {
