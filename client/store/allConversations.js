@@ -9,13 +9,17 @@ const SET_CONVO_END_TIME = " SET_CONVO_END_TIME";
 
 const initialConversationState = {
   defaultConversations: [],
-  currentConversation: {},
-  recordedText: ''
+  recordedText: '',
+  startTime: 0,
+  endTime: 0
 }
 
 const setAllConversations = conversations => ({type: SET_ALL_CONVERSATIONS, conversations});
 const postNewConversation = conversation => ({type: POST_NEW_CONVERSATION, conversation})
 export const setRecordedText = (text) => ({type: SET_RECORDED_TEXT, text})
+export const setConvoStartTime = (time) => ({type: SET_CONVO_START_TIME, time})
+export const setConvoEndTime = (time) => ({type: SET_CONVO_END_TIME, time})
+
 
 export const fetchAllConversations = (userId) => dispatch =>
   axios.get(`/api/conversations/user/${userId}`)
