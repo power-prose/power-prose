@@ -13,7 +13,8 @@ class RecordButtons extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      preSubmit: false
+      preSubmit: false,
+      text: ""
     };
     this.handleStart = this.handleStart.bind(this);
     this.handleStop = this.handleStop.bind(this);

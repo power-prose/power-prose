@@ -59,7 +59,6 @@ router.post('/', (req, res, next) => {
     // create conversation instance using info from the body in the request
     .then(tones => {
       savedTones = tones.processedTones;
-      debugger
       savedToneSentences = tones.tentativeSentences;
       return Conversation.create({
         name: conversationName,
@@ -75,13 +74,10 @@ router.post('/', (req, res, next) => {
       savedTones.conversationId = newConversation.id
       return Tone.create(savedTones) // create row of tones
     })
-    // save tones so we can later get the conversation id off of that row where we created the tones- will use in created the wordOccurrences instances
     .then(createdTones => {
-      debugger
       //tonesRow = createdTones;
-      // right now we know that all of the savedToneSentences pertain to tentative tones, will have to update later if we want more than one tone
+      // right now we know that all of the savedToneSentences pertain to tentative tone, will have to change later if we want more than one tone
       const toneSentencesObjects = savedToneSentences.map(function(sentence) {
-        debugger
         return {
           sentence,
           toneName: 'tentative', //later we may just want tone id, could update model to include id instead of name
