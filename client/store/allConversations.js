@@ -1,5 +1,6 @@
 import axios from 'axios';
-import store from '../store';
+import store, {fetchChosenConversation} from '../store';
+
 
 const SET_ALL_CONVERSATIONS = "SET_ALL_CONVERSATIONS";
 const POST_NEW_CONVERSATION = "POST_NEW_CONVERSATION";
@@ -36,6 +37,7 @@ export function postNewConvo(conversation) {
         .then(newConversation => {
           const action = postNewConversation(newConversation);
           dispatch(action);
+          dispatch(fetchChosenConversation(newConversation.id))
           //history.push(`/`);
         })
         .catch(error => console.log(error));
@@ -49,8 +51,7 @@ export default function (state = initialConversationState, action) {
 
     case POST_NEW_CONVERSATION: {
       const allConversations = [...state.defaultConversations, action.conversation]
-      return Object.assign({}, state, {defaultConversations: allConversations,
-      currentConversation: action.conversation})
+      return Object.assign({}, state, {defaultConversations: allConversations})
     }
 
     case SET_RECORDED_TEXT:
