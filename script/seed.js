@@ -1,4 +1,4 @@
-const { User, WatchWord, Conversation, WatchWordOccurrence, Tone, Snippet, db } = require('../server/db/models')
+const { User, WatchWord, Conversation, WatchWordOccurrence, Tone, Snippet, ToneSentence, db } = require('../server/db/models')
 
 const users = [{
   email: '12345@gmail.com',
@@ -522,6 +522,150 @@ const tones = [{
   conversationId: 10
 }];
 
+const toneSentences = [{
+  sentence: 'Should we wait until Ann has a chance to chime in?.',
+  toneName: 'tentative',
+  conversationId: 1
+} , {
+  sentence: 'Does that make sense?',
+  toneName: 'tentative',
+  conversationId: 1
+} , {
+  sentence: `I'm not sure if this is right, but what if we go with option A?`,
+  toneName: 'tentative',
+  conversationId: 1
+} , {
+  sentence: `This is just a suggestion, but why don't we all take a turn to say what we like best about this idea?`,
+  toneName: 'tentative',
+  conversationId: 1
+} , {
+  sentence: `I'm probably not the best person to answer that question.`,
+  toneName: 'tentative',
+  conversationId: 1
+} , {
+  sentence: `What would everyone think of pursuing Kate's idea?`,
+  toneName: 'tentative',
+  conversationId: 1
+} , {
+  sentence: `I'm not sure what's best, but I can take some time to think about it.`,
+  toneName: 'tentative',
+  conversationId: 1
+} , {
+  sentence: `I'd like to hear what other think of this idea before really recommending it, but I think we might talk with Tom about what he suggested at our last meeting.`,
+  toneName: 'tentative',
+  conversationId: 1
+} , {
+  sentence: 'Should we wait until Ann has a chance to chime in?.',
+  toneName: 'tentative',
+  conversationId: 2
+} , {
+  sentence: 'Does that make sense?',
+  toneName: 'tentative',
+  conversationId: 2
+} , {
+  sentence: `This is just a suggestion, but why don't we all take a turn to say what we like best about this idea?`,
+  toneName: 'tentative',
+  conversationId: 2
+} , {
+  sentence: `I'm probably not the best person to answer that question.`,
+  toneName: 'tentative',
+  conversationId: 2
+} , {
+  sentence: `I'm not sure if this is right, but what if we go with option A?`,
+  toneName: 'tentative',
+  conversationId: 2
+} , {
+  sentence: `I'd like to hear what other think of this idea before really recommending it, but I think we might talk with Tom about what he suggested at our last meeting.`,
+  toneName: 'tentative',
+  conversationId: 2
+} , {
+  sentence: `What would everyone think of pursuing Kate's idea?`,
+  toneName: 'tentative',
+  conversationId: 2
+} , {
+  sentence: `I'm not sure what's best, but I can take some time to think about it.`,
+  toneName: 'tentative',
+  conversationId: 2
+} , {
+  sentence: `I'd like to hear what other think of this idea before really recommending it, but I think we might talk with Tom about what he suggested at our last meeting.`,
+  toneName: 'tentative',
+  conversationId: 2
+} , {
+  sentence: `I'm probably not the best person to answer that question.`,
+  toneName: 'tentative',
+  conversationId: 3
+} , {
+  sentence: 'Should we wait until Ann has a chance to chime in?.',
+  toneName: 'tentative',
+  conversationId: 3
+} , {
+  sentence: 'Does that make sense?',
+  toneName: 'tentative',
+  conversationId: 3
+} , {
+  sentence: `This is just a suggestion, but why don't we all take a turn to say what we like best about this idea?`,
+  toneName: 'tentative',
+  conversationId: 3
+} , {
+  sentence: `What would everyone think of pursuing Kate's idea?`,
+  toneName: 'tentative',
+  conversationId: 3
+} , {
+  sentence: `I'm not sure if this is right, but what if we go with option A?`,
+  toneName: 'tentative',
+  conversationId: 3
+} , {
+  sentence: `I'd like to hear what other think of this idea before really recommending it, but I think we might talk with Tom about what he suggested at our last meeting.`,
+  toneName: 'tentative',
+  conversationId: 3
+} , {
+  sentence: `I'd like to hear what other think of this idea before really recommending it, but I think we might talk with Tom about what he suggested at our last meeting.`,
+  toneName: 'tentative',
+  conversationId: 3
+} , {
+  sentence: `I'm not sure what's best, but I can take some time to think about it.`,
+  toneName: 'tentative',
+  conversationId: 3
+} , {
+  sentence: `I'm probably not the best person to answer that question.`,
+  toneName: 'tentative',
+  conversationId: 4
+} , {
+  sentence: 'Should we wait until Ann has a chance to chime in?.',
+  toneName: 'tentative',
+  conversationId: 4
+} , {
+  sentence: `This is just a suggestion, but why don't we all take a turn to say what we like best about this idea?`,
+  toneName: 'tentative',
+  conversationId: 4
+} , {
+  sentence: 'Does that make sense?',
+  toneName: 'tentative',
+  conversationId: 4
+} , {
+  sentence: `I'm not sure if this is right, but what if we go with option A?`,
+  toneName: 'tentative',
+  conversationId: 4
+} , {
+  sentence: `What would everyone think of pursuing Kate's idea?`,
+  toneName: 'tentative',
+  conversationId: 4
+} , {
+  sentence: `I'd like to hear what other think of this idea before really recommending it, but I think we might talk with Tom about what he suggested at our last meeting.`,
+  toneName: 'tentative',
+  conversationId: 4
+} , {
+  sentence: `I'm not sure what's best, but I can take some time to think about it.`,
+  toneName: 'tentative',
+  conversationId: 4
+} , {
+  sentence: `I'd like to hear what other think of this idea before really recommending it, but I think we might talk with Tom about what he suggested at our last meeting.`,
+  toneName: 'tentative',
+  conversationId: 4
+}];
+
+
+
 // const snippets = [{
 //   text: ' ... i’m no expert but I think we might want to consider ...'
 // } , {
@@ -553,6 +697,10 @@ const seed = () =>
   .then(() =>
   Promise.all(tones.map(tone =>
     Tone.create(tone))
+  ))
+  .then(() =>
+  Promise.all(toneSentences.map(toneSentence =>
+    ToneSentence.create(toneSentence))
   ))
   // .then(() =>
   // Promise.all(snippets.map(snippet =>
