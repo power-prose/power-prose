@@ -1,68 +1,71 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { VictoryBar, VictoryChart, VictoryAxis } from "victory";
+// import { VictoryBar, VictoryChart, VictoryAxis } from "victory";
+import {
+  dateParser,
+  singleConvoWatchWordsForViz,
+  singleConvoToneForViz
+} from "../utils";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  Bar,
+  BarChart,
+  ZAxis,
+  Scatter,
+  ScatterChart
+} from "recharts";
 
 const SingleConversationData = props => {
   const { conversation } = props;
   const tone = conversation.tone;
-  let dateToRender;
-  console.log("CONVERSATION!!!", conversation);
 
+  console.log("CONVERSATION!!!", conversation);
+  let dateToRender;
   let tonesData = [];
   let watchWordsData;
   if (tone) {
-    watchWordsData = conversation.watchWords.map(word => {return {wordOrPhrase: word.wordOrPhrase, countOfTimesUsed: word.watchWordOccurrence.countOfTimesUsed}});
-    console.log("object!!!", watchWordsData)
-
-    let conversationTones = tone;
-    dateToRender = conversation.date.slice(0,conversation.date.indexOf('T'));
-    let notTones = ["conversationId", "createdAt", "id", "updatedAt"];
-    for (let key in conversationTones) {
-      if (!notTones.includes(key)) {
-
-        tonesData.push({ tone: key, value: conversationTones[key]*100 });
-      }
-    }
+    dateToRender = dateParser(conversation.date);
+    watchWordsData = singleConvoWatchWordsForViz(conversation.watchWords);
+    tonesData = singleConvoToneForViz(tone);
   }
-
 
   return (
     <div className="container-vertical">
-      <div>Name: {conversation.name}</div>
-      <div>
-        Date: {dateToRender}
-      </div>
-      <div className="container-horizontal">
+      <h5>Name: {conversation.name}</h5>
+      <div>Date: {dateToRender}</div>
+      <div className="container-vertical">
         <div className="chart-wrapper">
           <h6>Watch Words Used</h6>
-          <VictoryChart domainPadding={20}>
-            <VictoryAxis />
-            <VictoryAxis dependentAxis
-            tickFormat={x => `${x} t`}
-
-            />
-            <VictoryBar
-              data={watchWordsData}
-              x="wordOrPhrase"
-              y="countOfTimesUsed"
-            />
-          </VictoryChart>
+          <BarChart width={800} height={400} data={watchWordsData}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="Word" interval={0} tickLine={false} tick={false}/>
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Bar legendType="none" dataKey="Count" fill="#1a294f" />
+          </BarChart>
         </div>
         <div className="chart-wrapper">
           <h6>Tones Identified</h6>
-          <VictoryChart domainPadding={20}>
-            <VictoryAxis />
-            <VictoryAxis
-              dependentAxis
-              tickFormat={x => `${x}%`}
-            />
-            <VictoryBar
-              data={tonesData.filter(tone => tone.value > 0)}
-              x="tone"
-              y="value"
-            />
-          </VictoryChart>
+          <ScatterChart
+            width={700}
+            height={400}
+            margin={{ top: 20, right: 20, bottom: 10, left: 10 }}
+          >
+            <XAxis dataKey="tone" name="tone" hide={true}/>
+            <YAxis dataKey="index" hide={true}/>
+            <ZAxis dataKey="value" range={[20, 5000]} scale="linear" name="value"  />
+            <Tooltip cursor={{ strokeDasharray: "3 3" }} />
+            <Legend />
+            <Scatter legendType="none" name="Tones" data={tonesData} fill="#8884d8" />
+          </ScatterChart>
         </div>
       </div>
     </div>
@@ -81,3 +84,44 @@ const mapDispatch = null;
 export default withRouter(
   connect(mapState, mapDispatch)(SingleConversationData)
 );
+
+//old:
+
+// <div className="container-vertical">
+//       <h5>Name: {conversation.name}</h5>
+//       <div>
+//         Date: {dateToRender}
+//       </div>
+//       <div className="container-horizontal">
+//         <div className="chart-wrapper">
+//           <h6>Watch Words Used</h6>
+//           <VictoryChart domainPadding={20}>
+//             <VictoryAxis />
+//             <VictoryAxis dependentAxis
+//             tickFormat={x => `${x} t`}
+
+//             />
+//             <VictoryBar
+//               data={watchWordsData}
+//               x="wordOrPhrase"
+//               y="countOfTimesUsed"
+//             />
+//           </VictoryChart>
+//         </div>
+//         <div className="chart-wrapper">
+//           <h6>Tones Identified</h6>
+//           <VictoryChart domainPadding={20}>
+//             <VictoryAxis />
+//             <VictoryAxis
+//               dependentAxis
+//               tickFormat={x => `${x}%`}
+//             />
+//             <VictoryBar
+//               data={tonesData}
+//               x="tone"
+//               y="value"
+//             />
+//           </VictoryChart>
+//         </div>
+//       </div>
+//     </div>
