@@ -19,20 +19,10 @@ const styles = {
 
 
  export default class Snippets extends React.Component {
-  //const { snippets } = props;
+
   state = {
     open: false,
-    snippets: [{
-        text: ' ... i’m no expert but I think we might want to consider ...'
-      } , {
-        text: '... i’m no expert but what I would suggest is ... '
-      } , {
-        text: '... i just want to say that i’m on board with that ...'
-      } , {
-        text: '... i’m just not sure that’s the best approach'
-      } , {
-        text: ' ... i’m just not sure that’s the way to go'
-      }]
+    snippets: this.props.chosenConversation.snippets
   }
 
   handleOpen = () => {
@@ -46,11 +36,16 @@ const styles = {
 
   handleRequestDelete = specificSnippet => () => {
 
-
-    const snippets = [...this.state.snippets];
+    //const updatedChosenConv = Object.assign({}, this.props.chosenConversation)
+    const snippets = this.state.snippets
     const snippetToDelete = snippets.indexOf(specificSnippet);
     snippets.splice(snippetToDelete, 1);
+
+    //NOT DELETING SINCE SET STATE IS BASED ON LOCAL STATE
+    //MAYBE STILL HAVE LOCAL STATE AND SET STATE HERE
+    //DISPATCH ON HANDLE SUBMIT A CONVERSATION OBJECT THATS FED FROM THE LOCAL STATE
     this.setState({ snippets });
+
 
   }
 
@@ -61,6 +56,7 @@ const styles = {
 
 
   render() {
+
     const actions = [
       <FlatButton
         label="Cancel"
@@ -74,7 +70,6 @@ const styles = {
         onClick={this.handleClose}
       />,
     ];
-
     const snippetMenu = this.state.snippets.map((snippet, i) => {
     return (<Chip
         key={i}
@@ -114,7 +109,13 @@ const styles = {
 //   }
 // }
 
-// const mapDispatch = null;
+// const mapDispatch = (dispatch) => {
+//   return {
+//     handleSubmit(){
+
+//     }
+//   }
+// }
 
 // export default withRouter(connect(mapState, mapDispatch)(Snippets));
 
