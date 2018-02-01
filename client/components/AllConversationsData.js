@@ -191,6 +191,15 @@ export class AllConversationsData extends Component {
                            <Line key={watchWord.id} type="monotone" dataKey={watchWord} stroke="#8884d8" activeDot={{r: 8}}/>
                          ))
                        }
+                       <Brush>
+                         <LineChart>
+                           {
+                             displayedWatchWords.length && displayedWatchWords.filter(word => word === 'sorry').map(word => (
+                               <Line key={word} type="monotone" dataKey={word} stroke="#8884d9" activeDot={{r: 8}}/>
+                             ))
+                           }
+                         </LineChart>
+                       </Brush>
                       </LineChart>
                     </div>
                     <div style={styles.slide}>
@@ -206,6 +215,15 @@ export class AllConversationsData extends Component {
                            <Line key={tone} type="monotone" dataKey={tone} stroke="#8884d9" activeDot={{r: 8}}/>
                          ))
                        }
+                       <Brush>
+                         <LineChart>
+                           {
+                             displayedTones.length && displayedTones.filter(tone => tone === 'tentative').map(tone => (
+                               <Line key={tone} type="monotone" dataKey={tone} stroke="#8884d9" activeDot={{r: 8}}/>
+                             ))
+                           }
+                         </LineChart>
+                       </Brush>
                      </LineChart>
                    </div>
                    <div style={styles.slide}>
