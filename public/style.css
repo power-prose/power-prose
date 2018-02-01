@@ -37,12 +37,24 @@ form div {
   letter-spacing: .2em;
 }
 
-.container-horizontal {
+.container-outer-horizontal {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   padding-top: 1%;
-  /*padding-left: 1%;*/
+  padding-left: 1%;
+  padding-right: 1%;
+}
+
+.container-inner-horizontal {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.container-inside-tabs {
+  padding-top: .5%;
+  margin-left: -2%
 }
 
 .container-vertical {
@@ -54,13 +66,10 @@ form div {
   /*padding-left: 1%;*/
 }
 
-.container-allconversations {
-  margin-top: -3%;
-  margin-right: 2%
-}
-
-#container-watch-words {
-  flex: 1;
+.container-inner-vertical {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .container-watchwords {
@@ -68,8 +77,6 @@ form div {
 }
 
 .container-right {
-  flex: 2;
   padding-left: 1.5%;
+  padding-right: 1.5%;
 }
-
-
