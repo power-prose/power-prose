@@ -18,16 +18,35 @@ const analyzeTone = (conversationText) => {
             password: tonePassword
         }
     })
-    .then(response => {
-        const processedTones = {};
-        response.data.document_tone.tones.forEach(tone => {
-            processedTones[tone.tone_id] = tone.score
+        .then(response => {
+            let toneData = {}
+
+            let processedTones = {};
+            let tentativeSentences = [];
+
+            response.data.document_tone.tones.forEach(tone => {
+                processedTones[tone.tone_id] = tone.score
+            })
+            toneData.processedTones = processedTones;
+
+            // if there is not more than 1 recorded sentence, the watson api does not return sentence info
+            if (response.data.sentences_tone) {
+                response.data.sentences_tone.forEach(function (sentence) {
+                    sentence.tones.forEach(function (tone) {
+                        if (tone.tone_id === "tentative") {
+                            tentativeSentences.push(sentence.text)
+                        }
+                    })
+                })
+                toneData.tentativeSentences = tentativeSentences;
+            } else {
+                toneData.tentativeSentences = [];
+            }
+            return toneData;
         })
-        return processedTones;
-    })
-    .catch(error => {
-        console.log(error)
-    })
+        .catch(error => {
+            console.log(error)
+        })
 }
 
 module.exports = { analyzeTone }
