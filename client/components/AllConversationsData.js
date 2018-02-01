@@ -90,22 +90,31 @@ export class AllConversationsData extends Component {
     });
   };
 
-  //
-  // calcMostUsedWatchWord () {
-  //   const { conversations } = this.props;
-  //   let obj = {}
-  //
-  //   conversations.forEach(conversation => {
-  //     conversations.watchWords.forEach(watchWordObj => {
-  //       if (obj[watchWordObj.wordOrPhrase] === undefined) {
-  //         obj[watchWordObj.wordOrPhrase] = watchWordObj.watchWordOccurrence.countOfTimesUsed
-  //       } else {
-  //         obj[watchWordObj.wordOrPhrase] += watchWordObj.watchWordOccurrence.countOfTimesUsed
-  //       }
-  //     })
-  //   })
-  //   return obj;
-  // }
+  calcMostUsedWatchWord () {
+    const { conversations } = this.props;
+    let obj = {}
+
+    conversations.forEach(conversation => {
+      conversation.watchWords.forEach(watchWordObj => {
+        if (watchWordObj.wordOrPhrase !== undefined) {
+          if (obj[watchWordObj.wordOrPhrase] === undefined) {
+            obj[watchWordObj.wordOrPhrase] = watchWordObj.watchWordOccurrence.countOfTimesUsed
+          } else {
+            obj[watchWordObj.wordOrPhrase] += watchWordObj.watchWordOccurrence.countOfTimesUsed
+          }
+        }
+      })
+    })
+    let count = 0;
+    let word = ''
+    for (var key in obj) {
+      if (obj[key] > count) {
+        count = obj[key];
+        word = key;
+      }
+    }
+    return word;
+  }
 
   // create chart data from a user's conversations
   createChartData = () => {
@@ -126,9 +135,9 @@ export class AllConversationsData extends Component {
   }
 
   render () {
-    const { user, watchWords } = this.props;
+    const { user, watchWords, conversations } = this.props;
     const { displayedWatchWords } = this.state;
-    // {console.log('!!!!!', this.calcMostUsedWatchWord())}
+    {console.log('!!!!!', this.calcMostUsedWatchWord())}
 
     return (
       <div className="container-horizontal">
@@ -164,7 +173,7 @@ export class AllConversationsData extends Component {
             title="Your Most Used WatchWord"
           />
           <CardText>
-            One line.
+            {this.calcMostUsedWatchWord()}
           </CardText>
         </Card>
         <Card style={styles.topLevelCard}>
