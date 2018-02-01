@@ -8,8 +8,6 @@ const axios = require("axios");
 
 // TODO: undefined gets logged out whenever microphone picks up speech....
 
-const request = require('request');
-
 class RecordButtons extends Component {
   constructor(props) {
     super(props);
@@ -23,13 +21,10 @@ class RecordButtons extends Component {
     this.togglePlay = this.togglePlay.bind(this);
   }
 
-  componentDidMount() {
-  }
-
   // handleStart = () => // we can do this instead of binding in the constructor
   handleStart() {
     const startTime = new Date();
-    //this.props.dispatchStartTime(startTime);
+    this.props.dispatchStartTime(startTime);
     this.setState({hasStarted: true })
     const handleUpdate = this.handleUpdate;
     axios // consider moving axios request to the store; we need to send in the ability to handle the update
@@ -43,7 +38,7 @@ class RecordButtons extends Component {
         this.stream.setEncoding("utf8"); // get text instead of Buffers for on data events
 
         this.stream.on("data", function (data) {
-          //console.log(data);
+          console.log(data);
           handleUpdate(data);
         });
 
@@ -59,19 +54,22 @@ class RecordButtons extends Component {
   handleUpdate(data) {
     let updatedText = this.state.text + data;
     this.setState({ text: updatedText});
-    this.props.dispatchText(updatedText)
     console.log(updatedText);
     console.log('@@@', this.state.hasStarted)
   }
 
   handleStop() {
     const endTime = new Date();
-    //this.props.dispatchEndTime(endTime)
-
+    this.props.dispatchEndTime(endTime)
+    console.log('THIS STATE TEXT!!!!', this.state.text);
     this.stream.stop = this.stream.stop.bind(this.stream);
-    this.stream.stop();
+    this.stream.stop()
+    setTimeout(() => this.props.handleConvoPost(this.state.text), 3000)
+
     this.setState({ preSubmit: true, hasStarted: false})
     console.log("***", this.state.preSubmit)
+
+
     // make form appear
   }
 
@@ -116,24 +114,21 @@ const mapState = state => {
 const mapDispatch = (dispatch) => {
   return {
     // send conversation to thunk with the text on it already & change thunk creator accordingly
-    // handleSubmit(event) {
-    //   event.preventDefault();
-
-    //   const conversationData = {
-    //     name: event.target.recordingName.value
-    //   }
-    //   dispatch(postNewConvo(conversationData))
-    // },
-    dispatchText(text) {
-      dispatch(setRecordedText(text));
+    handleConvoPost(text) {
+      let date = new Date().toString();
+      let slicedDate = date.slice(0, (date.indexOf('G') - 1));
+      const conversationData = {
+        name: `Recording ${slicedDate}`,
+        text: text
+      }
+      dispatch(postNewConvo(conversationData))
+    },
+    dispatchStartTime(startTime) {
+      dispatch(setConvoStartTime(startTime));
+    },
+    dispatchEndTime(endTime) {
+      dispatch(setConvoEndTime(endTime))
     }
-    //,
-  //   dispatchStartTime(startTime) {
-  //     dispatch(setConvoStartTime(startTime));
-  //   },
-  //   dispatchEndTime(endTime) {
-  //     dispatch(setConvoEndTime(endTime))
-  //   }
   }
 };
 

@@ -28,8 +28,9 @@ export const fetchAllConversations = (userId) => dispatch =>
 
 export function postNewConvo(conversation) {
   return function thunk(dispatch) {
-    conversation.text = store.getState().allConversations.recordedText;
+    // conversation.text = store.getState().allConversations.recordedText;
     conversation.lengthTime = (store.getState().allConversations.endTime - store.getState().allConversations.startTime) / 1000;
+    console.log("CONVERSATION!!!!!!!", conversation);
     return axios.post(`/api/conversations`, conversation)
         .then(res => res.data)
         .then(newConversation => {

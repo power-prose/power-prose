@@ -46,18 +46,20 @@ router.post('/', (req, res, next) => {
   let createdConversation;
   let savedTones;
   let savedToneSentences;
-  
+
   // get the counts of the watch words
   wordCounter.countWords(conversationText)
     // save wordFrequencies for later
     // kick off tone analysis from util function file
     .then(wordFrequencies => {
+      console.log("WORD FREQUENCIES", wordFrequencies)
       savedWordFrequencies = wordFrequencies
       return toneAnalysis.analyzeTone(conversationText);
     })
     // take analyzed tones we get back and the sentences and save for later
     // create conversation instance using info from the body in the request
     .then(tones => {
+      console.log("TONES!!!!", tones);
       savedTones = tones.processedTones;
       savedToneSentences = tones.tentativeSentences;
       return Conversation.create({
