@@ -31,7 +31,7 @@ const users = [{
 }];
 
 const watchWords = [{
-  wordOrPhrase: "I'm no expert but"
+  wordOrPhrase: "no expert"
 } , {
   wordOrPhrase: 'Just'
 } , {
@@ -39,13 +39,13 @@ const watchWords = [{
 } , {
   wordOrPhrase: 'Am I making sense'
 } , {
-  wordOrPhrase: "'I'm sorry"
+  wordOrPhrase: "sorry"
 } , {
-  wordOrPhrase: 'I would just like to say'
+  wordOrPhrase: 'just like to say'
 } , {
-  wordOrPhrase: "I'm not sure but"
+  wordOrPhrase: "not sure"
 } , {
-  wordOrPhrase: 'I would just like to ask'
+  wordOrPhrase: 'just like to ask'
 } , {
   wordOrPhrase: 'I was wondering'
 }];
