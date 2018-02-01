@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Snippets from './Snippets'
 import { connect } from "react-redux";
 import { postNewConvo, setRecordedText, setConvoStartTime, setConvoEndTime } from "../store";
 const WatsonSpeech = require("watson-speech");
@@ -19,6 +20,7 @@ class RecordButtons extends Component {
     this.handleStart = this.handleStart.bind(this);
     this.handleStop = this.handleStop.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this);
+    this.togglePlay = this.togglePlay.bind(this);
   }
 
   componentDidMount() {
@@ -27,7 +29,8 @@ class RecordButtons extends Component {
   // handleStart = () => // we can do this instead of binding in the constructor
   handleStart() {
     const startTime = new Date();
-    this.props.dispatchStartTime(startTime);
+    //this.props.dispatchStartTime(startTime);
+    this.setState({hasStarted: true })
     const handleUpdate = this.handleUpdate;
     axios // consider moving axios request to the store; we need to send in the ability to handle the update
       .get("/api/speech-to-text/token")
@@ -55,47 +58,48 @@ class RecordButtons extends Component {
 
   handleUpdate(data) {
     let updatedText = this.state.text + data;
-    this.setState({ text: updatedText });
+    this.setState({ text: updatedText});
     this.props.dispatchText(updatedText)
     console.log(updatedText);
+    console.log('@@@', this.state.hasStarted)
   }
 
   handleStop() {
     const endTime = new Date();
-    this.props.dispatchEndTime(endTime)
+    //this.props.dispatchEndTime(endTime)
 
     this.stream.stop = this.stream.stop.bind(this.stream);
     this.stream.stop();
-    this.setState({ preSubmit: true })
+    this.setState({ preSubmit: true, hasStarted: false})
+    console.log("***", this.state.preSubmit)
     // make form appear
   }
 
+  togglePlay = () => {
+    if (!this.state.hasStarted) this.handleStart()
+    else this.handleStop()
+  }
+
   render() {
+    let buttonColor = this.state.hasStarted ? 'red' : 'yellow'
     return (
       <div>
         <h1>Record Buttons Here</h1>
         <div className="on-button-container">
-          <button className="on-button" onClick={this.handleStart}>
-            START
+          <button
+          className="on-button" style={{backgroundColor: buttonColor}}
+          onClick={this.togglePlay}>{this.state.hasStarted ? 'STOP' : 'START'}
           </button>
         </div>
         <div>
-          <button className="stop-button" onClick={this.handleStop}>
+          {/* <button className="stop-button" onClick={this.handleStop}>
             STOP
-          </button>
+          </button> */}
         </div>
         <div>
           {this.state.preSubmit &&
             <div>
-              <form onSubmit={this.props.handleSubmit}>
-                <label htmlFor="Name">Title your recording</label>
-                <input
-                  type="text"
-                  name="recordingName"
-                  placeholder="Title your Recording"
-                />
-                <button type="submit">Submit</button>
-              </form>
+              <Snippets />
             </div>
           }
         </div>
@@ -112,25 +116,24 @@ const mapState = state => {
 const mapDispatch = (dispatch) => {
   return {
     // send conversation to thunk with the text on it already & change thunk creator accordingly
-    handleSubmit(event) {
-      event.preventDefault();
+    // handleSubmit(event) {
+    //   event.preventDefault();
 
-      const conversationData = {
-        name: event.target.recordingName.value,
-        //lengthTime: "300",
-        //eventually pass in time
-      }
-      dispatch(postNewConvo(conversationData))
-    },
+    //   const conversationData = {
+    //     name: event.target.recordingName.value
+    //   }
+    //   dispatch(postNewConvo(conversationData))
+    // },
     dispatchText(text) {
       dispatch(setRecordedText(text));
-    },
-    dispatchStartTime(startTime) {
-      dispatch(setConvoStartTime(startTime));
-    },
-    dispatchEndTime(endTime) {
-      dispatch(setConvoEndTime(endTime))
     }
+    //,
+  //   dispatchStartTime(startTime) {
+  //     dispatch(setConvoStartTime(startTime));
+  //   },
+  //   dispatchEndTime(endTime) {
+  //     dispatch(setConvoEndTime(endTime))
+  //   }
   }
 };
 
