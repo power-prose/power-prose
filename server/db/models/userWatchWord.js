@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
 
-const WatchWord = db.define('watchWord', {
+const UserWatchWord = db.define('userWatchWord', {
   wordOrPhrase: {
     type: Sequelize.STRING,
     unique: true,
@@ -9,4 +9,4 @@ const WatchWord = db.define('watchWord', {
   }
 });
 
-module.exports = WatchWord;
+module.exports = UserWatchWord;
