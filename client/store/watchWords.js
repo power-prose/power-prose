@@ -16,7 +16,7 @@ export const fetchUserWatchWords = (userId) => dispatch =>
     .then(res => dispatch(setUserWatchWords(res.data)))
     .catch(error => console.log(error));
 
-export const deleteUserWatchWord = (userId, userWatchWordId) => dispatch =>
+export const deleteUserWatchWord = (userWatchWordId) => dispatch =>
   axios.delete(`api/userWatchWords/${userId}/${userWatchWordId}`)
     .then((res) => dispatch(deleteUserWatchWord(userWatchWordId)))  
     .catch(error => console.log(error));
