@@ -39,7 +39,7 @@ class Snippets extends React.Component {
     if (this.props.convo.id) {
       this.setState({
         snippets: this.props.convo.snippets,
-        watchWords: this.props.convo.watchWords
+        watchWords: this.props.convo.userWatchWords
       });
     }
   };
@@ -51,7 +51,7 @@ class Snippets extends React.Component {
   handleClose = () => {
     const conversationData = { ...this.props.convo };
     console.log('CONVERSATION DATA BEFORE', conversationData);
-    conversationData.watchWords = this.state.watchWords.filter(
+    conversationData.userWatchWords = this.state.watchWords.filter(
       watchWord => watchWord.watchWordOccurrence.countOfTimesUsed !== 0
     );
     conversationData.name = this.state.recordingName;
@@ -65,7 +65,7 @@ class Snippets extends React.Component {
     const snippetToDelete = snippets.indexOf(specificSnippet);
 
     //***GET ID OF DELETED SNIPPET
-    const watchWordToDecId = snippets.splice(snippetToDelete, 1)[0].watchWordId;
+    const watchWordToDecId = snippets.splice(snippetToDelete, 1)[0].userWatchWordId;
 
     //***GET THE WATCHWORD TO DECREMENT
     const watchWordToDec = this.state.watchWords.filter(

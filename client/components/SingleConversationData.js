@@ -10,7 +10,7 @@ const SingleConversationData = props => {
   const { conversation } = props;
   const tone = conversation.tone;
 
-  console.log("CONVERSATION!!!", conversation);
+  // console.log("CONVERSATION!!!", conversation);
   let dateToRender;
   let tonesData = [];
   let watchWordsData;

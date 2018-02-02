@@ -21,6 +21,7 @@ export const dateParser = datetime => {
 };
 
 export const singleConvoWatchWordsForViz = watchWords => {
+  console.log(watchWords);
   return watchWords.map(word => {
     return {
       Word: word.wordOrPhrase,
