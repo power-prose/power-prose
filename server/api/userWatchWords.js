@@ -21,11 +21,19 @@ router.delete('/:userWatchWordId', (req, res, next) => {
       id: req.params.userWatchWordId,
     }
   })
+    .then(() => res.sendStatus(204))
+    .catch(next);
 })
 
 // add new a userWatchWord for one user
-router.post('/:userId', (req, res, next) => {
-  UserWatchWord.create(req.body)
-    .then(userWatchWord => userWatchWord.userId = req.params.userId)
+router.post('/', (req, res, next) => {
+  const watchWordData = req.body;
+  const wordOrPhrase = watchWordData.wordOrPhrase;
+  const userId = req.user.id
+  UserWatchWord.create({
+    wordOrPhrase,
+    userId
+  })
+    .then(newWord => res.json(newWord))
     .catch(next);
 })
