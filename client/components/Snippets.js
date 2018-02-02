@@ -54,13 +54,14 @@ const styles = theme => ({
 
     const newCount = watchWordToDec.watchWordOccurrence.countOfTimesUsed = count - 1
 
-
+    console.log("testing", watchWordToDec)
     //MAKE A NEW WATCHWORDS OBJECT WITH THE UPDATED COUNT
-    let newWWObj = [...(this.state.watchWords.filter(watchWord => watchWord.id !== 7)), watchWordToDec]
+    let newWWObj = [...(this.state.watchWords.filter(watchWord => watchWord.id !== watchWordToDecId)), watchWordToDec]
 
     this.setState({ snippets, watchWords: newWWObj, deleted: true });
 
     //CURRENTLY LOADING THE LOCAL STATE WITH A WATCH WORD OF COUNT 0
+    //FILTER OUT THOSE WITH STATE OF 0
     console.log("STATE:", this.state)
 
   }
@@ -156,12 +157,5 @@ const styles = theme => ({
 
 // export default withRouter(connect(mapState, mapDispatch)(Snippets));
 
-/* <form onSubmit={this.props.handleSubmit}>
-<label htmlFor="Name">Title your recording</label>
-<input
-  type="text"
-  name="recordingName"
-  placeholder="Title your Recording"
-/>
-<button type="submit" >Submit</button>
-</form> */
+//NOTES FOR LYSSA
+//FINISH MAKING DISPATCH BUT FIRST MAKE A PUT ROUTE THAT UPDATES A CONVERSATION

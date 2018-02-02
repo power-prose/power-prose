@@ -7,6 +7,7 @@ const POST_NEW_CONVERSATION = "POST_NEW_CONVERSATION";
 const SET_RECORDED_TEXT = "SET_RECORDED_TEXT"
 const SET_CONVO_START_TIME = "SET_CONVO_START_TIME";
 const SET_CONVO_END_TIME = " SET_CONVO_END_TIME";
+const UPDATE_CONVO = "UPDATE_CONVO"
 
 const initialConversationState = {
   defaultConversations: [],
@@ -20,6 +21,7 @@ const postNewConversation = conversation => ({type: POST_NEW_CONVERSATION, conve
 export const setRecordedText = (text) => ({type: SET_RECORDED_TEXT, text})
 export const setConvoStartTime = (time) => ({type: SET_CONVO_START_TIME, time})
 export const setConvoEndTime = (time) => ({type: SET_CONVO_END_TIME, time})
+export const updateConversation = (conversation) => ({type: UPDATE_CONVO, conversation})
 
 
 export const fetchAllConversations = (userId) => dispatch =>
@@ -44,6 +46,17 @@ export function postNewConvo(conversation) {
   };
 }
 
+export function updateConversationThunk(conversation) {
+  return function thunk(dispatch) {
+    return axios.put(`/api/conversations/${conversation.id}`, conversation)
+        .then(res => {
+          dispatch(updateConversation(res.data))
+          dispatch(fetchChosenConversation(res.data.id))
+        })
+        .catch(error => console.log(error + ` Updating conversation ${conversation.id} was unsuccessful`))
+  }
+}
+
 export default function (state = initialConversationState, action) {
   switch (action.type) {
     case SET_ALL_CONVERSATIONS:
@@ -62,6 +75,12 @@ export default function (state = initialConversationState, action) {
 
     case SET_CONVO_END_TIME:
       return Object.assign({}, state, {endTime: action.time})
+
+    case UPDATE_CONVO: {
+      const updatedConversations = state.defaultConversations.map(conversation =>(action.conversation.id === conversation.id ? action.conversation : conversation))
+
+      return Object.assign({}, state, {defaultConversations: updatedConversations})
+    }
 
     default:
       return state
