@@ -22,7 +22,7 @@ class LoggedInHome extends Component {
     render() {
 
         return (
-            <div className="container-horizontal">
+            <div className="container-outer-horizontal">
 
                 <Switch>
                     <Route path="/speak" component={Speak} />
