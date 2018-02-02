@@ -3,7 +3,7 @@ const db = require('../db');
 
 const Snippet = db.define('snippet', {
   text: {
-    type: Sequelize.STRING,
+    type: Sequelize.TEXT,
     allowNull: false
   }
 });
