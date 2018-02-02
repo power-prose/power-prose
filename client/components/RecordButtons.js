@@ -8,6 +8,39 @@ const axios = require("axios");
 
 // TODO: undefined gets logged out whenever microphone picks up speech....
 
+const chosenConversation = {
+snippets: [{
+  text: ' ... i’m no expert but I think we might want to consider ...',
+  conversationId: 21,
+  watchWordId: 1
+} , {
+  text: '... i’m no expert but what I would suggest is ... ',
+  conversationId: 21,
+  watchWordId: 1
+} , {
+  text: '... i just want to say that i’m on board with that ...',
+  conversationId: 21,
+  watchWordId: 2
+} , {
+  text: '... i’m just not sure that’s the best approach',
+  conversationId: 21,
+  watchWordId: 7
+} , {
+  text: ' ... i’m just not sure that’s the way to go',
+  conversationId: 21,
+  watchWordId: 7
+}],
+
+watchWords: [
+  {id: 7, wordOrPhrase: "not sure", watchWordOccurrence:
+  {countOfTimesUsed: 2, conversationId: 21, watchWordId: 7}},
+  {id: 2, wordOrPhrase: "just", watchWordOccurrence:
+  {countOfTimesUsed: 1, conversationId: 21, watchWordId: 2}},
+  {id: 1, wordOrPhrase: "no expert", watchWordOccurrence: {countOfTimesUsed: 2, conversationId: 21, watchWordId: 1}}
+  ]
+}
+
+
 class RecordButtons extends Component {
   constructor(props) {
     super(props);
@@ -55,7 +88,7 @@ class RecordButtons extends Component {
     let updatedText = this.state.text + data;
     this.setState({ text: updatedText});
     console.log(updatedText);
-    console.log('@@@', this.state.hasStarted)
+
   }
 
   handleStop() {
@@ -67,7 +100,6 @@ class RecordButtons extends Component {
     setTimeout(() => this.props.handleConvoPost(this.state.text), 3000)
 
     this.setState({ preSubmit: true, hasStarted: false})
-    console.log("***", this.state.preSubmit)
 
 
     // make form appear
@@ -95,9 +127,12 @@ class RecordButtons extends Component {
           </button> */}
         </div>
         <div>
-          {this.state.preSubmit &&
+          { chosenConversation.snippets.length &&
             <div>
-              <Snippets />
+              <Snippets chosenConversation={chosenConversation} />
+              {/* replace passed in prop with this.props.chosenConversation */}
+              {/* replace truthy value before && with this.props.chosenConversation.snippets.length */}
+
             </div>
           }
         </div>
@@ -107,7 +142,9 @@ class RecordButtons extends Component {
 }
 
 const mapState = state => {
-  return {}; // pull in text from state.allConversations.text and then send it to the thunkcreator re lines below
+  return {
+    // chosenConversation: state.chosenConversation
+  }
 };
 
 //need to create a conversation in db with appropriate data

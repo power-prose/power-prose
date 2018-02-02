@@ -135,3 +135,11 @@ router.get("/user/:userId/chosen", (req, res, next) => {
       });
   }
 });
+
+router.put('/:conversationId', (req, res, next) => {
+  Conversation.findById({
+    where: {id: req.params.conversationId}
+  })
+  .then(foundConvo => foundConvo.update(req.body))
+  .then(updatedConvo => res.json(updatedConvo))
+})
