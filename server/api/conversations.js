@@ -1,22 +1,18 @@
-const router = require("express").Router();
-const {
-  Conversation,
-  WatchWord,
-  WatchWordOccurrence,
-  Tone,
-  Snippet,
-  ToneSentence
-} = require("../db/models");
-const wordCounter = require("../utils/wordCounter");
+const router = require('express').Router();
+const { Conversation, UserWatchWord, WatchWordOccurrence, Tone, Snippet, ToneSentence } = require('../db/models');
+const wordCounter = require('../utils/wordCounter');
+
+const toneAnalysis = require('../utils/toneAnalysis');
+
 const { createAllSnippetsWithWatchWords } = require("../utils/createSnippets");
-const toneAnalysis = require("../utils/toneAnalysis");
+
 
 module.exports = router;
 
 // get a single conversation with all associated watchWordOccurences and snippets
 router.get("/:conversationId", (req, res, next) => {
   Conversation.findById(req.params.conversationId, {
-    include: [Tone, WatchWord, Snippet, ToneSentence]
+    include: [Tone, UserWatchWord, Snippet, ToneSentence]
   })
     .then(conversation => {
       req.session.chosenConversation = conversation;
@@ -29,8 +25,8 @@ router.get("/user/:userId", (req, res, next) => {
   Conversation.findAll({
     where: {
       userId: req.params.userId
-    },
-    include: [Tone, WatchWord, Snippet, ToneSentence]
+    }, include: [Tone, UserWatchWord, Snippet, ToneSentence]
+
   })
     .then(conversations => res.json(conversations))
     .catch(next);
@@ -47,7 +43,7 @@ router.post("/", (req, res, next) => {
   const conversationName = conversationData.name;
   const conversationText = conversationData.text;
   const conversationLengthTime = conversationData.lengthTime;
-  const conversationUserId = req.user.id;
+  const conversationUserId = req.user.id
 
   let savedWordFrequencies;
   let createdConversation;
@@ -55,19 +51,16 @@ router.post("/", (req, res, next) => {
   let savedToneSentences;
 
   // get the counts of the watch words
-  wordCounter
-    .countWords(conversationText)
+  wordCounter.countWords(conversationText, conversationUserId)
     // save wordFrequencies for later
     // kick off tone analysis from util function file
     .then(wordFrequencies => {
-      console.log("WORD FREQUENCIES", wordFrequencies);
-      savedWordFrequencies = wordFrequencies;
+      savedWordFrequencies = wordFrequencies
       return toneAnalysis.analyzeTone(conversationText);
     })
     // take analyzed tones we get back and the sentences and save for later
     // create conversation instance using info from the body in the request
     .then(tones => {
-      console.log("TONES!!!!", tones);
       savedTones = tones.processedTones;
       savedToneSentences = tones.tentativeSentences;
       return Conversation.create({
@@ -103,7 +96,7 @@ router.post("/", (req, res, next) => {
       const wordCountsArray = Object.keys(savedWordFrequencies).map(wordId => {
         return {
           countOfTimesUsed: savedWordFrequencies[wordId],
-          watchWordId: +wordId, // will change to userWatchWordId
+          userWatchWordId: +wordId,
           conversationId: createdConversation.id
         };
       });
@@ -145,7 +138,7 @@ router.get("/user/:userId/chosen", (req, res, next) => {
           ...conversations.map(conversation => conversation.id)
         );
         return Conversation.findById(max, {
-          include: [Tone, WatchWord, Snippet]
+          include: [Tone, UserWatchWord, Snippet]
         });
       })
       .then(conversation => {
