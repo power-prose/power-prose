@@ -23,15 +23,36 @@ const styles = theme => ({
 });
 
 
- export default class Snippets extends React.Component {
+class Snippets extends React.Component {
+  constructor(){
+    super()
+    this.state = {
+      open: false,
+      snippets: [],
+      watchWords: [],
+      recordingName: '',
+      deleted: false,
+      updateSent: false
+    }
+  }
 
-  state = {
-    open: false,
-    snippets: this.props.chosenConversation.snippets,
-    watchWords: this.props.chosenConversation.watchWords,
-    recordingName: '',
-    deleted: false,
-    updateSent: false
+  componentDidMount = () => {
+    console.log("WE HERE, Props:", this.props)
+    if (this.props.chosenConservation && this.props.chosenConservation.snippets !== this.state.snippets){
+      this.setState({snippets: this.props.chosenConservation.snippets})
+    }
+  }
+
+
+  componentWillReceiveProps = (nextProps) => {
+
+    console.log("%%%", nextProps)
+    if (nextProps.chosenConservation && nextProps.chosenConservation.snippets !== this.state.snippets) {
+      this.setState({
+        snippets: nextProps.chosenConservation.snippets,
+        watchWords: nextProps.chosenConversation.watchWords
+      })
+    }
   }
 
   handleOpen = () => {
@@ -82,7 +103,6 @@ const styles = theme => ({
 
 
   render() {
-
     const actions = [
       <FlatButton
         label="Confirm All"
@@ -113,6 +133,8 @@ const styles = theme => ({
         </Chip>)
   })
 
+  console.log("Current State:", this.state)
+
     return (
       <div>
         <RaisedButton label="Confirm your snippets" onClick={this.handleOpen} />
@@ -136,34 +158,36 @@ const styles = theme => ({
           {snippetMenu}
 
         </Dialog>
-        {this.state.updateSent && <SingleConversationView /> }
+        {/* {this.state.updateSent && <SingleConversationView /> } */}
       </div>
     );
   }
 }
 
-// const mapState = (state) => {
-//   return {
-//     chosenConversation: state.chosenConservation
-//   }
-// }
-
-const mapDispatch = (dispatch) => {
+const mapState = (state, ownProps) => {
   return {
-    handleSubmit(){
-      //MAKING A NEW CONVERSATION OBJECT
-      const conversationData = {...this.props.chosenConversation}
-      conversationData.watchWords = this.state.watchWords.filter(watchWord => watchWord.watchWordOccurrence.countOfTimesUsed !== 0)
-      conversationData.name = this.state.recordingName
-
-      //SENDING TO THE BACKEND
-      dispatch(updateConversation(conversationData))
-
-    }
+    chosenConversation: state.chosenConservation
   }
 }
 
-// export default withRouter(connect(mapState, mapDispatch)(Snippets));
+// const mapDispatch = (dispatch) => {
+//   return {
+//     handleSubmit(){
+//       //MAKING A NEW CONVERSATION OBJECT
+//       const conversationData = {...this.props.chosenConversation}
+//       conversationData.watchWords = this.state.watchWords.filter(watchWord => watchWord.watchWordOccurrence.countOfTimesUsed !== 0)
+//       conversationData.name = this.state.recordingName
+
+//       //SENDING TO THE BACKEND
+//       dispatch(updateConversation(conversationData))
+
+//     }
+//   }
+// }
+
+//mapDispatch
+
+export default withRouter(connect(mapState)(Snippets));
 
 //NOTES FOR LYSSA
 //FINISH MAKING DISPATCH BUT FIRST MAKE A PUT ROUTE THAT UPDATES A CONVERSATION

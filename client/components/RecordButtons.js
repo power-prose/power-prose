@@ -115,6 +115,11 @@ class RecordButtons extends Component {
   }
 
   render() {
+    let snippetsLength
+    let snippets = this.props.chosenConversation ? this.props.chosenConversation.snippets : []
+    if (snippets) snippetsLength = snippets.length
+    console.log("$$$", snippets)
+
     let buttonColor = this.state.hasStarted ? 'red' : 'yellow'
     return (
       <div>
@@ -126,16 +131,12 @@ class RecordButtons extends Component {
           </button>
         </div>
         <div>
-          { chosenConversation.snippets.length &&
-            <div>
-              <Snippets chosenConversation={chosenConversation} />
-              {/* replace passed in prop with this.props.chosenConversation */}
-              {/* replace truthy value before && with this.props.chosenConversation.snippets.length */}
-
-            </div>
-          }
+          {snippetsLength &&
+          <div>
+            <Snippets />
+          </div>}
+          </div>
         </div>
-      </div>
     );
   }
 }
@@ -144,7 +145,8 @@ const mapState = state => {
   return {
     // chosenConversation: state.chosenConversation
     startTime: state.startTime,
-    endTime: state.endTime
+    endTime: state.endTime,
+    chosenConversation: state.chosenConversation
   }
 };
 
