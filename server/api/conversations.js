@@ -140,6 +140,11 @@ router.put('/:conversationId', (req, res, next) => {
   Conversation.findById({
     where: {id: req.params.conversationId}
   })
-  .then(foundConvo => foundConvo.update(req.body))
+  .then(foundConvo =>
+    foundConvo.update(req.body))
+  .then(updatedConvo =>
+    Snippet.destroy({
+      where: {conversationId: updatedConvo.id}
+  }))
   .then(updatedConvo => res.json(updatedConvo))
 })

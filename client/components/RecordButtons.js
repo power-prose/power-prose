@@ -105,6 +105,10 @@ class RecordButtons extends Component {
     // make form appear
   }
 
+  handleTimer() {
+    const currentTime = this.state.endTime - this.state.startTime
+  }
+
   togglePlay = () => {
     if (!this.state.hasStarted) this.handleStart()
     else this.handleStop()
@@ -120,11 +124,6 @@ class RecordButtons extends Component {
           className="on-button" style={{backgroundColor: buttonColor}}
           onClick={this.togglePlay}>{this.state.hasStarted ? 'STOP' : 'START'}
           </button>
-        </div>
-        <div>
-          {/* <button className="stop-button" onClick={this.handleStop}>
-            STOP
-          </button> */}
         </div>
         <div>
           { chosenConversation.snippets.length &&
@@ -144,6 +143,8 @@ class RecordButtons extends Component {
 const mapState = state => {
   return {
     // chosenConversation: state.chosenConversation
+    startTime: state.startTime,
+    endTime: state.endTime
   }
 };
 
@@ -151,6 +152,7 @@ const mapState = state => {
 const mapDispatch = (dispatch) => {
   return {
     // send conversation to thunk with the text on it already & change thunk creator accordingly
+
     handleConvoPost(text) {
       let date = new Date().toString();
       let slicedDate = date.slice(0, (date.indexOf('G') - 1));
