@@ -14,9 +14,10 @@ const styles = theme => ({
     margin: 4,
   },
   wrapper: {
-    display: 'flex',
+    display: 'block',
     flexWrap: 'wrap',
   },
+  hoverColor: 'blue300'
 });
 
 
@@ -26,7 +27,8 @@ const styles = theme => ({
     open: false,
     snippets: this.props.chosenConversation.snippets,
     watchWords: this.props.chosenConversation.watchWords,
-    recordingName: ''
+    recordingName: '',
+    deleted: false
   }
 
   handleOpen = () => {
@@ -39,7 +41,7 @@ const styles = theme => ({
 
 
   handleRequestDelete = specificSnippet => () => {
-    console.log(">><<", this.state.watchWords)
+    console.log(">><<", this.state.deleted)
 
     const snippets = this.state.snippets
     const snippetToDelete = snippets.indexOf(specificSnippet);
@@ -56,7 +58,7 @@ const styles = theme => ({
     //MAKE A NEW WATCHWORDS OBJECT WITH THE UPDATED COUNT
     let newWWObj = [...(this.state.watchWords.filter(watchWord => watchWord.id !== 7)), watchWordToDec]
 
-    this.setState({ snippets, watchWords: newWWObj });
+    this.setState({ snippets, watchWords: newWWObj, deleted: true });
 
     //CURRENTLY LOADING THE LOCAL STATE WITH A WATCH WORD OF COUNT 0
     console.log("STATE:", this.state)
@@ -70,7 +72,7 @@ const styles = theme => ({
 
   handleChange = (event) => {
     const recordingName = event.target.value
-    console.log(recordingName)
+    console.log("before:", this.state.deleted)
     this.setState({recordingName})
 
   }
@@ -82,14 +84,16 @@ const styles = theme => ({
       <FlatButton
         label="Confirm All"
         secondary={true}
-        styles= {styles.leftIcon}
+        disabled={!this.state.recordingName}
+        style= {{float: 'left'}}
         onClick={this.handleClose}
 
       />,
       <FlatButton
-        label="Submit"
+        label="Save Changes"
         primary={true}
         keyboardFocused={true}
+        disabled={!this.state.deleted || !this.state.recordingName}
         onClick={this.handleClose}
       />,
     ];
@@ -110,7 +114,7 @@ const styles = theme => ({
       <div>
         <RaisedButton label="Confirm your snippets" onClick={this.handleOpen} />
         <Dialog
-          title="Scrollable Dialog"
+          title="Review & Edit Your Recording"
           actions={actions}
           modal={false}
           open={this.state.open}
@@ -144,8 +148,9 @@ const styles = theme => ({
 // const mapDispatch = (dispatch) => {
 //   return {
 //     handleSubmit(){
-
-//     }
+//       const conversationData = {...this.props.chosenConversation}
+//       conversationData.watchWords = this.state.watchWords
+//       conversationData.name = this.state.recordingName
 //   }
 // }
 
