@@ -8,17 +8,36 @@ const axios = require("axios");
 
 // TODO: undefined gets logged out whenever microphone picks up speech....
 
-const chosenConversation = {snippets: [{
-  text: ' ... i’m no expert but I think we might want to consider ...'
+const chosenConversation = {
+snippets: [{
+  text: ' ... i’m no expert but I think we might want to consider ...',
+  conversationId: 21,
+  watchWordId: 1
 } , {
-  text: '... i’m no expert but what I would suggest is ... '
+  text: '... i’m no expert but what I would suggest is ... ',
+  conversationId: 21,
+  watchWordId: 1
 } , {
-  text: '... i just want to say that i’m on board with that ...'
+  text: '... i just want to say that i’m on board with that ...',
+  conversationId: 21,
+  watchWordId: 2
 } , {
-  text: '... i’m just not sure that’s the best approach'
+  text: '... i’m just not sure that’s the best approach',
+  conversationId: 21,
+  watchWordId: 7
 } , {
-  text: ' ... i’m just not sure that’s the way to go'
-}]
+  text: ' ... i’m just not sure that’s the way to go',
+  conversationId: 21,
+  watchWordId: 7
+}],
+
+watchWords: [
+  {id: 7, wordOrPhrase: "not sure", watchWordOccurrence:
+  {countOfTimesUsed: 2, conversationId: 21, watchWordId: 7}},
+  {id: 2, wordOrPhrase: "just", watchWordOccurrence:
+  {countOfTimesUsed: 1, conversationId: 21, watchWordId: 2}},
+  {id: 1, wordOrPhrase: "no expert", watchWordOccurrence: {countOfTimesUsed: 2, conversationId: 21, watchWordId: 1}}
+  ]
 }
 
 

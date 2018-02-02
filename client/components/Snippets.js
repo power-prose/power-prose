@@ -5,9 +5,11 @@ import Dialog from 'material-ui/Dialog';
 import Chip from 'material-ui/Chip';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
+import TextField from 'material-ui/TextField';
+import PropTypes from 'prop-types';
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 
-const styles = {
+const styles = theme => ({
   chip: {
     margin: 4,
   },
@@ -15,14 +17,16 @@ const styles = {
     display: 'flex',
     flexWrap: 'wrap',
   },
-};
+});
 
 
  export default class Snippets extends React.Component {
 
   state = {
     open: false,
-    snippets: this.props.chosenConversation.snippets
+    snippets: this.props.chosenConversation.snippets,
+    watchWords: this.props.chosenConversation.watchWords,
+    recordingName: ''
   }
 
   handleOpen = () => {
@@ -35,17 +39,27 @@ const styles = {
 
 
   handleRequestDelete = specificSnippet => () => {
+    console.log(">><<", this.state.watchWords)
 
-    //const updatedChosenConv = Object.assign({}, this.props.chosenConversation)
     const snippets = this.state.snippets
     const snippetToDelete = snippets.indexOf(specificSnippet);
-    snippets.splice(snippetToDelete, 1);
+    const watchWordToDecId = snippets.splice(snippetToDelete, 1)[0].watchWordId
 
-    //NOT DELETING SINCE SET STATE IS BASED ON LOCAL STATE
-    //MAYBE STILL HAVE LOCAL STATE AND SET STATE HERE
-    //DISPATCH ON HANDLE SUBMIT A CONVERSATION OBJECT THATS FED FROM THE LOCAL STATE
-    this.setState({ snippets });
+    //GET THE WATCHWORD TO DECREMENT - SNIPPETS DELETE INDIVIDUALLY ONLY EVER AN ARRAY OF ONE
+    const watchWordToDec = this.state.watchWords.filter(watchWord => watchWord.id === watchWordToDecId)[0]
 
+    const count = watchWordToDec.watchWordOccurrence.countOfTimesUsed
+
+    const newCount = watchWordToDec.watchWordOccurrence.countOfTimesUsed = count - 1
+
+
+    //MAKE A NEW WATCHWORDS OBJECT WITH THE UPDATED COUNT
+    let newWWObj = [...(this.state.watchWords.filter(watchWord => watchWord.id !== 7)), watchWordToDec]
+
+    this.setState({ snippets, watchWords: newWWObj });
+
+    //CURRENTLY LOADING THE LOCAL STATE WITH A WATCH WORD OF COUNT 0
+    console.log("STATE:", this.state)
 
   }
 
@@ -54,14 +68,23 @@ const styles = {
     console.log(event.target.value)
   }
 
+  handleChange = (event) => {
+    const recordingName = event.target.value
+    console.log(recordingName)
+    this.setState({recordingName})
+
+  }
+
 
   render() {
 
     const actions = [
       <FlatButton
-        label="Cancel"
-        primary={true}
+        label="Confirm All"
+        secondary={true}
+        styles= {styles.leftIcon}
         onClick={this.handleClose}
+
       />,
       <FlatButton
         label="Submit"
@@ -83,7 +106,6 @@ const styles = {
         </Chip>)
   })
 
-
     return (
       <div>
         <RaisedButton label="Confirm your snippets" onClick={this.handleOpen} />
@@ -95,9 +117,19 @@ const styles = {
           onRequestClose={this.handleClose}
           autoScrollBodyContent = {true}
         >
-         I am the Snippets component. My job is to render snippets for the user most recent conversation. I have access to these snippets through props. The current vision is that I am rendered after the User stops the record button.
+           <form >
+          <input
+            type="text"
+            style={{marginBottom: 2 + 'em'}}
+            name="recordingName"
+            placeholder="Title your Recording"
+            onChange= {this.handleChange}
+          />
+        </form>
           {snippetMenu}
+
         </Dialog>
+
       </div>
     );
   }

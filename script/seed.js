@@ -522,27 +522,28 @@ const tones = [{
   conversationId: 10
 }];
 
-const snippets = [{
-  text: ' ... i’m no expert but I think we might want to consider ...',
-  conversationId: 22,
-  watchWordId: 1
-} , {
-  text: '... i’m no expert but what I would suggest is ... ',
-  conversationId: 22,
-  watchWordId: 1
-} , {
-  text: '... i just want to say that i’m on board with that ...',
-  conversationId: 22,
-  watchWordId: 2
-} , {
-  text: '... i’m just not sure that’s the best approach',
-  conversationId: 22,
-  watchWordId: 7
-} , {
-  text: ' ... i’m just not sure that’s the way to go',
-  conversationId: 22,
-  watchWordId: 7
-}];
+// const snippets = [{
+//   text: ' ... i’m no expert but I think we might want to consider ...',
+//   conversationId: 22,
+//   watchWordId: 1
+// } , {
+//   text: '... i’m no expert but what I would suggest is ... ',
+//   conversationId: 22,
+//   watchWordId: 1
+// } , {
+//   text: '... i just want to say that i’m on board with that ...',
+//   conversationId: 22,
+//   watchWordId: 2
+// } , {
+//   text: '... i’m just not sure that’s the best approach',
+//   conversationId: 22,
+//   watchWordId: 7
+// } , {
+//   text: ' ... i’m just not sure that’s the way to go',
+//   conversationId: 22,
+//   watchWordId: 7
+// }];
+
 
 const seed = () =>
   Promise.all(users.map(user =>
@@ -564,10 +565,10 @@ const seed = () =>
   Promise.all(tones.map(tone =>
     Tone.create(tone))
   ))
-  .then(() =>
-  Promise.all(snippets.map(snippet =>
-    Snippet.create(snippet))
-  ));
+  // .then(() =>
+  // Promise.all(snippets.map(snippet =>
+  //   Snippet.create(snippet))
+  // ));
 
 
 const main = () => {
