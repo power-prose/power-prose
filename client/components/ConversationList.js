@@ -2,8 +2,7 @@ import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchChosenConversation } from "../store";
-import { Card, CardHeader, CardText, Divider, Menu, MenuItem, Paper } from "material-ui";
-
+import { Card, CardHeader, CardText, Divider, List, ListItem } from "material-ui";
 
 const ConversationList = props => {
   const { conversations, handleClick } = props;
@@ -16,13 +15,20 @@ const ConversationList = props => {
       />
       <Divider inset={true} />
       <CardHeader title="View another conversation" />
-      <Menu>
-        {
-          conversations && conversations.map(conversation => (
-            <MenuItem style={styles.menu} key={conversation.id} onClick={e => handleClick(e, conversation.id)} primaryText={conversation.name} />
-          ))
-        }
-      </Menu>
+        <List>
+
+            {conversations &&
+              conversations.map(conversation => (
+                <ListItem
+                  style={styles.list}
+                  key={conversation.id}
+                  onClick={e => handleClick(e, conversation.id)}
+                >
+                  {conversation.name}
+                </ListItem>
+              ))}
+
+        </List>
     </Card>
     </div>
   );
@@ -74,7 +80,7 @@ const styles = {
   cardStyle: {
     maxWidth: 260
   },
-  menu: {
+  list: {
     fontSize: 14,
     maxWidth: 260,
     whiteSpace: 'normal'

@@ -1,6 +1,6 @@
 const { WatchWord } = require('../db/models');
 
-const findWatchWords = () => {
+const findWatchWords = () => { // send user.id back here and return UserWatchWords.findAll(where: userId = req.params.userId)
     let watchWords;
     return WatchWord.findAll()
         .then((words) => {
@@ -12,7 +12,7 @@ const findWatchWords = () => {
 
 
 const countWords = (spokenText) => {
-    //this returns a promise
+    // this returns a promise
     return findWatchWords()
         .then(watchWords => {
             let regWords = watchWords.map(word => {
@@ -29,5 +29,3 @@ const countWords = (spokenText) => {
         })
 }
 module.exports = { countWords };
-
-

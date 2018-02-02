@@ -5,7 +5,7 @@ module.exports = router;
 
 // get a single user by id, eagerly loading watchWords and conversations
 router.get('/:userId', (req, res, next) => {
-  User.findById(req.params.userId, { include: [WatchWord, Conversation] })
+  User.findById(req.params.userId, { include: [WatchWord, Conversation] }) // userWatchWord
     .then(user => res.json(user))
     .catch(next)
 });
