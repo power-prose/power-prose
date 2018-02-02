@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { Conversation, WatchWord, WatchWordOccurrence, Tone, Snippet, ToneSentence } = require('../db/models');
 const wordCounter = require('../utils/wordCounter');
-
+const {createAllSnippetsWithWatchWords} = require('../utils/createSnippets');
 const toneAnalysis = require('../utils/toneAnalysis');
 
 module.exports = router;
@@ -103,6 +103,13 @@ router.post('/', (req, res, next) => {
       return WatchWordOccurrence.bulkCreate(wordCountsArray)
     })
     // find the conversation that was just created by its id and eagerly load all associations
+    .then(() => {
+      return createAllSnippetsWithWatchWords(conversationText, createdConversation.id);
+    })
+    .then((snippetsArr) => {
+      console.log("SNIPPETS ARRAY", snippetsArr)
+      return Snippet.bulkCreate(snippetsArr)
+    })
     .then(() => {
       return Conversation.findById(createdConversation.id, { include: [{ all: true }] })
     })
