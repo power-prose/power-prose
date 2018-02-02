@@ -50,6 +50,7 @@ export function updateConversationThunk(conversation) {
   return function thunk(dispatch) {
     return axios.put(`/api/conversations/${conversation.id}`, conversation)
         .then(res => {
+          console.log("DATA!!!!!", res.data)
           dispatch(updateConversation(res.data))
           dispatch(fetchChosenConversation(res.data.id))
         })
