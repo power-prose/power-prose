@@ -6,7 +6,7 @@ const SingleConversationView = props => {
   return (
     <div className="container-inner-horizontal">
       <ConversationList />
-      <div className="container-right container-vertical ">
+      <div className="container-right container-vertical">
         <SingleConversationData />
         <UserSentences />
       </div>
