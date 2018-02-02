@@ -14,9 +14,9 @@ const findWatchWords = (userId) => {
 }
 
 
-const countWords = (spokenText) => {
+const countWords = (spokenText, userId) => {
     // this returns a promise
-    return findWatchWords()
+    return findWatchWords(userId)
         .then(watchWords => {
             let regWords = watchWords.map(word => {
                 return { wordId: word.wordId, word: word.word, regex: new RegExp(word.word, 'gi') };

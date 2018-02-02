@@ -29,10 +29,10 @@ router.get("/user/:userId", (req, res, next) => {
 })
 
 router.post('/', (req, res, next) => {
-  // if (!req.user) {
-  //   res.status(403).send("forbidden");
-  //   return;
-  // }
+  if (!req.user) {
+    res.status(403).send("forbidden");
+    return;
+  }
   let conversationData = req.body
 
 
@@ -40,7 +40,7 @@ router.post('/', (req, res, next) => {
   const conversationName = conversationData.name;
   const conversationText = conversationData.text;
   const conversationLengthTime = conversationData.lengthTime;
-  const conversationUserId = conversationData.userId; //change back to req.user.id
+  const conversationUserId = req.user.id
 
   let savedWordFrequencies;
   let createdConversation;
@@ -48,7 +48,7 @@ router.post('/', (req, res, next) => {
   let savedToneSentences;
 
   // get the counts of the watch words
-  wordCounter.countWords(conversationText)
+  wordCounter.countWords(conversationText, conversationUserId)
     // save wordFrequencies for later
     // kick off tone analysis from util function file
     .then(wordFrequencies => {

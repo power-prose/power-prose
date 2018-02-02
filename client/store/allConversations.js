@@ -45,6 +45,7 @@ export function postNewConvo(conversation) {
   };
 }
 
+// we need to revisit how changes in the userWatchWords model affect this thunk!!!
 export function updateConversationThunk(conversation) {
   return function thunk(dispatch) {
     return axios.put(`/api/conversations/${conversation.id}`, conversation)
