@@ -24,8 +24,8 @@ const styles = theme => ({
 
 
 class Snippets extends React.Component {
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
     this.state = {
       open: false,
       snippets: [],
@@ -37,23 +37,11 @@ class Snippets extends React.Component {
   }
 
   componentDidMount = () => {
-    console.log("WE HERE, Props:", this.props)
-    if (this.props.chosenConservation && this.props.chosenConservation.snippets !== this.state.snippets){
-      this.setState({snippets: this.props.chosenConservation.snippets})
+    if (this.props.convo.id){
+      this.setState({snippets: this.props.convo.snippets, watchWords: this.props.convo.watchWords})
     }
   }
 
-
-  componentWillReceiveProps = (nextProps) => {
-
-    console.log("%%%", nextProps)
-    if (nextProps.chosenConservation && nextProps.chosenConservation.snippets !== this.state.snippets) {
-      this.setState({
-        snippets: nextProps.chosenConservation.snippets,
-        watchWords: nextProps.chosenConversation.watchWords
-      })
-    }
-  }
 
   handleOpen = () => {
     this.setState({open: true});
@@ -133,8 +121,6 @@ class Snippets extends React.Component {
         </Chip>)
   })
 
-  console.log("Current State:", this.state)
-
     return (
       <div>
         <RaisedButton label="Confirm your snippets" onClick={this.handleOpen} />
@@ -164,30 +150,23 @@ class Snippets extends React.Component {
   }
 }
 
-const mapState = (state, ownProps) => {
+const mapDispatch = (dispatch) => {
   return {
-    chosenConversation: state.chosenConservation
+    handleSubmit(){
+      //MAKING A NEW CONVERSATION OBJECT
+      const conversationData = {...this.props.convo}
+      conversationData.watchWords = this.state.watchWords.filter(watchWord => watchWord.watchWordOccurrence.countOfTimesUsed !== 0)
+      conversationData.name = this.state.recordingName
+
+      //SENDING TO THE BACKEND
+      dispatch(updateConversation(conversationData))
+
+    }
   }
 }
 
-// const mapDispatch = (dispatch) => {
-//   return {
-//     handleSubmit(){
-//       //MAKING A NEW CONVERSATION OBJECT
-//       const conversationData = {...this.props.chosenConversation}
-//       conversationData.watchWords = this.state.watchWords.filter(watchWord => watchWord.watchWordOccurrence.countOfTimesUsed !== 0)
-//       conversationData.name = this.state.recordingName
 
-//       //SENDING TO THE BACKEND
-//       dispatch(updateConversation(conversationData))
-
-//     }
-//   }
-// }
-
-//mapDispatch
-
-export default withRouter(connect(mapState)(Snippets));
+export default withRouter(connect(mapDispatch)(Snippets));
 
 //NOTES FOR LYSSA
 //FINISH MAKING DISPATCH BUT FIRST MAKE A PUT ROUTE THAT UPDATES A CONVERSATION
