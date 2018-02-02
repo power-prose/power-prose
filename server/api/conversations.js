@@ -1,8 +1,15 @@
-const router = require('express').Router();
-const { Conversation, WatchWord, WatchWordOccurrence, Tone, Snippet, ToneSentence } = require('../db/models');
-const wordCounter = require('../utils/wordCounter');
-const {createAllSnippetsWithWatchWords} = require('../utils/createSnippets');
-const toneAnalysis = require('../utils/toneAnalysis');
+const router = require("express").Router();
+const {
+  Conversation,
+  WatchWord,
+  WatchWordOccurrence,
+  Tone,
+  Snippet,
+  ToneSentence
+} = require("../db/models");
+const wordCounter = require("../utils/wordCounter");
+const { createAllSnippetsWithWatchWords } = require("../utils/createSnippets");
+const toneAnalysis = require("../utils/toneAnalysis");
 
 module.exports = router;
 
@@ -22,19 +29,19 @@ router.get("/user/:userId", (req, res, next) => {
   Conversation.findAll({
     where: {
       userId: req.params.userId
-    }, include: [Tone, WatchWord, Snippet, ToneSentence]
+    },
+    include: [Tone, WatchWord, Snippet, ToneSentence]
   })
     .then(conversations => res.json(conversations))
-    .catch(next)
-})
+    .catch(next);
+});
 
-router.post('/', (req, res, next) => {
+router.post("/", (req, res, next) => {
   if (!req.user) {
     res.status(403).send("forbidden");
     return;
   }
-  let conversationData = req.body
-
+  let conversationData = req.body;
 
   // get all of the conversation data out of the request
   const conversationName = conversationData.name;
@@ -48,12 +55,13 @@ router.post('/', (req, res, next) => {
   let savedToneSentences;
 
   // get the counts of the watch words
-  wordCounter.countWords(conversationText)
+  wordCounter
+    .countWords(conversationText)
     // save wordFrequencies for later
     // kick off tone analysis from util function file
     .then(wordFrequencies => {
-      console.log("WORD FREQUENCIES", wordFrequencies)
-      savedWordFrequencies = wordFrequencies
+      console.log("WORD FREQUENCIES", wordFrequencies);
+      savedWordFrequencies = wordFrequencies;
       return toneAnalysis.analyzeTone(conversationText);
     })
     // take analyzed tones we get back and the sentences and save for later
@@ -72,9 +80,9 @@ router.post('/', (req, res, next) => {
     // add conversation id from newly created conversation to tones object
     // create tone instance from analyzed tones
     .then(newConversation => {
-      createdConversation = newConversation
-      savedTones.conversationId = newConversation.id
-      return Tone.create(savedTones) // create row of tones
+      createdConversation = newConversation;
+      savedTones.conversationId = newConversation.id;
+      return Tone.create(savedTones); // create row of tones
     })
     .then(createdTones => {
       //tonesRow = createdTones;
@@ -82,13 +90,12 @@ router.post('/', (req, res, next) => {
       const toneSentencesObjects = savedToneSentences.map(function(sentence) {
         return {
           sentence,
-          toneName: 'tentative', //later we may just want tone id, could update model to include id instead of name
+          toneName: "tentative", //later we may just want tone id, could update model to include id instead of name
           conversationId: createdConversation.id
-        }
-      })
-      return ToneSentence.bulkCreate(toneSentencesObjects)
+        };
+      });
+      return ToneSentence.bulkCreate(toneSentencesObjects);
     })
-
 
     // create array based on the wordFrequencies created from the function in util wordCount file (above)
     // create a watchwordoccurrence for each watchWord found
@@ -98,26 +105,31 @@ router.post('/', (req, res, next) => {
           countOfTimesUsed: savedWordFrequencies[wordId],
           watchWordId: +wordId, // will change to userWatchWordId
           conversationId: createdConversation.id
-        }
-      })
-      return WatchWordOccurrence.bulkCreate(wordCountsArray)
+        };
+      });
+      return WatchWordOccurrence.bulkCreate(wordCountsArray);
     })
     // find the conversation that was just created by its id and eagerly load all associations
     .then(() => {
-      return createAllSnippetsWithWatchWords(conversationText, createdConversation.id);
+      return createAllSnippetsWithWatchWords(
+        conversationText,
+        createdConversation.id
+      );
     })
-    .then((snippetsArr) => {
-      console.log("SNIPPETS ARRAY", snippetsArr)
-      return Snippet.bulkCreate(snippetsArr)
+    .then(snippetsArr => {
+      console.log("SNIPPETS ARRAY", snippetsArr);
+      return Snippet.bulkCreate(snippetsArr);
     })
     .then(() => {
-      return Conversation.findById(createdConversation.id, { include: [{ all: true }] })
+      return Conversation.findById(createdConversation.id, {
+        include: [{ all: true }]
+      });
     })
     // send the convo back to the client
     .then(conversation => {
-      res.status(201).json(conversation)
-    })
-  })
+      res.status(201).json(conversation);
+    });
+});
 
 router.get("/user/:userId/chosen", (req, res, next) => {
   if (req.session.chosenConversation) {
@@ -143,10 +155,25 @@ router.get("/user/:userId/chosen", (req, res, next) => {
   }
 });
 
-router.put('/:conversationId', (req, res, next) => {
-  Conversation.findById({
-    where: {id: req.params.conversationId}
+router.put("/:conversationId", (req, res, next) => {
+  const watchWordOccNew = req.body.watchWords.map(obj => obj.watchWordOccurrence)
+  console.log("NEW WWO", watchWordOccNew);
+  const snippetDelete = Snippet.destroy({
+    where: { conversationId: req.params.conversationId }
   })
-  .then(foundConvo => foundConvo.update(req.body))
-  .then(updatedConvo => res.json(updatedConvo))
-})
+  const wordOccDelete = WatchWordOccurrence.destroy( {
+    where: {conversationId: req.params.conversationId}
+  })
+  Promise.all([snippetDelete, wordOccDelete])
+    .then((stuff) => WatchWordOccurrence.bulkCreate(watchWordOccNew))
+    .then(() => Conversation.findById(req.params.conversationId))
+    .then(foundConvo => foundConvo.update(req.body))
+    // Conversation.findById(req.params.conversationId)
+    // .then(foundConvo =>
+    //   foundConvo.update(req.body))
+    // .then(updatedConvo =>
+    //   Snippet.destroy({
+    //     where: {conversationId: updatedConvo.id}
+    // }))
+    .then(updatedConvo => res.json(updatedConvo));
+});

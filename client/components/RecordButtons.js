@@ -105,12 +105,21 @@ class RecordButtons extends Component {
     // make form appear
   }
 
+  handleTimer() {
+    const currentTime = this.state.endTime - this.state.startTime
+  }
+
   togglePlay = () => {
     if (!this.state.hasStarted) this.handleStart()
     else this.handleStop()
   }
 
   render() {
+    let snippetsLength
+    let snippets = this.props.chosenConversation ? this.props.chosenConversation.snippets : []
+    if (snippets) snippetsLength = snippets.length
+    console.log("$$$", this.props.chosenConversation)
+
     let buttonColor = this.state.hasStarted ? 'red' : 'yellow'
     return (
       <div>
@@ -122,28 +131,21 @@ class RecordButtons extends Component {
           </button>
         </div>
         <div>
-          {/* <button className="stop-button" onClick={this.handleStop}>
-            STOP
-          </button> */}
+          {snippetsLength  &&
+          <div>
+            <Snippets convo={this.props.chosenConversation} />
+          </div>}
+          </div>
         </div>
-        <div>
-          { chosenConversation.snippets.length &&
-            <div>
-              <Snippets chosenConversation={chosenConversation} />
-              {/* replace passed in prop with this.props.chosenConversation */}
-              {/* replace truthy value before && with this.props.chosenConversation.snippets.length */}
-
-            </div>
-          }
-        </div>
-      </div>
     );
   }
 }
 
 const mapState = state => {
   return {
-    // chosenConversation: state.chosenConversation
+    startTime: state.startTime,
+    endTime: state.endTime,
+    chosenConversation: state.chosenConversation
   }
 };
 
@@ -151,6 +153,7 @@ const mapState = state => {
 const mapDispatch = (dispatch) => {
   return {
     // send conversation to thunk with the text on it already & change thunk creator accordingly
+
     handleConvoPost(text) {
       let date = new Date().toString();
       let slicedDate = date.slice(0, (date.indexOf('G') - 1));
