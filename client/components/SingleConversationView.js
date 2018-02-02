@@ -4,12 +4,12 @@ import { SingleConversationData, ConversationList, UserSentences } from "./";
 
 const SingleConversationView = props => {
   return (
-          <div className="container-horizontal">
-        <ConversationList />
-    <div className="container-vertical container-right">
-      <SingleConversationData />
-      <UserSentences />
-    </div>
+    <div className="container-inner-horizontal">
+      <ConversationList />
+      <div className="container-right container-vertical">
+        <SingleConversationData />
+        <UserSentences />
+      </div>
     </div>
   );
 };

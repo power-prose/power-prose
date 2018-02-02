@@ -96,7 +96,7 @@ router.post('/', (req, res, next) => {
       const wordCountsArray = Object.keys(savedWordFrequencies).map(wordId => {
         return {
           countOfTimesUsed: savedWordFrequencies[wordId],
-          watchWordId: +wordId,
+          watchWordId: +wordId, // will change to userWatchWordId
           conversationId: createdConversation.id
         }
       })

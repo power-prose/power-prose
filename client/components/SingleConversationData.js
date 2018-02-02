@@ -1,26 +1,10 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-// import { VictoryBar, VictoryChart, VictoryAxis } from "victory";
-import {
-  dateParser,
-  singleConvoWatchWordsForViz,
-  singleConvoToneForViz
-} from "../utils";
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  Bar,
-  BarChart,
-  ZAxis,
-  Scatter,
-  ScatterChart
-} from "recharts";
+import { dateParser, singleConvoWatchWordsForViz, singleConvoToneForViz } from "../utils";
+import { Bar, BarChart, CartesianGrid, Legend, LineChart, Line, Scatter, ScatterChart, Tooltip, XAxis, YAxis, ZAxis } from "recharts";
+import {Card, CardHeader, CardTitle, CardText} from 'material-ui/Card';
+
 
 const SingleConversationData = props => {
   const { conversation } = props;
@@ -37,9 +21,34 @@ const SingleConversationData = props => {
   }
 
   return (
-    <div className="container-vertical">
-      <h5>Name: {conversation.name}</h5>
-      <div>Date: {dateToRender}</div>
+    <div>
+      <div className="container-inner-horizontal">
+        <Card style={styles.topLevelCard}>
+          <CardHeader
+            title="You Are Viewing"
+          />
+          <CardText>
+            {conversation.name}, {conversation.date && dateParser(conversation.date)}
+          </CardText>
+        </Card>
+        <Card style={styles.topLevelCard}>
+          <CardHeader
+            title="Your Most Used Watchword"
+          />
+          <CardText>
+            something
+          </CardText>
+        </Card>
+        <Card style={styles.topLevelCard}>
+          <CardHeader
+            title="Your Most Frequent Tone"
+          />
+          <CardText>
+            something
+          </CardText>
+        </Card>
+      </div>
+
       <div className="container-vertical">
         <div className="chart-wrapper">
           <h6>Watch Words Used</h6>
@@ -85,43 +94,10 @@ export default withRouter(
   connect(mapState, mapDispatch)(SingleConversationData)
 );
 
-//old:
-
-// <div className="container-vertical">
-//       <h5>Name: {conversation.name}</h5>
-//       <div>
-//         Date: {dateToRender}
-//       </div>
-//       <div className="container-horizontal">
-//         <div className="chart-wrapper">
-//           <h6>Watch Words Used</h6>
-//           <VictoryChart domainPadding={20}>
-//             <VictoryAxis />
-//             <VictoryAxis dependentAxis
-//             tickFormat={x => `${x} t`}
-
-//             />
-//             <VictoryBar
-//               data={watchWordsData}
-//               x="wordOrPhrase"
-//               y="countOfTimesUsed"
-//             />
-//           </VictoryChart>
-//         </div>
-//         <div className="chart-wrapper">
-//           <h6>Tones Identified</h6>
-//           <VictoryChart domainPadding={20}>
-//             <VictoryAxis />
-//             <VictoryAxis
-//               dependentAxis
-//               tickFormat={x => `${x}%`}
-//             />
-//             <VictoryBar
-//               data={tonesData}
-//               x="tone"
-//               y="value"
-//             />
-//           </VictoryChart>
-//         </div>
-//       </div>
-//     </div>
+const styles = {
+  topLevelCard: {
+    width: 300,
+    marginRight: 20,
+    marginBottom: 20
+  }
+};

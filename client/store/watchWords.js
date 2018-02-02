@@ -7,7 +7,7 @@ const defaultWatchWords = [];
 const setCurrentWatchWords = watchWords => ({type: SET_CURRENT_WATCHWORDS, watchWords})
 
 export const fetchCurrentWatchWords = () => dispatch =>
-  axios.get('/api/watchWords')
+  axios.get('/api/watchWords') // fetch the watch words for the given user
     .then(res => dispatch(setCurrentWatchWords(res.data)))
     .catch(error => console.log(error));
 

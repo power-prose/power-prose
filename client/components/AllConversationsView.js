@@ -29,9 +29,9 @@ export class AllConversationsView extends Component {
   }
 
   // ensures local state is updated with this.props.watchWords when the components receives these props from the store
-  componentWillReceiveProps (newProps) {
-    if (newProps.watchWords !== this.state.displayedWatchWords) {
-      this.setState({ displayedWatchWords: this.props.watchWords.map(watchWordObj => watchWordObj.wordOrPhrase) })
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.watchWords !== this.state.displayedWatchWords) {
+      this.setState({ displayedWatchWords: nextProps.watchWords.map(watchWordObj => watchWordObj.wordOrPhrase) })
     }
   }
 
@@ -202,7 +202,7 @@ calcMostFrequentTone = () => {
               </CardText>
             </Card>
           </div>
-        <div>
+          <div className="container-inner-horizontal">
           <Tabs
             onChange={this.handleSlideChange}
             value={this.state.slideIndex}
@@ -212,11 +212,12 @@ calcMostFrequentTone = () => {
             <Tab label="Tone" value={1} />
             <Tab label="watchWords and Tone" value={2} />
           </Tabs>
+          </div>
           <SwipeableViews
             index={this.state.slideIndex}
             onChangeIndex={this.handleChange}
           >
-          <div className="container-inner-horizontal container-inside-tabs">
+          <div style={styles.slide} className="container-inner-horizontal container-inside-tabs">
             <LineChart width={1000} height={500} data={this.createWordData()}
             margin={{top: 5, right: 30, left: 20, bottom: 5}}>
               <XAxis dataKey="name"/>
@@ -240,7 +241,7 @@ calcMostFrequentTone = () => {
               </Brush>
             </LineChart>
           </div>
-          <div style={styles.slide}>
+          <div style={styles.slide} className="container-inner-horizontal container-inside-tabs">
           <LineChart width={1000} height={500} data={this.createToneData()}
           margin={{top: 5, right: 30, left: 20, bottom: 5}}>
           <XAxis dataKey="name"/>
@@ -264,7 +265,7 @@ calcMostFrequentTone = () => {
           </Brush>
           </LineChart>
           </div>
-          <div style={styles.slide}>
+          <div style={styles.slide} className="container-inner-vertical container-inside-tabs">
           <LineChart width={1000} height={500} data={this.createWordData()} syncId="anyId"
           margin={{top: 5, right: 30, left:20, bottom: 5}}>
           <XAxis dataKey="name"/>
@@ -277,7 +278,6 @@ calcMostFrequentTone = () => {
             ))
           }
           </LineChart>
-          <p>Maybe some other content</p>
           <LineChart width={1000} height={500} data={this.createToneData()} syncId="anyId"
           margin={{top: 5, right: 30, left:20, bottom: 5}}>
           <XAxis dataKey="name"/>
@@ -301,6 +301,7 @@ calcMostFrequentTone = () => {
           </LineChart>
           </div>
           </SwipeableViews>
+          <div>
           </div>
           </div>
           </div>
@@ -486,7 +487,7 @@ const styles = {
     padding: 10,
   },
   tab: {
-    maxWidth: 1000
+    minWidth: 950
   },
   cardStyle: {
     minWidth: 260
