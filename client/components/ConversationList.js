@@ -4,13 +4,15 @@ import { connect } from "react-redux";
 import { fetchChosenConversation } from "../store";
 import { dateParser } from "../utils";
 import { Card, CardHeader, CardText, Menu, MenuItem, Paper } from "material-ui";
+import Divider from 'material-ui/Divider';
+
 
 const ConversationList = props => {
   const { conversations, handleClick } = props;
 
   const styles = {
     block: {
-      maxWidth: 300
+      maxWidth: 250
     },
     toggle: {
       marginBottom: 16,
@@ -33,6 +35,13 @@ const ConversationList = props => {
     },
     topLevelCard: {
       width: 300
+    },
+    cardStyle: {
+      maxWidth: 260
+    },
+    menu: {
+      fontSize: 14,
+      maxWidth: 260
     }
   };
 
@@ -45,24 +54,22 @@ const ConversationList = props => {
   };
 
   return (
-    <Card>
+    <div className="container-watchwords">
+    <Card style={styles.cardStyle}>
+      <CardHeader
+        title=""
+      />
+      <Divider inset={true} />
       <CardHeader title="Choose a conversation" />
-      <CardText>
-        <div style={styles.block}>
-
-          {conversations &&
-            conversations.map(conversation => (
-              <div
-                key={conversation.id}
-                onClick={e => handleClick(e, conversation.id)}
-              >
-                {conversation.name}
-              </div>
-            ))}
-
-        </div>
-      </CardText>
+      <Menu>
+        {
+          conversations && conversations.map(conversation => (
+            <MenuItem style={styles.menu} key={conversation.id} onClick={e => handleClick(e, conversation.id)} primaryText={conversation.name} />
+          ))
+        }
+      </Menu>
     </Card>
+    </div>
   );
 };
 
