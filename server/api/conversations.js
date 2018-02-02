@@ -22,7 +22,7 @@ router.get("/user/:userId", (req, res, next) => {
   Conversation.findAll({
     where: {
       userId: req.params.userId
-    }, include: [Tone, WatchWord, Snippet]
+    }, include: [Tone, WatchWord, Snippet, ToneSentence]
   })
     .then(conversations => res.json(conversations))
     .catch(next)

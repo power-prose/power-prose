@@ -1,6 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import { SingleConversationData, ConversationList } from "./";
+import { SingleConversationData, ConversationList, UserSentences } from "./";
 
 const SingleConversationView = props => {
   return (
@@ -8,6 +8,7 @@ const SingleConversationView = props => {
         <ConversationList />
     <div className="container-vertical container-right">
       <SingleConversationData />
+      <UserSentences />
     </div>
     </div>
   );
