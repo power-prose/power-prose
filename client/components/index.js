@@ -14,3 +14,5 @@ export {default as AllConversationsView} from './AllConversationsView';
 export {default as LoggedInHome} from './LoggedInHome';
 export {default as RecordingNameForm} from './RecordingNameForm';
 export {default as ConversationList} from './ConversationList'
+export {default as AllConversationsSidebar} from './AllConversationsSidebar';
+export {default as UserSentences} from './UserSentences';
