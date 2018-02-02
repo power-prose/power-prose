@@ -14,14 +14,26 @@ router.get('/:userId', (req, res, next) => {
     .catch(next)
 });
 
-// delete a user's userWatchWord instance
-router.delete('/:userWatchWordId', (req, res, next) => {
-  UserWatchWord.destroy({
+router.get('/:userId/active', (req, res, next) => {
+  UserWatchWord.findAll({
     where: {
-      id: req.params.userWatchWordId,
+      userId: req.params.userId,
+      active: true
     }
   })
-    .then(() => res.sendStatus(204))
+    .then(words => res.json(words))
+    .catch(next)
+});
+
+// delete a user's userWatchWord instance
+router.put('/:userWatchWordId', (req, res, next) => {
+  UserWatchWord.update(req.body,
+    {
+      where: {
+        id: req.params.userWatchWordId,
+      }, returning: true
+    })
+    .then((updatedWord) => res.json(updatedWord[1][0]))
     .catch(next);
 })
 
@@ -37,3 +49,4 @@ router.post('/', (req, res, next) => {
     .then(newWord => res.json(newWord))
     .catch(next);
 })
+

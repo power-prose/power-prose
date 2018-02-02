@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { destroyUserWatchWord, postUserWatchWord } from '../store/index';
+import { updateUserWatchWord, postUserWatchWord } from '../store/index';
 import { log } from 'util';
 
 
@@ -46,7 +46,7 @@ const WatchWords = (props) => {
 
 const mapState = (state) => {
   return {
-    watchWords: state.watchWords,
+    watchWords: state.watchWords.activeWatchWords,
     user: state.user
   }
 };
@@ -56,7 +56,7 @@ const mapDispatch = (dispatch) => {
     onDeleteClick(event, wordId) {
       event.preventDefault();
       console.log('I am in the onDeleteClick event!')
-      dispatch(destroyUserWatchWord(wordId))
+      dispatch(updateUserWatchWord(wordId))
     },
     handleSubmit(event) {
       console.log("inside handle submit", event.target.addWord.value)

@@ -32,7 +32,8 @@ const users = [{
 
 const userWatchWords = [{
   wordOrPhrase: "no expert",
-  userId: 1
+  userId: 1,
+  active: false
 }, {
   wordOrPhrase: 'Just',
   userId: 1

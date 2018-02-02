@@ -11,7 +11,8 @@ import {
     me,
     fetchAllConversations,
     fetchInitialConversation,
-    fetchUserWatchWords
+    fetchUserWatchWords,
+    fetchActiveWatchWords
 } from "../store";
 
 class LoggedInHome extends Component {
@@ -56,6 +57,7 @@ const mapDispatch = dispatch => {
             dispatch(fetchAllConversations(userId));
             dispatch(fetchInitialConversation(userId));
             dispatch(fetchUserWatchWords(userId));
+            dispatch(fetchActiveWatchWords(userId))
         }
     };
 };

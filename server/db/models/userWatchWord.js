@@ -6,6 +6,10 @@ const UserWatchWord = db.define('userWatchWord', {
     type: Sequelize.STRING,
     unique: true,
     allowNull: false
+  },
+  active: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: true
   }
 });
 
