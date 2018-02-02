@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Snippets from './Snippets'
 import { connect } from "react-redux";
-import { postNewConvo, setRecordedText, setConvoStartTime, setConvoEndTime } from "../store";
+import { postNewConvo, setConvoStartTime, setConvoEndTime } from "../store";
 const WatsonSpeech = require("watson-speech");
 const axios = require("axios");
 
