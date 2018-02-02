@@ -1,16 +1,33 @@
-const { WatchWord } = require('../db/models');
-
+// const { WatchWord } = require('../db/models');
+const { UserWatchWord } = require('../db/models');
 //find watchwords in db - will need update to userwatchwords model based on userId, so we'll have to give it the req.session.userId or something
 
-const findWatchWords = () => { // send user.id back here and return UserWatchWords.findAll(where: userId = req.params.userId)
-    let watchWords;
-    return WatchWord.findAll()
+// const findWatchWords = () => { // send user.id back here and return UserWatchWords.findAll(where: userId = req.params.userId)
+//     let watchWords;
+//     return WatchWord.findAll()
+//         .then((words) => {
+//             return words.map(word => {
+//                 return { wordOrPhrase: word.wordOrPhrase, id: word.id }
+//             })
+//     })
+// }
+
+
+
+
+const findWatchWords = (userId) => {
+    return UserWatchWord.findAll({
+        where: {
+            userId
+        }
+    })
         .then((words) => {
             return words.map(word => {
                 return { wordOrPhrase: word.wordOrPhrase, id: word.id }
             })
     })
 }
+
 
 const createAllSnippets = (wordArr, text, conversationId) => {
 
@@ -52,7 +69,7 @@ const createAllSnippets = (wordArr, text, conversationId) => {
             text.toLowerCase()
         ).map(ind => {
             return {
-                watchWordId: word.id,
+                userWatchWordId: word.id,
                 word: word.wordOrPhrase,
                 text: createSnippet(ind, text),
                 conversationId
@@ -77,8 +94,8 @@ const createAllSnippets = (wordArr, text, conversationId) => {
     return finalArr;
 };
 
-const createAllSnippetsWithWatchWords = (text, conversationId) => {
-    return findWatchWords()
+const createAllSnippetsWithWatchWords = (text, conversationId, userId) => {
+    return findWatchWords(userId)
     .then((wordArr) => {
         console.log("WORD ARR: ", wordArr);
         console.log("TEXT:", text);
