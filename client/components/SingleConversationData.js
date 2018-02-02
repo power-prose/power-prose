@@ -16,7 +16,7 @@ const SingleConversationData = props => {
   let watchWordsData;
   if (tone) {
     dateToRender = dateParser(conversation.date);
-    watchWordsData = singleConvoWatchWordsForViz(conversation.watchWords);
+    watchWordsData = singleConvoWatchWordsForViz(conversation.userWatchWords);
     tonesData = singleConvoToneForViz(tone);
   }
 

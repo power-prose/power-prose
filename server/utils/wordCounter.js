@@ -1,8 +1,11 @@
-const { WatchWord } = require('../db/models');
+const { UserWatchWord } = require('../db/models');
 
-const findWatchWords = () => { // send user.id back here and return UserWatchWords.findAll(where: userId = req.params.userId)
-    let watchWords;
-    return WatchWord.findAll()
+const findWatchWords = (userId) => {
+    return UserWatchWord.findAll({
+        where: {
+            userId
+        }
+    })
         .then((words) => {
             return words.map(word => {
                 return { word: word.wordOrPhrase, wordId: word.id }
@@ -11,9 +14,9 @@ const findWatchWords = () => { // send user.id back here and return UserWatchWor
 }
 
 
-const countWords = (spokenText) => {
+const countWords = (spokenText, userId) => {
     // this returns a promise
-    return findWatchWords()
+    return findWatchWords(userId)
         .then(watchWords => {
             let regWords = watchWords.map(word => {
                 return { wordId: word.wordId, word: word.word, regex: new RegExp(word.word, 'gi') };
@@ -25,6 +28,7 @@ const countWords = (spokenText) => {
                 //currently only capturing number of times a word was spoken, *not* the snippet/context around it
                 if (found) wordFrequencies[wordId] = found.length;
             }
+            console.log("!!!!", wordFrequencies)
             return wordFrequencies;
         })
 }

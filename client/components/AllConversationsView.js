@@ -67,7 +67,7 @@ export class AllConversationsView extends Component {
     let obj = {}
 
     conversations.forEach(conversation => {
-      conversation.watchWords.forEach(watchWordObj => {
+      conversation.userWatchWords.forEach(watchWordObj => {
         if (watchWordObj.wordOrPhrase !== undefined) {
           if (obj[watchWordObj.wordOrPhrase] === undefined) {
             obj[watchWordObj.wordOrPhrase] = watchWordObj.watchWordOccurrence.countOfTimesUsed
@@ -136,7 +136,7 @@ calcMostFrequentTone = () => {
 
       obj.name = conversation.name
       conversations.length && this.props.watchWords.forEach(watchWord => {
-        let count = conversation.watchWords.filter(wordObj => wordObj.wordOrPhrase === watchWord.wordOrPhrase)[0]
+        let count = conversation.userWatchWords.filter(wordObj => wordObj.wordOrPhrase === watchWord.wordOrPhrase)[0]
         obj[watchWord.wordOrPhrase] = count === undefined ? 0 : count.watchWordOccurrence.countOfTimesUsed
       })
       data.push(obj)
@@ -440,7 +440,7 @@ const mapState = state => {
   return {
     user: state.user,
     conversations: state.allConversations.defaultConversations,
-    watchWords: state.watchWords
+    watchWords: state.watchWords.allWatchWords
     // pull in tones from the state on the store -- use them to render the toggle menu
   };
 };

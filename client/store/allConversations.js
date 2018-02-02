@@ -33,7 +33,6 @@ export function postNewConvo(conversation) {
   return function thunk(dispatch) {
     // conversation.text = store.getState().allConversations.recordedText;
     conversation.lengthTime = (store.getState().allConversations.endTime - store.getState().allConversations.startTime) / 1000;
-    console.log("CONVERSATION!!!!!!!", conversation);
     return axios.post(`/api/conversations`, conversation)
         .then(res => res.data)
         .then(newConversation => {
@@ -46,6 +45,7 @@ export function postNewConvo(conversation) {
   };
 }
 
+// we need to revisit how changes in the userWatchWords model affect this thunk!!!
 export function updateConversationThunk(conversation) {
   return function thunk(dispatch) {
     return axios.put(`/api/conversations/${conversation.id}`, conversation)
