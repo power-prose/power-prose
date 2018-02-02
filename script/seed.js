@@ -56,7 +56,7 @@ const userWatchWords = [{
   userId: 1
 }, {
   wordOrPhrase: 'I was wondering',
-  userId: 1
+  userId: 2
 }];
 
 const conversations = [{

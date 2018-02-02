@@ -11,13 +11,13 @@ import {
     me,
     fetchAllConversations,
     fetchInitialConversation,
-    fetchCurrentWatchWords
+    fetchUserWatchWords
 } from "../store";
 
 class LoggedInHome extends Component {
     componentDidMount() {
-        this.props.loadInitialData();
-        this.props.fetchConversations(this.props.user.id);
+        this.props.loadUserData();
+        this.props.fetchConversationsAndWatchWords(this.props.user.id);
     }
     render() {
 
@@ -49,13 +49,13 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
     return {
-        loadInitialData() {
+        loadUserData() {
             dispatch(me());
-            dispatch(fetchCurrentWatchWords());
         },
-        fetchConversations(userId) {
+        fetchConversationsAndWatchWords(userId) {
             dispatch(fetchAllConversations(userId));
             dispatch(fetchInitialConversation(userId));
+            dispatch(fetchUserWatchWords(userId));
         }
     };
 };
