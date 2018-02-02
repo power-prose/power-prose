@@ -15,7 +15,7 @@ const ConversationList = props => {
         title=""
       />
       <Divider inset={true} />
-      <CardHeader title="Choose a conversation" />
+      <CardHeader title="View another conversation" />
       <Menu>
         {
           conversations && conversations.map(conversation => (
