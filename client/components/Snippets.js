@@ -1,19 +1,15 @@
 import React from "react";
-import { withRouter, Route, Switch } from "react-router-dom";
+import { withRouter} from "react-router-dom";
 import { connect } from "react-redux";
 import Dialog from "material-ui/Dialog";
-import Chip from "material-ui/Chip";
 import FlatButton from "material-ui/FlatButton";
-import RaisedButton from "material-ui/RaisedButton";
 import TextField from "material-ui/TextField";
-import PropTypes from "prop-types";
-import { RadioButton, RadioButtonGroup } from "material-ui/RadioButton";
-import SingleConversationView from "./SingleConversationView";
 import { updateConversationThunk } from "../store";
+import {SnippetChip} from './';
 
 const styles = theme => ({
   chip: {
-    margin: 4
+    margin: 10
   },
   wrapper: {
     display: "block",
@@ -26,7 +22,6 @@ class Snippets extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: false,
       snippets: [],
       watchWords: [],
       recordingName: "",
@@ -39,25 +34,21 @@ class Snippets extends React.Component {
     if (this.props.convo.id) {
       this.setState({
         snippets: this.props.convo.snippets,
-        watchWords: this.props.convo.userWatchWords
+        watchWords: this.props.convo.userWatchWords,
+        recordingName: this.props.convo.name
       });
     }
   };
 
-  handleOpen = () => {
-    this.setState({ open: true });
-  };
 
   handleClose = () => {
     const conversationData = { ...this.props.convo };
-    console.log('CONVERSATION DATA BEFORE', conversationData);
     conversationData.userWatchWords = this.state.watchWords.filter(
       watchWord => watchWord.watchWordOccurrence.countOfTimesUsed !== 0
     );
     conversationData.name = this.state.recordingName;
-    console.log("CONVERSATION DATA AFTER", conversationData)
     this.props.handleSubmit(conversationData);
-    this.setState({ open: false, updateSent: true });
+    this.setState({ updateSent: true });
   };
 
   handleRequestDelete = specificSnippet => () => {
@@ -65,7 +56,8 @@ class Snippets extends React.Component {
     const snippetToDelete = snippets.indexOf(specificSnippet);
 
     //***GET ID OF DELETED SNIPPET
-    const watchWordToDecId = snippets.splice(snippetToDelete, 1)[0].userWatchWordId;
+    const watchWordToDecId = snippets.splice(snippetToDelete, 1)[0]
+      .userWatchWordId;
 
     //***GET THE WATCHWORD TO DECREMENT
     const watchWordToDec = this.state.watchWords.filter(
@@ -86,12 +78,6 @@ class Snippets extends React.Component {
     ];
 
     this.setState({ snippets, watchWords: newWWObj, deleted: true });
-
-    console.log("STATE:", this.state);
-  };
-
-  handleClick = event => {
-    console.log(event.target.value);
   };
 
   handleChange = event => {
@@ -102,59 +88,50 @@ class Snippets extends React.Component {
   render() {
     const actions = [
       <FlatButton
-        label="Confirm All"
+        label="Submit"
         secondary={true}
-        disabled={!this.state.recordingName}
-        style={{ float: "left" }}
-        onClick={this.handleClose}
-      />,
-      <FlatButton
-        label="Save Changes"
-        primary={true}
-        keyboardFocused={true}
-        disabled={!this.state.deleted || !this.state.recordingName}
+        keyboardFocused={false}
         onClick={this.handleClose}
       />
     ];
     const snippetMenu = this.state.snippets.map((snippet, i) => {
       return (
-        <Chip
-          key={i}
-          value={`${i + 1}`}
-          name="snippetName"
-          id={i}
-          onClick={this.handleClick}
-          onRequestDelete={this.handleRequestDelete(snippet)}
-          style={styles.chip}
-        >
-          {snippet.text}
-        </Chip>
+        <SnippetChip
+        key={i}
+          i={i}
+          snippet={snippet}
+          onRequestDelete={this.handleRequestDelete}
+        />
       );
     });
-
     return (
       <div>
-        <RaisedButton label="Confirm your snippets" onClick={this.handleOpen} />
         <Dialog
-          title="Review & Edit Your Recording"
+          title="Review Your Recording"
           actions={actions}
-          modal={false}
-          open={this.state.open}
+          modal={true}
+          open={this.props.open}
           onRequestClose={this.handleClose}
           autoScrollBodyContent={true}
         >
           <form>
+            <label htmlFor="recordingName">Name your recording: </label>
             <input
               type="text"
-              style={{ marginBottom: 2 + "em" }}
+              style={{ marginBottom: 2 + "em", width: 300 + "px" }}
               name="recordingName"
-              placeholder="Title your Recording"
+              placeholder={this.props.convo.name}
+              value={this.state.recordingName}
               onChange={this.handleChange}
             />
           </form>
+          <label>
+            See every time you used a WatchWord below. Are any of them
+            exceptions to the rule? Remove them from the list and your data
+            won't include them.
+          </label>
           {snippetMenu}
         </Dialog>
-        {/* {this.state.updateSent && <SingleConversationView /> } */}
       </div>
     );
   }
@@ -164,24 +141,12 @@ const mapState = state => {
   return {};
 };
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch, ownProps) => {
   return {
     handleSubmit(conversationData) {
-      //MAKING A NEW CONVERSATION OBJECT
-      // const conversationData = { ...this.props.convo };
-      // conversationData.watchWords = this.state.watchWords.filter(
-      //   watchWord => watchWord.watchWordOccurrence.countOfTimesUsed !== 0
-      // );
-      // conversationData.name = this.state.recordingName;
-      console.log("CONVERSATION!!!!", conversationData);
-
-      //SENDING TO THE BACKEND
-      dispatch(updateConversationThunk(conversationData));
+      dispatch(updateConversationThunk(conversationData, ownProps.history));
     }
   };
 };
 
 export default withRouter(connect(mapState, mapDispatch)(Snippets));
-
-//NOTES FOR LYSSA
-//FINISH MAKING DISPATCH BUT FIRST MAKE A PUT ROUTE THAT UPDATES A CONVERSATION
