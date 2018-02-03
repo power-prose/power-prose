@@ -101,7 +101,7 @@ export class SingleConversationData extends Component {
               title="Tones Perceived in This Conversation"
             />
             <ScatterChart width={425} height={200}
-              margin={{ top: 20, right: 20, bottom: 10, left: 10 }}
+              margin={{ top: 20, right: 20, bottom: 20, left: 10 }}
             >
               <XAxis dataKey="tone" name="tone" hide={true}/>
               <YAxis dataKey="index" hide={true}/>
@@ -135,9 +135,10 @@ const styles = {
     marginBottom: 20
   },
   chartCard: {
-    height: 275,
+    height: 280,
     marginRight: 20,
     marginBottom: 20,
-    paddingRight: 20
+    paddingRight: 20,
+    paddingBottom: 20
   }
 };
