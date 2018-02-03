@@ -68,7 +68,7 @@ export class AllConversationsView extends Component {
     const { conversations } = this.props;
     let obj = {}
 
-    conversations.forEach(conversation => {
+    conversations.length && conversations.forEach(conversation => {
       conversation.userWatchWords.forEach(watchWordObj => {
         if (watchWordObj.wordOrPhrase !== undefined) {
           if (obj[watchWordObj.wordOrPhrase] === undefined) {
@@ -95,7 +95,7 @@ calcMostFrequentTone = () => {
     const possibleTones = ['anger', 'fear', 'joy', 'sadness', 'analytical', 'confident', 'tentative'];
     let obj = {}
 
-    conversations.forEach(conversation => {
+    conversations.length && conversations.forEach(conversation => {
       let toneObj = conversation.tone;
 
       possibleTones.forEach(tone => {
@@ -121,7 +121,7 @@ calcMostFrequentTone = () => {
     const { conversations } = this.props;
     let date = ''
 
-    conversations.forEach(conversation => {
+    conversations.length && conversations.forEach(conversation => {
       if (conversation.date > date) date = conversation.date
     })
 
@@ -133,7 +133,7 @@ calcMostFrequentTone = () => {
     const { conversations, watchWords } = this.props;
     let data = []
 
-    conversations.forEach(conversation => {
+    conversations.length && conversations.forEach(conversation => {
       let obj = {}
 
       obj.name = conversation.name
@@ -151,7 +151,7 @@ calcMostFrequentTone = () => {
     let data = [];
     let toneArr = ['anger', 'fear', 'joy', 'sadness', 'analytical', 'confident', 'tentative'];
 
-    conversations.forEach(conversation => {
+    conversations.length && conversations.forEach(conversation => {
       let newObj = {}
       let toneObj = conversation.tone;
       newObj.name = conversation.name;
