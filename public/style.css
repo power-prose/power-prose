@@ -74,6 +74,9 @@ form div {
 
 .container-watchwords {
   margin-top: 3%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .container-right {
