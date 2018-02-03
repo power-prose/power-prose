@@ -133,7 +133,7 @@ class RecordButtons extends Component {
         <div>
           {snippetsLength  &&
           <div>
-            <Snippets convo={this.props.chosenConversation} />
+            <Snippets open={true} convo={this.props.chosenConversation} />
           </div>}
           </div>
         </div>
