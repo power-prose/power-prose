@@ -46,13 +46,14 @@ export function postNewConvo(conversation) {
 }
 
 // we need to revisit how changes in the userWatchWords model affect this thunk!!!
-export function updateConversationThunk(conversation) {
+export function updateConversationThunk(conversation, history) {
   return function thunk(dispatch) {
     return axios.put(`/api/conversations/${conversation.id}`, conversation)
         .then(res => {
           console.log("DATA!!!!!", res.data)
           dispatch(updateConversation(res.data))
           dispatch(fetchChosenConversation(res.data.id))
+          history.push('/single-conversation')
         })
         .catch(error => console.log(error + ` Updating conversation ${conversation.id} was unsuccessful`))
   }
