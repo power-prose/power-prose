@@ -58,6 +58,8 @@ export class AllConversationsView extends Component {
 
   handleSlideChange = (value, label) => {
     this.setState({
+      displayedWatchWords: this.props.watchWords.map(watchWordObj => watchWordObj.wordOrPhrase),
+      displayedTones: ['anger', 'fear', 'joy', 'sadness', 'analytical', 'confident', 'tentative'],
       slideIndex: value
     });
   };
