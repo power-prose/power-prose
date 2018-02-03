@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { dateParser, singleConvoWatchWordsForViz, singleConvoToneForViz } from "../utils";
 import { Bar, BarChart, CartesianGrid, Legend, LineChart, Line, Scatter, ScatterChart, Tooltip, XAxis, YAxis, ZAxis } from "recharts";
-import {Card, CardHeader, CardTitle, CardText} from 'material-ui/Card';
+import { Card, CardHeader, CardTitle, CardText } from 'material-ui/Card';
 
 
 export class SingleConversationData extends Component {
@@ -41,7 +41,7 @@ export class SingleConversationData extends Component {
     return tone;
   }
 
-  render () {
+  render() {
     const { conversation } = this.props;
     const tone = conversation.tone;
 
@@ -83,38 +83,40 @@ export class SingleConversationData extends Component {
           </Card>
         </div>
 
-        <div className="container-vertical">
+        <div className="single-convo-graphs">
           <div className="chart-wrapper">
             <h6>Watch Words Used</h6>
-            <BarChart width={800} height={400} data={watchWordsData}>
+            <BarChart width={400} height={200} data={watchWordsData}>
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="Word" interval={0} tickLine={false} tick={false}/>
+              <XAxis dataKey="Word" interval={0} tickLine={false} tick={false} />
               <YAxis />
               <Tooltip />
               <Legend />
               <Bar legendType="none" dataKey="Count" fill="#1a294f" />
             </BarChart>
-          </div>
-          <div className="chart-wrapper">
-            <h6>Tones Identified</h6>
-            <ScatterChart
-              width={700}
-              height={400}
-              margin={{ top: 20, right: 20, bottom: 10, left: 10 }}
-            >
-              <XAxis dataKey="tone" name="tone" hide={true}/>
-              <YAxis dataKey="index" hide={true}/>
-              <ZAxis dataKey="value" range={[20, 5000]} scale="linear" name="value"  />
-              <Tooltip cursor={{ strokeDasharray: "3 3" }} />
-              <Legend />
-              <Scatter legendType="none" name="Tones" data={tonesData} fill="#8884d8" />
-            </ScatterChart>
-          </div>
+            </div>
+
+            <div className="chart-wrapper">
+              <h6>Tones Identified</h6>
+              <ScatterChart
+                width={400}
+                height={200}
+                margin={{ top: 20, right: 20, bottom: 10, left: 10 }}
+              >
+                <XAxis dataKey="tone" name="tone" hide={true} />
+                <YAxis dataKey="index" hide={true} />
+                <ZAxis dataKey="value" range={[20, 5000]} scale="linear" name="value" />
+                <Tooltip cursor={{ strokeDasharray: "3 3" }} />
+                <Legend />
+                <Scatter legendType="none" name="Tones" data={tonesData} fill="#8884d8" />
+              </ScatterChart>
+            </div>
+
         </div>
       </div>
     );
   }
-};
+}
 
 // something we need to think through here is how to conditionally render snippets -- how will the component know whether this conversation is the user's most recent conversation?
 const mapState = state => {

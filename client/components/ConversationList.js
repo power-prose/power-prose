@@ -2,7 +2,7 @@ import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchChosenConversation } from "../store";
-import { Card, CardHeader, CardText, Divider, List, ListItem } from "material-ui";
+import { Card, Paper, CardHeader, CardText, Divider, List, ListItem } from "material-ui";
 
 const ConversationList = props => {
   const { conversations, handleClick } = props;
@@ -15,6 +15,7 @@ const ConversationList = props => {
       />
       <Divider inset={true} />
       <CardHeader title="View another conversation" />
+      <Paper style={{maxHeight: 600, overflow: 'auto'}}>
         <List>
 
             {conversations &&
@@ -29,6 +30,7 @@ const ConversationList = props => {
               ))}
 
         </List>
+        </Paper>
     </Card>
     </div>
   );
@@ -83,6 +85,9 @@ const styles = {
   list: {
     fontSize: 14,
     maxWidth: 260,
-    whiteSpace: 'normal'
+    whiteSpace: 'normal',
+    '&:hover': {
+      backgroundColor: '#F0DDD4'
+    }
   }
 };
