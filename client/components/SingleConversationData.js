@@ -82,11 +82,12 @@ export class SingleConversationData extends Component {
             </CardText>
           </Card>
         </div>
-
-        <div className="single-convo-graphs">
-          <div className="chart-wrapper">
-            <h6>Watch Words Used</h6>
-            <BarChart width={400} height={200} data={watchWordsData}>
+        <div className="container-inner-horizontal">
+          <Card style={styles.chartCard}>
+            <CardHeader
+              title="Watch Words in This Conversation"
+            />
+            <BarChart width={425} height={225} data={watchWordsData}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="Word" interval={0} tickLine={false} tick={false} />
               <YAxis />
@@ -94,24 +95,22 @@ export class SingleConversationData extends Component {
               <Legend />
               <Bar legendType="none" dataKey="Count" fill="#1a294f" />
             </BarChart>
-            </div>
-
-            <div className="chart-wrapper">
-              <h6>Tones Identified</h6>
-              <ScatterChart
-                width={400}
-                height={200}
-                margin={{ top: 20, right: 20, bottom: 10, left: 10 }}
-              >
-                <XAxis dataKey="tone" name="tone" hide={true} />
-                <YAxis dataKey="index" hide={true} />
-                <ZAxis dataKey="value" range={[20, 5000]} scale="linear" name="value" />
-                <Tooltip cursor={{ strokeDasharray: "3 3" }} />
-                <Legend />
-                <Scatter legendType="none" name="Tones" data={tonesData} fill="#8884d8" />
-              </ScatterChart>
-            </div>
-
+          </Card>
+          <Card style={styles.chartCard}>
+            <CardHeader
+              title="Tones Perceived in This Conversation"
+            />
+            <ScatterChart width={425} height={200}
+              margin={{ top: 20, right: 20, bottom: 20, left: 10 }}
+            >
+              <XAxis dataKey="tone" name="tone" hide={true}/>
+              <YAxis dataKey="index" hide={true}/>
+              <ZAxis dataKey="value" range={[20, 5000]} scale="linear" name="value"  />
+              <Tooltip cursor={{ strokeDasharray: "3 3" }} />
+              <Legend />
+              <Scatter legendType="none" name="Tones" data={tonesData} fill="#8884d8" />
+            </ScatterChart>
+          </Card>
         </div>
       </div>
     );
@@ -127,14 +126,19 @@ const mapState = state => {
 
 const mapDispatch = null;
 
-export default withRouter(
-  connect(mapState, mapDispatch)(SingleConversationData)
-);
+export default withRouter(connect(mapState, mapDispatch)(SingleConversationData));
 
 const styles = {
   topLevelCard: {
     width: 300,
     marginRight: 20,
     marginBottom: 20
+  },
+  chartCard: {
+    height: 280,
+    marginRight: 20,
+    marginBottom: 20,
+    paddingRight: 20,
+    paddingBottom: 20
   }
 };
