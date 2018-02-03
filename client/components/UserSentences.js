@@ -5,11 +5,15 @@ import {Card, CardHeader, CardTitle, CardText, Divider, Subheader } from 'materi
 
 
 const styles = {
-  chartCard: {
+  sentencesCard: {
     height: 275,
     marginRight: 20,
     marginBottom: 20,
-    paddingRight: 20
+    paddingRight: 20,
+    maxHeight: 200,
+    maxWidth: 913,
+    minWidth: 913,
+    overflow: 'auto'
   }
 };
 
@@ -17,10 +21,10 @@ const UserSentences = (props) => {
   const { conversation } = props;
 
   return (
-    <div className="container-inner-horizontal">
-      <Card style={styles.chartCard}>
+
+      <Card style={styles.sentencesCard}>
         <CardHeader
-          title="Your Tentative Sentences"
+          title="Tentative Sentences from This Conversation"
         />
         <CardText>
           {
@@ -32,7 +36,7 @@ const UserSentences = (props) => {
           }
         </CardText>
       </Card>
-    </div>
+
   )
 };
 
