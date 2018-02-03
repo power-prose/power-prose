@@ -7,17 +7,6 @@ import TextField from "material-ui/TextField";
 import { updateConversationThunk } from "../store";
 import {SnippetChip} from './';
 
-const styles = theme => ({
-  chip: {
-    margin: 10
-  },
-  wrapper: {
-    display: "block",
-    flexWrap: "wrap"
-  },
-  hoverColor: "blue300"
-});
-
 class Snippets extends React.Component {
   constructor(props) {
     super(props);
@@ -114,17 +103,17 @@ class Snippets extends React.Component {
           onRequestClose={this.handleClose}
           autoScrollBodyContent={true}
         >
-          <form>
-            <label htmlFor="recordingName">Name your recording: </label>
-            <input
-              type="text"
-              style={{ marginBottom: 2 + "em", width: 300 + "px" }}
-              name="recordingName"
+        <div>
+        <TextField
+        floatingLabelText="Name your recording"
+      floatingLabelFixed={true}
+          id="rr"
+          name="recordingName"
               placeholder={this.props.convo.name}
               value={this.state.recordingName}
               onChange={this.handleChange}
-            />
-          </form>
+        />
+        </div>
           <label>
             See every time you used a WatchWord below. Are any of them
             exceptions to the rule? Remove them from the list and your data
