@@ -12,29 +12,29 @@ import history from './history'
 // establishes socket connection
 import './socket'
 
-const theme = getMuiTheme({
-  palette: {
-    primary1Color: '#fff9c4',
-    primary2Color: '#fff9c4',
-    primary3Color: '#fff9c4',
-    accent1Color: '#fff9c4',
-    accent2Color: '#fff9c4',
-    accent3Color: '#fff9c4',
-    textColor: '#fff9c4',
-    alternateTextColor: '#fff9c4',
-    canvasColor: '#fff9c4',
-    borderColor: '#fff9c4',
-    disabledColor: '#fff9c4',
-    pickerHeaderColor: '#fff9c4',
-    clockCircleColor: '#fff9c4',
-    shadowColor: '#fff9c4',
-  },
-});
+// const theme = getMuiTheme({
+//   palette: {
+//     primary1Color: '#f0ddd4',
+//     primary2Color: '#ffffff',
+//     primary3Color: '#bdaba3',
+//     accent1Color: '#0e254c',
+//     accent2Color: '#3e4d78',
+//     accent3Color: '#000024',
+//     textColor: '#000000',
+//     alternateTextColor: '#ffffff',
+//     canvasColor: '#f0ddd4',
+//     borderColor: '#bdaba3',
+//     disabledColor: '#C8C8C8',
+//     pickerHeaderColor: '#0e254c',
+//     clockCircleColor: '#0e254c',
+//     shadowColor: '#C8C8C8',
+//   },
+// });
 
 
 ReactDOM.render(
   <Provider store={store}>
-    <MuiThemeProvider muiTheme={theme}>
+    <MuiThemeProvider >
       <Router history={history}>
         <UserInterface />
       </Router>
