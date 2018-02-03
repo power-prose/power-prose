@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import store from './store'
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import getMuiTheme from 'material-ui/styles/getMuiTheme'; //for setting custom theme
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import { UserInterface } from './components'
@@ -11,6 +11,8 @@ import history from './history'
 
 // establishes socket connection
 import './socket'
+
+// colors for setting custom theme
 
 // const theme = getMuiTheme({
 //   palette: {
