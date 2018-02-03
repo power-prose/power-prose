@@ -1,29 +1,45 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { updateUserWatchWord, postUserWatchWord } from '../store/index';
-import { log } from 'util';
+import { Avatar, Chip, FontIcon } from 'material-ui';
+import SvgIconFace from 'material-ui/svg-icons/action/face';
+import {blue300, indigo900} from 'material-ui/styles/colors';
 
 
-const WatchWords = (props) => {
-  const { watchWords, user } = props
-  console.log("USER", user.id)
+export class WatchWords extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {}
+  }
 
-  return (
-    <div id="container-watch-words" className="card">
-      <div className="card-header">Your watch words and phrases</div>
-      <div className="list-group list-group-flush">
-        {
-          watchWords.length && watchWords.map(word => (
-            <div>
-              <div className="list-group-item" key={word.id}>{word.wordOrPhrase}</div>
-              <button onClick={(event) => props.onDeleteClick(event, word.id)}>Delete</button>
-            </div>
-          ))
-        }
-        <div>
+  handleRequestDelete = () => {
+    alert('You clicked the delete button.');
+  }
 
-          <form onSubmit={props.handleSubmit}>
+  handleClick = () => {
+    alert('You clicked the Chip.');
+  }
+
+  render () {
+    const { watchWords, user } = this.props;
+
+    return (
+      <div>
+          {
+            watchWords.length && watchWords.map(word => (
+              <div key={word.id} style={styles.wrapper}>
+                <Chip
+                  onRequestDelete={(event) => this.props.onDeleteClick(event, word.id)}
+                  onClick={this.handleClick}
+                  style={styles.chip}
+                >
+                  {word.wordOrPhrase}
+                </Chip>
+              </div>
+            ))
+          }
+          <form onSubmit={this.props.handleSubmit}>
             <div>
               <label htmlFor="addWord">Add a Word</label>
               <input
@@ -38,9 +54,8 @@ const WatchWords = (props) => {
             </div>
           </form>
         </div>
-      </div>
-    </div>
-  )
+    )
+  }
 };
 
 
@@ -55,12 +70,9 @@ const mapDispatch = (dispatch) => {
   return {
     onDeleteClick(event, wordId) {
       event.preventDefault();
-      console.log('I am in the onDeleteClick event!')
       dispatch(updateUserWatchWord(wordId))
     },
     handleSubmit(event) {
-      console.log("inside handle submit", event.target.addWord.value)
-
       event.preventDefault();
       let wordOrPhrase = event.target.addWord.value
       dispatch(postUserWatchWord({ wordOrPhrase }))
@@ -69,3 +81,21 @@ const mapDispatch = (dispatch) => {
 }
 
 export default withRouter(connect(mapState, mapDispatch)(WatchWords));
+
+const styles = {
+  chip: {
+    margin: 4,
+  },
+  wrapper: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+};
+
+
+
+// import React from 'react';
+// import Avatar from 'material-ui/Avatar';
+// import FontIcon from 'material-ui/FontIcon';
+// import SvgIconFace from 'material-ui/svg-icons/action/face';
+// import {blue300, indigo900} from 'material-ui/styles/colors';
