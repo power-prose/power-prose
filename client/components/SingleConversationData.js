@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { dateParser, singleConvoWatchWordsForViz, singleConvoToneForViz } from "../utils";
 import { Bar, BarChart, CartesianGrid, Legend, LineChart, Line, Scatter, ScatterChart, Tooltip, XAxis, YAxis, ZAxis } from "recharts";
-import {Card, CardHeader, CardTitle, CardText} from 'material-ui/Card';
+import { Card, CardHeader, CardTitle, CardText } from 'material-ui/Card';
 
 
 export class SingleConversationData extends Component {
@@ -82,11 +82,12 @@ export class SingleConversationData extends Component {
             </CardText>
           </Card>
         </div>
-
-        <div className="container-vertical">
-          <div className="chart-wrapper">
-            <h6>Watch Words Used</h6>
-            <BarChart width={450} height={225} data={watchWordsData}>
+        <div className="container-inner-horizontal">
+          <Card style={styles.chartCard}>
+            <CardHeader
+              title="Watch Words in This Conversation"
+            />
+            <BarChart width={425} height={225} data={watchWordsData}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="Word" interval={0} tickLine={false} tick={false}/>
               <YAxis />
@@ -94,12 +95,12 @@ export class SingleConversationData extends Component {
               <Legend />
               <Bar legendType="none" dataKey="Count" fill="#1a294f" />
             </BarChart>
-          </div>
-          <div className="chart-wrapper">
-            <h6>Tones Identified</h6>
-            <ScatterChart
-              width={450}
-              height={225}
+          </Card>
+          <Card style={styles.chartCard}>
+            <CardHeader
+              title="Tones Perceived in This Conversation"
+            />
+            <ScatterChart width={425} height={200}
               margin={{ top: 20, right: 20, bottom: 10, left: 10 }}
             >
               <XAxis dataKey="tone" name="tone" hide={true}/>
@@ -109,7 +110,7 @@ export class SingleConversationData extends Component {
               <Legend />
               <Scatter legendType="none" name="Tones" data={tonesData} fill="#8884d8" />
             </ScatterChart>
-          </div>
+          </Card>
         </div>
       </div>
     );
@@ -125,14 +126,18 @@ const mapState = state => {
 
 const mapDispatch = null;
 
-export default withRouter(
-  connect(mapState, mapDispatch)(SingleConversationData)
-);
+export default withRouter(connect(mapState, mapDispatch)(SingleConversationData));
 
 const styles = {
   topLevelCard: {
     width: 300,
     marginRight: 20,
     marginBottom: 20
+  },
+  chartCard: {
+    height: 275,
+    marginRight: 20,
+    marginBottom: 20,
+    paddingRight: 20
   }
 };
