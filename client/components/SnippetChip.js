@@ -6,9 +6,7 @@ const SnippetChip = props => {
   const snippet = props.snippet;
   const onClick = props.onClick;
   const onRequestDelete = props.onRequestDelete;
-  const style = { margin: 10 };
-
-  // const testSnip = {id: 1, text: 'all the cake over here like I love to eat cake', conversationId: 2, userWatchWordId: 6, word: 'like', index: 23}
+  const style = { marginBottom: 10 };
 
   const createSnip = (snip) => {
     let beginning = snip.text.slice(0, snip.index);
@@ -32,5 +30,3 @@ const SnippetChip = props => {
 };
 
 export default SnippetChip;
-
-// <span style={{ fontWeight: "bold" }}>{snippet.text}</span>
