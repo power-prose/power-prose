@@ -30,7 +30,7 @@ const UserSentences = (props) => {
           {
             conversation.toneSentences && conversation.toneSentences.map(toneSentence => {
               return (
-                <div>{toneSentence.sentence}</div>
+                <div key={toneSentence.id}>{toneSentence.sentence}</div>
               )
             })
           }

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { dateParser, singleConvoWatchWordsForViz, singleConvoToneForViz } from "../utils";
-import { Bar, BarChart, CartesianGrid, Legend, LineChart, Line, Scatter, ScatterChart, Tooltip, XAxis, YAxis, ZAxis } from "recharts";
+import { Bar, BarChart, CartesianGrid, Legend, LineChart, Line, Scatter, ScatterChart, Tooltip, XAxis, YAxis, ZAxis, RadarChart, PolarGrid, Radar, PolarAngleAxis, PolarRadiusAxis } from "recharts";
 import { Card, CardHeader, CardTitle, CardText } from 'material-ui/Card';
 
 
@@ -11,6 +11,8 @@ export class SingleConversationData extends Component {
     super(props);
     this.state = {};
   }
+
+  
 
   calcMostUsedWatchWord = () => {
     const { conversation } = this.props;
@@ -28,7 +30,7 @@ export class SingleConversationData extends Component {
 
   calcMostFrequentTone = () => {
     const { conversation } = this.props;
-    const possibleTones = ['anger', 'fear', 'joy', 'sadness', 'analytical', 'confident', 'tentative'];
+    const possibleTones = ['anger', 'fear', 'sadness', 'tentative', 'analytical', 'joy', 'confident'];
     let index = 0;
     let tone = '';
 
@@ -41,7 +43,7 @@ export class SingleConversationData extends Component {
     return tone;
   }
 
-  render () {
+  render() {
     const { conversation } = this.props;
     const tone = conversation.tone;
 
@@ -89,7 +91,7 @@ export class SingleConversationData extends Component {
             />
             <BarChart width={425} height={225} data={watchWordsData}>
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="Word" interval={0} tickLine={false} tick={false}/>
+              <XAxis dataKey="Word" interval={0} tickLine={false} tick={false} />
               <YAxis />
               <Tooltip />
               <Legend />
@@ -100,24 +102,22 @@ export class SingleConversationData extends Component {
             <CardHeader
               title="Tones Perceived in This Conversation"
             />
-            <ScatterChart width={425} height={200}
-              margin={{ top: 20, right: 20, bottom: 20, left: 10 }}
-            >
-              <XAxis dataKey="tone" name="tone" hide={true}/>
-              <YAxis dataKey="index" hide={true}/>
-              <ZAxis dataKey="value" range={[20, 5000]} scale="linear" name="value"  />
-              <Tooltip cursor={{ strokeDasharray: "3 3" }} />
-              <Legend />
-              <Scatter legendType="none" name="Tones" data={tonesData} fill="#8884d8" />
-            </ScatterChart>
+
+            <RadarChart margin={{top: 5, right: 5, bottom: 5, left: 5}} outerRadius={90} width={425} height={225} data={tonesData}>
+              <PolarGrid />
+              <PolarAngleAxis dataKey="tone" />
+              <PolarRadiusAxis domain={[-10, 100]} axisLine={false} tick={false} />
+
+              <Radar name="Document" dataKey="value" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
+            </RadarChart>
           </Card>
         </div>
       </div>
     );
   }
-};
+}
 
-// something we need to think through here is how to conditionally render snippets -- how will the component know whether this conversation is the user's most recent conversation?
+
 const mapState = state => {
   return {
     conversation: state.chosenConversation

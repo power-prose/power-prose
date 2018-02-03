@@ -31,20 +31,13 @@ export const singleConvoWatchWordsForViz = watchWords => {
 };
 
 export const singleConvoToneForViz = tones => {
-  let indexArr = [0,1,2,3,4,5,6]
-  let notTones = ["conversationId", "createdAt", "id", "updatedAt"];
-  let tonesData = [];
-  let i;
-  for (let key in tones) {
-    if (!notTones.includes(key)) {
-      let index = Math.floor(Math.random()*indexArr.length)
-      let num = indexArr[index];
-      indexArr.splice(index, 1);
-
-      tonesData.push({ tone: key, value: tones[key] * 100, index:  num+1});
-      i++
-    }
-
-  }
-  return tonesData;
+  //let indexArr = [0,1,2,3,4,5,6]
+  //let notTones = ["conversationId", "createdAt", "id", "updatedAt"];
+  //let tonesData = [];
+  //let i;
+  const toneNames = ['tentative', 'fear', 'sadness', 'anger', 'analytical', 'joy', 'confident']
+  return toneNames.map(toneName => {
+    let title = toneName[0].toUpperCase() + toneName.substr(1);
+     return { tone: title, value: tones[toneName] * 100};
+  })
 };
