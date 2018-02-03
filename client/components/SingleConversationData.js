@@ -86,7 +86,7 @@ export class SingleConversationData extends Component {
         <div className="container-vertical">
           <div className="chart-wrapper">
             <h6>Watch Words Used</h6>
-            <BarChart width={800} height={400} data={watchWordsData}>
+            <BarChart width={450} height={225} data={watchWordsData}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="Word" interval={0} tickLine={false} tick={false}/>
               <YAxis />
@@ -98,8 +98,8 @@ export class SingleConversationData extends Component {
           <div className="chart-wrapper">
             <h6>Tones Identified</h6>
             <ScatterChart
-              width={700}
-              height={400}
+              width={450}
+              height={225}
               margin={{ top: 20, right: 20, bottom: 10, left: 10 }}
             >
               <XAxis dataKey="tone" name="tone" hide={true}/>
