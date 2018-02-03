@@ -7,17 +7,6 @@ import TextField from "material-ui/TextField";
 import { updateConversationThunk } from "../store";
 import {SnippetChip} from './';
 
-const styles = theme => ({
-  chip: {
-    margin: 10
-  },
-  wrapper: {
-    display: "block",
-    flexWrap: "wrap"
-  },
-  hoverColor: "blue300"
-});
-
 class Snippets extends React.Component {
   constructor(props) {
     super(props);
