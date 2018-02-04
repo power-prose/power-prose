@@ -22,6 +22,125 @@ form div {
   display: inline-block;
 }
 
+#landing-page {
+  width: 100%;
+  /* padding: 75px; */
+  background-color: #F0DDD4;
+}
+
+#top-pane {
+  padding: 75px;
+}
+
+#title {
+  text-align: center;
+  width: 100%;
+  padding-bottom: 50px;
+}
+
+#signup-button {
+  margin-left: 100px;
+}
+
+#top-container > div {
+  display: inline-block;
+  max-width: 400px;
+  vertical-align: top;
+}
+
+#top-image {
+  width: 100%;
+  z-index: 5;
+  position: relative;
+}
+
+.empty-square1 {
+    border: 4px solid #C28459;
+    height: 267px;
+    position: absolute;
+    width: 400px;
+    margin-top: 61px;
+    margin-left: -40px;
+    z-index: 0;
+}
+
+.empty-square2 {
+  border: 4px solid #C28459;
+  height: 205px;
+  position: absolute;
+  width: 313px;
+  margin-top: 52px;
+  margin-left: 69px;
+  z-index: 0;
+
+}
+
+#bottom-image {
+  width: 43%;
+  z-index: 5;
+  position: relative;
+}
+
+#app-info {
+  padding: 30px;
+  margin-left: 40px;
+}
+
+#app-headline {
+  padding: 10px;
+}
+
+#second-image-div {
+  margin-top: 69px;
+  margin-left: 115px;
+}
+
+#bottom-left {
+  background-color: #0E254C;
+  
+}
+
+#bottom-right {
+  background-color: #F9F1EE;
+}
+
+#bottom-view > div {
+  display: inline-block;
+  vertical-align: top;
+  width: 50%;
+}
+
+.watson-icon {
+  width: 100%;
+}
+
+.icon-desc {
+  color: white;
+}
+
+#iphone {
+  margin-top: 90px;
+  margin-bottom: 90px;
+}
+
+.bullet-info {
+  margin: 65px 100px;
+}
+
+.bullet-info > div {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.bullet-info > div:first-child {
+  width: 30%;
+}
+
+.bullet-info > div:last-child {
+  width: 70%;
+  padding-left: 25px;
+}
+
 .on-button-container {
   padding: 3em;
 }

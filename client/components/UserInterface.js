@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { withRouter, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
-import { AllConversationsCarousel, Login, Signup, NavBar, LoggedOutHome, LoggedInHome, Footer } from "./";
+import { AllConversationsCarousel, LandingPage, Login, Signup, NavBar, LoggedOutHome, LoggedInHome, Footer } from "./";
 import { me } from "../store";
 import RecordButtons from "./RecordButtons";
 
@@ -22,7 +22,7 @@ class UserInterface extends Component {
             <Route path="/signup" component={Signup} />
 
             {isLoggedIn && <Route path="/" component={LoggedInHome} />}
-            <Route path="/" component={LoggedOutHome} />
+            <Route path="/" component={LandingPage} />
             {/* Displays our Login component as a fallback */}
             <Route component={Login} />
 
