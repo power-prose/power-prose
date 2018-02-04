@@ -99,6 +99,7 @@ form div {
   background-color: #0E254C;
   height: 840px;
   
+
 }
 
 #bottom-right {
@@ -215,12 +216,17 @@ form div {
   width: 300px;
   color: navy;
   font-size: 2.5em;
-  background: rgb(241, 211,200);
+  /*background: rgb(204,242,218);*/
+  /*background: rgb(241, 211,200);*/
   border: none;
   position: absolute;
   font-style: bold;
   letter-spacing: .2em;
   box-shadow: 0px 0px 7px rgba(0,0,0,0.1);
+}
+
+.mic {
+  height: 70%;
 }
 
 .on-button:focus {
@@ -233,13 +239,7 @@ form div {
 }
 
 @keyframes pulse_animation {
-  /*0% { transform: scale(1); }
-  30% { transform: scale(1); }
-  40% { transform: scale(1); }*/
   50% { transform: scale(1.08); }
-  /*60% { transform: scale(1); }
-  70% { transform: scale(1); }
-  80% { transform: scale(1); }*/
   100% { transform: scale(1); }
 }
 
@@ -253,6 +253,33 @@ form div {
   border-radius: 50%;
   -webkit-animation: pulsate 3s ease-out;
   -webkit-animation-iteration-count: infinite;
+}
+
+.pulsate-ring-outer {
+  height: 300px;
+  width: 300px;
+  position: absolute;
+  opacity: 0;
+  border: 2px solid;
+  border-color: rgb(241, 211,200);
+  border-radius: 50%;
+  -webkit-animation: pulse 3s ease-out;
+  -webkit-animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes pulse {
+  0% {
+    transform: scale(1, 1);
+    opacity: 1.0;
+  }
+  50% {
+    transform: scale(1.5,1.5);
+    opacity: 0.0;
+  }
+  100% {
+    transform: scale(1, 1);
+    opacity: 0.0;
+  }
 }
 
 @-webkit-keyframes pulsate {
@@ -271,3 +298,15 @@ form div {
 }
 
 
+.nav-link {
+ /*color: #A9A9A9;*/
+ color: #808080;
+}
+
+.nav-link:hover {
+ color:  #696969;
+}
+
+.speak-button-wrapper {
+  margin-left: 80%;
+}
