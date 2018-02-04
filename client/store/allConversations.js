@@ -7,7 +7,8 @@ const POST_NEW_CONVERSATION = "POST_NEW_CONVERSATION";
 const SET_RECORDED_TEXT = "SET_RECORDED_TEXT"
 const SET_CONVO_START_TIME = "SET_CONVO_START_TIME";
 const SET_CONVO_END_TIME = " SET_CONVO_END_TIME";
-const UPDATE_CONVO = "UPDATE_CONVO"
+const UPDATE_CONVO = "UPDATE_CONVO";
+const CLEAR_ALL_CONVERSATIONS = 'CLEAR_ALL_CONVERSATIONS';
 
 const initialConversationState = {
   defaultConversations: [],
@@ -22,7 +23,7 @@ export const setRecordedText = (text) => ({type: SET_RECORDED_TEXT, text})
 export const setConvoStartTime = (time) => ({type: SET_CONVO_START_TIME, time})
 export const setConvoEndTime = (time) => ({type: SET_CONVO_END_TIME, time})
 export const updateConversation = (conversation) => ({type: UPDATE_CONVO, conversation})
-
+export const clearAllConversations = () => ({type: CLEAR_ALL_CONVERSATIONS})
 
 export const fetchAllConversations = (userId) => dispatch =>
   axios.get(`/api/conversations/user/${userId}`)
@@ -83,6 +84,9 @@ export default function (state = initialConversationState, action) {
 
       return Object.assign({}, state, {defaultConversations: updatedConversations})
     }
+
+    case CLEAR_ALL_CONVERSATIONS:
+      return state
 
     default:
       return state

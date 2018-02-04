@@ -1,10 +1,12 @@
 import axios from 'axios';
 
 const SET_CHOSEN_CONVERSATION = 'SET_CHOSEN_CONVERSATION';
+const CLEAR_CHOSEN_CONVERSATION = 'CLEAR_CHOSEN_CONVERSATION';
 
 const defaultConversation = {};
 
 const setChosenConversation = conversation => ({type: SET_CHOSEN_CONVERSATION, conversation});
+const clearChosenConversation = () => ({type: CLEAR_CHOSEN_CONVERSATION})
 
 //this thunk takes a conversationId, fetches that conversation, and then sets that conversation as the chosen conversation on req.session
 export const fetchChosenConversation = (conversationId) => dispatch =>
@@ -22,6 +24,8 @@ export default function (state = defaultConversation, action) {
   switch(action.type) {
     case SET_CHOSEN_CONVERSATION:
       return action.conversation
+    case CLEAR_CHOSEN_CONVERSATION:
+        return state
     default:
       return state
   }

@@ -3,16 +3,30 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { dateParser, singleConvoWatchWordsForViz, singleConvoToneForViz } from "../utils";
 import { Bar, BarChart, CartesianGrid, Legend, LineChart, Line, Scatter, ScatterChart, Tooltip, XAxis, YAxis, ZAxis, RadarChart, PolarGrid, Radar, PolarAngleAxis, PolarRadiusAxis } from "recharts";
-import { Card, CardHeader, CardTitle, CardText } from 'material-ui/Card';
+import { Card, CardHeader, CardTitle, CardText, Dialog, FlatButton } from 'material-ui';
 
 
 export class SingleConversationData extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { dialogOpen: false };
   }
 
-  
+  componentDidMount () {
+    const { conversations } = this.props;
+
+    if (conversations.defaultConversations.length === 0) {
+      this.setState({ dialogOpen: true })
+    }
+  }
+
+  handleDialogOpen = () => {
+    this.setState({dialogOpen: true});
+  };
+
+  handleDialogClose = () => {
+    this.setState({ dialogOpen: false });
+  };
 
   calcMostUsedWatchWord = () => {
     const { conversation } = this.props;
@@ -46,6 +60,13 @@ export class SingleConversationData extends Component {
   render() {
     const { conversation } = this.props;
     const tone = conversation.tone;
+    const dialogAction = [
+      <FlatButton
+        label="Okay"
+        primary={true}
+        onClick={this.handleDialogClose}
+      />
+    ];
 
     let dateToRender;
     let tonesData = [];
@@ -112,6 +133,17 @@ export class SingleConversationData extends Component {
             </RadarChart>
           </Card>
         </div>
+        <div>
+        <Dialog
+          title="Record a Conversation"
+          actions={dialogAction}
+          modal={false}
+          open={this.state.dialogOpen}
+          onRequestClose={this.handleDialogClose}
+        >
+          Once you have recorded a conversation, it will apear on this page. You can also use this page to view any past conversation.
+        </Dialog>
+        </div>
       </div>
     );
   }
@@ -120,7 +152,8 @@ export class SingleConversationData extends Component {
 
 const mapState = state => {
   return {
-    conversation: state.chosenConversation
+    conversation: state.chosenConversation,
+    conversations: state.allConversations
   };
 };
 

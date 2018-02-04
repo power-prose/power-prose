@@ -48,6 +48,12 @@ export const logout = () =>
       })
       .catch(err => console.log(err))
 
+
+export const updateUser = (userId, request) => (dispatch) =>
+  axios.put(`api/users/${userId}`, request)
+    .then(res => dispatch(getUser(res.data)))
+    .catch(err => console.log(err));
+
 /**
  * REDUCER
  */
