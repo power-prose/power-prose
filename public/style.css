@@ -22,6 +22,10 @@ form div {
   display: inline-block;
 }
 
+.navbar-light .navbar-brand {
+  color: #0E254C;
+}
+
 #landing-page {
   width: 100%;
   /* padding: 75px; */
@@ -36,10 +40,6 @@ form div {
   text-align: center;
   width: 100%;
   padding-bottom: 50px;
-}
-
-#signup-button {
-  margin-left: 100px;
 }
 
 #top-container > div {
@@ -97,17 +97,23 @@ form div {
 
 #bottom-left {
   background-color: #0E254C;
+  height: 840px;
   
 }
 
 #bottom-right {
   background-color: #F9F1EE;
+  height: 840px;
 }
 
 #bottom-view > div {
   display: inline-block;
   vertical-align: top;
   width: 50%;
+}
+
+#left-content {
+  padding-top: 75px;
 }
 
 .watson-icon {
@@ -119,7 +125,7 @@ form div {
 }
 
 #iphone {
-  margin-top: 90px;
+  margin-top: 119px;
   margin-bottom: 90px;
 }
 
