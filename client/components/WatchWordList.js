@@ -1,17 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { updateUserWatchWord, postUserWatchWord } from '../store/index';
-import { Avatar, Card, CardHeader, CardText, Chip, Divider, FontIcon, RaisedButton, TextField } from 'material-ui';
-
+import { updateUserWatchWord, postUserWatchWord, updateUser } from '../store';
+import { Avatar, Card, CardHeader, CardText, Chip, Dialog, Divider, FlatButton, FontIcon, RaisedButton, TextField } from 'material-ui';
+import { dateParser2 } from '../utils';
 
 export class WatchWordList extends Component {
   constructor(props) {
     super(props);
-    this.state = { newWatchWord: '' }
+    this.state = { newWatchWord: '', dialogOpen: false }
   }
 
-  handleChange = (event) => {
+  componentDidMount () {
+    const { user } = this.props;
+
+    if (user.acceptedInitialWatchWords === false) {
+      this.setState({ dialogOpen: true });
+    }
+  }
+
+  handleFormChange = (event) => {
     this.setState({
       newWatchWord: event.target.value
     });
@@ -21,13 +29,30 @@ export class WatchWordList extends Component {
     alert('You clicked the delete button.');
   }
 
-  handleClick = () => {
+  handleChipClick = () => {
     alert('You clicked the Chip.');
   }
+
+  handleDialogOpen = () => {
+    this.setState({dialogOpen: true});
+  };
+
+  handleDialogClose = () => {
+    const { user } = this.props;
+    this.setState({ dialogOpen: false });
+    this.props.updateUser(user.id, { acceptedInitialWatchWords: true })
+  };
 
   render () {
     const { watchWords, user } = this.props;
     const { newWatchWord } = this.state;
+    const dialogAction = [
+      <FlatButton
+        label="Okay"
+        primary={true}
+        onClick={this.handleDialogClose}
+      />
+    ];
 
     return (
       <div className="container-watchwords">
@@ -38,7 +63,7 @@ export class WatchWordList extends Component {
               <div key={word.id} style={styles.wrapper}>
                 <Chip
                   onRequestDelete={(event) => this.props.onDeleteClick(event, word.id)}
-                  onClick={this.handleClick}
+                  onClick={this.handleChipClick}
                   style={styles.chip}
                 >
                   {word.wordOrPhrase}
@@ -53,11 +78,22 @@ export class WatchWordList extends Component {
               name='newwatchword'
               hintText='Enter a new watchword'
               value={newWatchWord}
-              onChange={this.handleChange}
+              onChange={this.handleFormChange}
             /><br />
             <RaisedButton label="Submit" secondary={true} style={styles.buttonStyle} />
           </form>
         </Card>
+        <div>
+        <Dialog
+          title="Get Started with Watch Words"
+          actions={dialogAction}
+          modal={false}
+          open={this.state.dialogOpen}
+          onRequestClose={this.handleDialogClose}
+        >
+          Welcome! We have preloaded your account with a set of suggested watch words. Please use the sidebar to the left to personalize your list.
+        </Dialog>
+        </div>
       </div>
     )
   }
@@ -82,6 +118,9 @@ const mapDispatch = (dispatch) => {
       console.log('!!!!!', event.target.newwatchword.value)
       let wordOrPhrase = event.target.newwatchword.value
       dispatch(postUserWatchWord({ wordOrPhrase }))
+    },
+    updateUser() {
+      dispatch(updateUser())
     }
   }
 }
