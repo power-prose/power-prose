@@ -9,7 +9,7 @@ const NavBar = props => {
   const loggedOutNav = (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <NavLink className="navbar-brand" to="/">
-        Power Prose
+      Power Prose
       </NavLink>
       <button
         className="navbar-toggler"
