@@ -16,7 +16,6 @@ export class SingleConversationData extends Component {
     const { conversations } = this.props;
 
     if (conversations.defaultConversations.length === 0) {
-      console.log('testing is working')
       this.setState({ dialogOpen: true })
     }
   }

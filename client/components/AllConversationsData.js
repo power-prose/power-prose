@@ -17,13 +17,20 @@ export class AllConversationsData extends Component {
     this.state = {
       displayedWatchWords: [],
       displayedTones: ['anger', 'fear', 'joy', 'sadness', 'analytical', 'confident', 'tentative'],
-      slideIndex: 0
+      slideIndex: 0,
+      dialogOpen: false
     }
   }
 
   componentDidMount () {
+    const { conversations } = this.props;
+
     if (this.props.watchWords !== this.state.displayedWatchWords) {
       this.setState({ displayedWatchWords: this.props.watchWords.map(watchWordObj => watchWordObj.wordOrPhrase) })
+    }
+
+    if (conversations.length === 0) {
+      this.setState({ dialogOpen: true })
     }
   }
 
@@ -33,6 +40,14 @@ export class AllConversationsData extends Component {
       this.setState({ displayedWatchWords: this.props.watchWords.map(watchWordObj => watchWordObj.wordOrPhrase) })
     }
   }
+
+  handleDialogOpen = () => {
+    this.setState({dialogOpen: true});
+  };
+
+  handleDialogClose = () => {
+    this.setState({ dialogOpen: false });
+  };
 
   // updates local state, which the chart uses to render lines
   handleWordToggle = (word) => {
@@ -131,6 +146,13 @@ export class AllConversationsData extends Component {
   render () {
     const { user, watchWords, conversations } = this.props;
     const { displayedWatchWords, onMenu, slideIndex, displayedTones } = this.state;
+    const dialogAction = [
+      <FlatButton
+        label="Okay"
+        primary={true}
+        onClick={this.handleDialogClose}
+      />
+    ];
 
     return (
       <div className="container-horizontal">
@@ -264,6 +286,17 @@ export class AllConversationsData extends Component {
                    </div>
                   </SwipeableViews>
         </div>
+        </div>
+        <div>
+        <Dialog
+          title="Record a Conversation"
+          actions={dialogAction}
+          modal={false}
+          open={this.state.dialogOpen}
+          onRequestClose={this.handleDialogClose}
+        >
+          Once you have recorded conversations, you will be able to view them all on this page.
+        </Dialog>
         </div>
       </div>
     )
