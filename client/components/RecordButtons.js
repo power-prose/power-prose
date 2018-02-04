@@ -5,11 +5,14 @@ import { postNewConvo, setConvoStartTime, setConvoEndTime } from "../store";
 const WatsonSpeech = require("watson-speech");
 const axios = require("axios");
 
+
+
 class RecordButtons extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: ""
+      text: "",
+      buttonAnimateClass: "na"
     };
     this.handleStart = this.handleStart.bind(this);
     this.handleStop = this.handleStop.bind(this);
@@ -19,6 +22,7 @@ class RecordButtons extends Component {
 
   // handleStart = () => // we can do this instead of binding in the constructor
   handleStart() {
+    this.setState({buttonAnimateClass: "pulsate-ring"})
     const startTime = new Date();
     this.props.dispatchStartTime(startTime);
     this.setState({ hasStarted: true });
@@ -53,6 +57,7 @@ class RecordButtons extends Component {
 
   handleStop() {
     const endTime = new Date();
+    this.setState({buttonAnimateClass: 'na'})
     this.props.dispatchEndTime(endTime);
     this.stream.stop = this.stream.stop.bind(this.stream);
     this.setState({ hasStarted: false });
@@ -79,10 +84,13 @@ class RecordButtons extends Component {
     let buttonColor = this.state.hasStarted ? "red" : "yellow";
     return (
       <div>
+       <div className="pulsating-circle" />
         <div className="on-button-container">
+        <div className={this.state.buttonAnimateClass}>
+        </div>
           <button
             className="on-button"
-            style={{ backgroundColor: buttonColor }}
+
             onClick={this.togglePlay}
           >
             {this.state.hasStarted ? "STOP" : "START"}

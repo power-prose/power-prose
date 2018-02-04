@@ -111,7 +111,7 @@ router.post("/", (req, res, next) => {
       );
     })
     .then(snippetsArr => {
-      console.log("SNIPPETS ARRAY", snippetsArr);
+
       return Snippet.bulkCreate(snippetsArr);
     })
     .then(() => {
@@ -151,7 +151,7 @@ router.get("/user/:userId/chosen", (req, res, next) => {
 
 router.put("/:conversationId", (req, res, next) => {
   const watchWordOccNew = req.body.userWatchWords.map(obj => obj.watchWordOccurrence)
-  console.log("NEW WWO", watchWordOccNew);
+
   const snippetDelete = Snippet.destroy({
     where: { conversationId: req.params.conversationId }
   })

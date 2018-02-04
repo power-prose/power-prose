@@ -23,7 +23,6 @@ const createAllSnippets = (wordArr, text, conversationId) => {
       while (op < text.length) {
         let currI = text.indexOf(word, op);
         if (currI > -1) {
-          // console.log('found it at: ', currI)
           indexArr.push(currI);
           op = currI + 1;
         } else break;
@@ -60,7 +59,6 @@ const createAllSnippets = (wordArr, text, conversationId) => {
         index
       };
     });
-    // console.log("SNIP ARR", snipArr)
     return snipArr;
   };
 
@@ -69,9 +67,7 @@ const createAllSnippets = (wordArr, text, conversationId) => {
   //PUTTING IT ALL TOGETHER:
   let finalArr = [];
   wordArr.forEach(word => {
-    // console.log("WORD", word);
     let arr = createSnippetsForOneWord(word, text);
-    // console.log('ARR', arr);
     if (arr.length) finalArr = finalArr.concat(arr);
   });
 
@@ -81,8 +77,6 @@ const createAllSnippets = (wordArr, text, conversationId) => {
 
 const createAllSnippetsWithWatchWords = (text, conversationId, userId) => {
   return findWatchWords(userId).then(wordArr => {
-    console.log("WORD ARR: ", wordArr);
-    console.log("TEXT:", text);
     return createAllSnippets(wordArr, text, conversationId);
   });
 };
