@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const User = require('../db/models/user')
+const { User, UserWatchWord } = require('../db/models')
 module.exports = router
 
 router.post('/login', (req, res, next) => {
@@ -23,7 +23,6 @@ router.post('/signup', (req, res, next) => {
       return user;
     })
     .then(user => {
-      // preloading all new users with a set of suggested watch words
       UserWatchWord.bulkCreate([
         { wordOrPhrase: 'just', userId: user.id },
         { wordOrPhrase: 'Does that make sense', userId: user.id },
