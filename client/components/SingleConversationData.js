@@ -12,8 +12,6 @@ export class SingleConversationData extends Component {
     this.state = {};
   }
 
-  
-
   calcMostUsedWatchWord = () => {
     const { conversation } = this.props;
     let count = 0;
