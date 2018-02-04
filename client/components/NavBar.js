@@ -2,6 +2,7 @@ import React from "react";
 import { NavLink, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout } from "../store";
+// import {Navbar, FormGroup, FormControl, Button, Nav, NavItem} from "react-bootstrap";
 
 const NavBar = props => {
   const { handleClick, isLoggedIn } = props;
@@ -16,8 +17,8 @@ const NavBar = props => {
         type="button"
         data-toggle="collapse"
         data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
+        aria-controls="#navbarSupportedContent"
+        aria-expanded={false}
         aria-label="Toggle navigation"
       >
         <span className="navbar-toggler-icon" />
@@ -33,6 +34,37 @@ const NavBar = props => {
       </div>
     </nav>
   );
+
+
+//react bootstrap attempt - did not work at all
+//   const loggedOutNav = (
+//    <Navbar defaultExpanded={true}>
+//   <Navbar.Header>
+//     <Navbar.Brand>
+//       <a href="#brand">React-Bootstrap</a>
+//     </Navbar.Brand>
+//     <Navbar.Toggle />
+//   </Navbar.Header>
+//   <Navbar.Collapse>
+//     <Nav>
+//       <NavItem eventKey={1} href="#">
+//         Link
+//       </NavItem>
+//       <NavItem eventKey={2} href="#">
+//         Link
+//       </NavItem>
+//     </Nav>
+//     <Nav pullRight>
+//       <NavItem eventKey={1} href="#">
+//         Link Right
+//       </NavItem>
+//       <NavItem eventKey={2} href="#">
+//         Link Right
+//       </NavItem>
+//     </Nav>
+//   </Navbar.Collapse>
+// </Navbar>
+//   );
 
   const loggedInNav = (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -50,8 +82,8 @@ const NavBar = props => {
       >
         <span className="navbar-toggler-icon" />
       </button>
-      <div className="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul className="navbar-nav mr-auto">
+      <div  className="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul id="nav-div" className="navbar-nav mr-auto">
           <li className="nav-item">
             <NavLink className="nav-link" to="/speak">
               Speak
@@ -69,10 +101,9 @@ const NavBar = props => {
           </li>
         </ul>
 
-        <NavLink className="nav-link" onClick={handleClick} to="/">
+        <NavLink className="nav-link nav-logout" onClick={handleClick} to="/">
           Logout
         </NavLink>
-
       </div>
     </nav>
   );

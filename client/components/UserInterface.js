@@ -15,7 +15,7 @@ class UserInterface extends Component {
     return (
       <div>
         <NavBar />
-        <div className="container-horizontal">
+        <div id="outer-most-div" className="container-horizontal">
           <Switch>
             {/* Routes placed here are available to all visitors */}
             <Route exact path="/about" component={LandingPage} />
