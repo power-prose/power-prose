@@ -39,8 +39,11 @@ export class WatchWordList extends Component {
 
   handleDialogClose = () => {
     const { user } = this.props;
+    const userId = user.id;
+    const request = { acceptedInitialWatchWords: true };
+    console.log('userId and request', userId, request)
     this.setState({ dialogOpen: false });
-    this.props.updateUser(user.id, { acceptedInitialWatchWords: true })
+    this.props.updateUser(userId, request)
   };
 
   render () {
@@ -119,8 +122,8 @@ const mapDispatch = (dispatch) => {
       let wordOrPhrase = event.target.newwatchword.value
       dispatch(postUserWatchWord({ wordOrPhrase }))
     },
-    updateUser() {
-      dispatch(updateUser())
+    updateUser(userId, request) {
+      dispatch(updateUser(userId, request))
     }
   }
 }
