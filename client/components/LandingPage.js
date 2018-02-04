@@ -5,10 +5,9 @@ import { Link } from "react-router-dom";
 
 
 const buttonStyle = {
-    marginLeft: 100,
     paddingLeft: 10,
     paddingRight: 10,
-    marginTop: 20
+    marginTop: 20,
 };
 
 const LandingPage = props => {
@@ -22,8 +21,8 @@ const LandingPage = props => {
                         <img src="https://i.imgur.com/4IoNZqD.jpg" alt="Woman on Phone" id="top-image" />
                     </div>
                     <div id="app-info">
-                        <h2 id="app-headline">A clear, concise headline....... </h2>
-                        <h3 id="app-description">Elaborate on the benefits of using Power Prose why you want to use it what it is for etc.......</h3>
+                        <div id="app-headline">Change your unconscious speech patterns and watch your professional career flourish.</div>
+                        <div id="app-description">Our speech can have a huge impact in how we are perceived. Numerous studies have shown that when they speak, women tend to use qualifier words and phrases which can diminish authority and position. Power Prose aims to help women reduce their use of qualifier words and in doing so increase their clout, confidence and contributions especially in the workplace.</div>
                         <Link to="/signup">
                         <RaisedButton style={buttonStyle}>Get Started</RaisedButton></Link>
                     </div>
@@ -41,7 +40,7 @@ const LandingPage = props => {
                                 <img src="/SpeechtoText.svg" className="watson-icon" />
                             </div>
                             <div>
-                                <div className="icon-desc">information about speech to text analysis what it does on the site etc. etc and watch words..........</div>
+                                <div className="icon-desc">Record your conversations and track your use of qualifier "watch words" in your business meetings, phone calls or interview practice.</div>
                             </div>
                         </div>
                         <div className="bullet-info">
@@ -49,7 +48,7 @@ const LandingPage = props => {
                                 <img src="/ToneAnalyzer.svg" className="watson-icon" />
                             </div>
                             <div>
-                                <div className="icon-desc">information about tone analysis  what it does on the site etc. etc watching for tentative tones</div>
+                                <div className="icon-desc">Receive feedback about the overall tones of your recorded conversations and see your sentences perceived as tentative.</div>
                             </div>
                         </div>
 
@@ -58,7 +57,7 @@ const LandingPage = props => {
                                 <img src="/bar-chart.svg" className="watson-icon" />
                             </div>
                             <div>
-                                <div className="icon-desc">Watch yourself improve over time with our data visualization etc...</div>
+                                <div className="icon-desc">Watch yourself improve over time with beautiful charts and graphs designed to track your progress.</div>
                             </div>
                         </div>
 
@@ -67,7 +66,7 @@ const LandingPage = props => {
                                 <img src="/tick.svg" className="watson-icon" />
                             </div>
                             <div>
-                                <div className="icon-desc">Sound more confident and achieve your goals...</div>
+                                <div className="icon-desc">Sound more confident and achieve your workplace goals.</div>
                             </div>
                         </div>
                     </div>
