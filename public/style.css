@@ -95,6 +95,34 @@ form div {
   position: relative;
 }
 
+.image-container1 {
+  position: relative;
+}
+
+.image-container1::before {
+  position: absolute;
+  top: 12%;
+  left: -8%;
+  width: 100%;
+  height: 100%;
+  border: 4px solid #C98E34;
+  content: '';
+}
+
+.image-container2 {
+  position: relative;
+}
+
+.image-container2::before {
+  position: absolute;
+  top: 12%;
+  width: 85%;
+  height: 100%;
+  border: 4px solid #C98E34;
+  content: '';
+  right: -10%;
+}
+
 .empty-square1 {
     border: 4px solid #C98E34;
     height: 267px;
@@ -103,6 +131,7 @@ form div {
     margin-top: 61px;
     margin-left: -40px;
     z-index: 0;
+    display: none;
 }
 
 .empty-square2 {
@@ -113,6 +142,7 @@ form div {
   margin-top: 52px;
   margin-left: 275px;
   z-index: 0;
+  display: none;
 }
 
 #bottom-image {
@@ -399,6 +429,9 @@ form div {
     margin-right: 20px;
     margin-bottom: 40px;
   }
+  #app-headline {
+    margin-top: 34px;
+  }
 }
 
 @media (max-width: 500px) {
@@ -408,5 +441,17 @@ form div {
   #second-pane-title {
     font-size: 20px;
     padding: 10px 20px;
+  }
+  .image-container1::before {
+    display: none;
+  }
+  .image-container2::before {
+    display: none;
+  }
+  #app-headline {
+    margin-top: 0;
+  }
+  #iphone {
+    margin-top: 30px;
   }
 }

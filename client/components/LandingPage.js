@@ -10,7 +10,7 @@ const buttonStyle = {
     marginTop: 20,
     backgroundColor: "#f99",
     "&:hover": {
-      backgroundColor: "#000"
+        backgroundColor: "#000"
     }
 };
 
@@ -19,7 +19,7 @@ const LandingPage = props => {
         <div id="landing-page">
             <div id="top-pane">
                 <div id="top-pane-top">
-                    <div>
+                    <div className="image-container1">
                         <div className="empty-square1" />
                         <img src="https://i.imgur.com/4IoNZqD.jpg" alt="Woman on Phone" id="top-image" />
                     </div>
@@ -34,7 +34,9 @@ const LandingPage = props => {
                 <div id="top-pane-bottom">
                     <div>
                         <div className="empty-square2" />
-                        <img src="https://i.imgur.com/MOHrTU1.jpg" alt="desk" id="bottom-image" />
+                        <div className="image-container2">
+                            <img src="https://i.imgur.com/MOHrTU1.jpg" alt="desk" id="bottom-image" />
+                        </div>
                     </div>
                     <div id="top-pane-bottom-right-space" />
                 </div>
