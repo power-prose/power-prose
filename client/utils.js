@@ -20,6 +20,16 @@ export const dateParser = datetime => {
   return `${month}/${day}/${year}`;
 };
 
+export const dateParser2 = datetime => {
+  let dateArr = datetime.slice(0, datetime.indexOf("T")).split("-");
+  let monthArr = ['noMonth', 'Jan', 'Feb', 'March', 'April', 'May', 'June', 'July', 'August', 'Sept', 'Oct', 'Nov', 'Dec'];
+  let year = dateArr[0];
+  let month = dateArr[1]
+  let monthStr = month.length === 2 ? monthArr[month.slice(1)] : monthArr[month]
+  let day = dateArr[2];
+  return `${monthStr} ${day} ${year}`;
+};
+
 export const singleConvoWatchWordsForViz = watchWords => {
   console.log(watchWords);
   return watchWords.map(word => {

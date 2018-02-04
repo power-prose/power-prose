@@ -4,8 +4,7 @@ import { connect } from "react-redux";
 import { dateParser } from '../utils'
 import {LineChart, Line, Brush, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from 'recharts';
 import Toggle from 'material-ui/Toggle';
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
+import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText, Dialog, FlatButton} from 'material-ui';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import SwipeableViews from 'react-swipeable-views';
 import Divider from 'material-ui/Divider';
@@ -23,8 +22,14 @@ export class AllConversationsView extends Component {
   }
 
   componentDidMount () {
+    const { conversations } = this.props;
+
     if (this.props.watchWords !== this.state.displayedWatchWords) {
       this.setState({ displayedWatchWords: this.props.watchWords.map(watchWordObj => watchWordObj.wordOrPhrase) })
+    }
+
+    if (conversations.length === 0) {
+      this.setState({ dialogOpen: true })
     }
   }
 
@@ -34,6 +39,14 @@ export class AllConversationsView extends Component {
       this.setState({ displayedWatchWords: nextProps.watchWords.map(watchWordObj => watchWordObj.wordOrPhrase) })
     }
   }
+
+  handleDialogOpen = () => {
+    this.setState({dialogOpen: true});
+  };
+
+  handleDialogClose = () => {
+    this.setState({ dialogOpen: false });
+  };
 
   // updates local state, which the chart uses to render lines
   handleWordToggle = (word) => {
@@ -171,6 +184,13 @@ calcMostFrequentTone = () => {
   render () {
     const { user, watchWords, conversations } = this.props;
     const { displayedWatchWords, onMenu, slideIndex, displayedTones } = this.state;
+    const dialogAction = [
+      <FlatButton
+        label="Okay"
+        primary={true}
+        onClick={this.handleDialogClose}
+      />
+    ];
 
     return (
       <div className="container-inner-horizontal">
@@ -305,6 +325,17 @@ calcMostFrequentTone = () => {
           </SwipeableViews>
           <div>
           </div>
+          </div>
+          <div>
+          <Dialog
+            title="Record a Conversation"
+            actions={dialogAction}
+            modal={false}
+            open={this.state.dialogOpen}
+            onRequestClose={this.handleDialogClose}
+          >
+            Once you have recorded conversations, you will be able to view them all on this page.
+          </Dialog>
           </div>
           </div>
     )

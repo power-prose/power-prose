@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { logout } from "../store";
+import { logout, clearAllConversations, clearChosenConversation, clearUserWatchWords } from "../store";
 
 const NavBar = props => {
   const { handleClick, isLoggedIn } = props;
@@ -92,6 +92,9 @@ const mapDispatch = dispatch => {
   return {
     handleClick() {
       dispatch(logout());
+      dispatch(clearAllConversations());
+      dispatch(clearChosenConversation());
+      dispatch(clearUserWatchWords());
     }
   };
 };
