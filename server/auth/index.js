@@ -20,6 +20,20 @@ router.post('/signup', (req, res, next) => {
   User.create(req.body)
     .then(user => {
       req.login(user, err => (err ? next(err) : res.json(user)))
+      return user;
+    })
+    .then(user => {
+      // preloading all new users with a set of suggested watch words
+      UserWatchWord.bulkCreate([
+        { wordOrPhrase: 'just', userId: user.id },
+        { wordOrPhrase: 'Does that make sense', userId: user.id },
+        { wordOrPhrase: 'no expert', userId: user.id },
+        { wordOrPhrase: 'Am I making sense', userId: user.id },
+        { wordOrPhrase: 'Sorry', userId: user.id },
+        { wordOrPhrase: 'just like to say', userId: user.id },
+        { wordOrPhrase: 'not sure', userId: user.id },
+        { wordOrPhrase: 'I was wondering', userId: user.id }
+      ])
     })
     .catch(err => {
       if (err.name === 'SequelizeUniqueConstraintError') {
