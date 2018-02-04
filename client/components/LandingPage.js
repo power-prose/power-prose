@@ -1,6 +1,15 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import { RaisedButton } from 'material-ui';
+import { Link } from "react-router-dom";
+
+
+const buttonStyle = {
+    marginLeft: 100,
+    paddingLeft: 10,
+    paddingRight: 10,
+    marginTop: 20
+};
 
 const LandingPage = props => {
     return (
@@ -15,7 +24,8 @@ const LandingPage = props => {
                     <div id="app-info">
                         <h2 id="app-headline">A clear, concise headline....... </h2>
                         <h3 id="app-description">Elaborate on the benefits of using Power Prose why you want to use it what it is for etc.......</h3>
-                        <RaisedButton id="signup-button">Signup</RaisedButton>
+                        <Link to="/signup">
+                        <RaisedButton style={buttonStyle}>Get Started</RaisedButton></Link>
                     </div>
                 </div>
                 <div id="second-image-div">
@@ -25,42 +35,42 @@ const LandingPage = props => {
             </div>
             <div id="bottom-view">
                 <div id="bottom-left">
-                    <div className="bullet-info">
-                        <div>
-                            <img src="/SpeechtoText.svg" className="watson-icon" />
+                    <div id="left-content">
+                        <div className="bullet-info">
+                            <div>
+                                <img src="/SpeechtoText.svg" className="watson-icon" />
+                            </div>
+                            <div>
+                                <div className="icon-desc">information about speech to text analysis what it does on the site etc. etc and watch words..........</div>
+                            </div>
                         </div>
-                        <div>
-                            <div className="icon-desc">information about speech to text analysis what it does on the site etc. etc and watch words..........</div>
+                        <div className="bullet-info">
+                            <div>
+                                <img src="/ToneAnalyzer.svg" className="watson-icon" />
+                            </div>
+                            <div>
+                                <div className="icon-desc">information about tone analysis  what it does on the site etc. etc watching for tentative tones</div>
+                            </div>
+                        </div>
+
+                        <div className="bullet-info">
+                            <div>
+                                <img src="/bar-chart.svg" className="watson-icon" />
+                            </div>
+                            <div>
+                                <div className="icon-desc">Watch yourself improve over time with our data visualization etc...</div>
+                            </div>
+                        </div>
+
+                        <div className="bullet-info">
+                            <div>
+                                <img src="/tick.svg" className="watson-icon" />
+                            </div>
+                            <div>
+                                <div className="icon-desc">Sound more confident and achieve your goals...</div>
+                            </div>
                         </div>
                     </div>
-                    <div className="bullet-info">
-                        <div>
-                            <img src="/ToneAnalyzer.svg" className="watson-icon" />
-                        </div>
-                        <div>
-                            <div className="icon-desc">information about tone analysis  what it does on the site etc. etc watching for tentative tones</div>
-                        </div>
-                    </div>
-
-                    <div className="bullet-info">
-                        <div>
-                            <img src="/ToneAnalyzer.svg" className="watson-icon" />
-                        </div>
-                        <div>
-                            <div className="icon-desc">information about tone analysis  what it does on the site etc. etc watching for tentative tones</div>
-                        </div>
-                    </div>
-
-                    <div className="bullet-info">
-                        <div>
-                            <img src="/ToneAnalyzer.svg" className="watson-icon" />
-                        </div>
-                        <div>
-                            <div className="icon-desc">information about tone analysis  what it does on the site etc. etc watching for tentative tones</div>
-                        </div>
-                    </div>
-
-
                 </div>
                 <div id="bottom-right">
                     <div>

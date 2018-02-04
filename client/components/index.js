@@ -1,7 +1,6 @@
 export {Login, Signup} from './auth-form'
 export {default as SingleConversationData} from './SingleConversationData.js'
 export {default as Footer} from './Footer.js'
-export {default as LoggedOutHome} from './LoggedOutHome.js'
 export {default as NavBar} from './NavBar.js'
 export {default as RecordButtons } from './RecordButtons.js'
 export {default as Snippets} from './Snippets.js'
