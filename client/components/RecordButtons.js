@@ -5,14 +5,13 @@ import { postNewConvo, setConvoStartTime, setConvoEndTime } from "../store";
 const WatsonSpeech = require("watson-speech");
 const axios = require("axios");
 
-
-
 class RecordButtons extends Component {
   constructor(props) {
     super(props);
     this.state = {
       text: "",
-      buttonAnimateClass: "na"
+      ringAnimateClass: "",
+      outerRingAnimateClass: ""
     };
     this.handleStart = this.handleStart.bind(this);
     this.handleStop = this.handleStop.bind(this);
@@ -22,7 +21,7 @@ class RecordButtons extends Component {
 
   // handleStart = () => // we can do this instead of binding in the constructor
   handleStart() {
-    this.setState({buttonAnimateClass: "pulsate-ring"})
+    this.setState({ringAnimateClass: "pulsate-ring", outerRingAnimateClass: "pulsate-ring-outer"})
     const startTime = new Date();
     this.props.dispatchStartTime(startTime);
     this.setState({ hasStarted: true });
@@ -57,7 +56,7 @@ class RecordButtons extends Component {
 
   handleStop() {
     const endTime = new Date();
-    this.setState({buttonAnimateClass: 'na'})
+    this.setState({ringAnimateClass: '', outerRingAnimateClass: ''})
     this.props.dispatchEndTime(endTime);
     this.stream.stop = this.stream.stop.bind(this.stream);
     this.setState({ hasStarted: false });
@@ -80,20 +79,20 @@ class RecordButtons extends Component {
       ? this.props.chosenConversation.snippets
       : [];
     if (snippets) snippetsLength = snippets.length;
-
-    let buttonColor = this.state.hasStarted ? "red" : "yellow";
+    let buttonColor = this.state.hasStarted ? "rgb(241, 211,200)" : "rgb(204,242,218)";
     return (
-      <div>
-       <div className="pulsating-circle" />
+      <div className="speak-button-wrapper">
+       <div/>
         <div className="on-button-container">
-        <div className={this.state.buttonAnimateClass}>
+        <div className={this.state.outerRingAnimateClass} />
+        <div className={this.state.ringAnimateClass}>
         </div>
           <button
-            className="on-button"
+            className="on-button" style={{"background": buttonColor}}
 
             onClick={this.togglePlay}
           >
-            {this.state.hasStarted ? "STOP" : "START"}
+            <img className="mic" src="/microphone-black-shape.svg" />
           </button>
         </div>
         <div>
@@ -119,8 +118,6 @@ const mapState = state => {
 //need to create a conversation in db with appropriate data
 const mapDispatch = dispatch => {
   return {
-    // send conversation to thunk with the text on it already & change thunk creator accordingly
-
     handleConvoPost(text) {
       let date = new Date().toString();
       let slicedDate = date.slice(0, date.indexOf("G") - 1);
