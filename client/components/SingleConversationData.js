@@ -81,7 +81,7 @@ export class SingleConversationData extends Component {
       <div>
         <div className="container-inner-horizontal">
           <Card style={styles.topLevelCard}>
-            <CardHeader
+            <CardHeader style={styles.cardTitle}
               title="You Are Viewing"
             />
             <CardText>
@@ -89,7 +89,7 @@ export class SingleConversationData extends Component {
             </CardText>
           </Card>
           <Card style={styles.topLevelCard}>
-            <CardHeader style={styles.font}
+            <CardHeader style={styles.cardTitle}
               title="Your Most Used Watchword"
             />
             <CardText>
@@ -97,7 +97,7 @@ export class SingleConversationData extends Component {
             </CardText>
           </Card>
           <Card style={styles.topLevelCard}>
-            <CardHeader
+            <CardHeader style={styles.cardTitle}
               title="Your Most Frequent Tone"
             />
             <CardText>
@@ -174,11 +174,11 @@ const styles = {
     paddingRight: 20,
     paddingBottom: 20
   },
-  font: {
+  cardTitle: {
     fontFamily: 'Amaranth, sans-serif',
     fontWeight: 'bold',
-    fontSize: 20,
-    color: '#0E254C'
+    backgroundColor: '#DBF3E3',
+    paddingRight: 0
   }
 
 };
