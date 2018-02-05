@@ -13,7 +13,7 @@ export class SingleConversationData extends Component {
   }
 
   handleDialogOpen = () => {
-    this.setState({dialogOpen: true});
+    this.setState({ dialogOpen: true });
   };
 
   handleDialogClose = () => {
@@ -73,24 +73,33 @@ export class SingleConversationData extends Component {
       <div>
         <div className="container-inner-horizontal">
           <Card style={styles.topLevelCard}>
-            <CardHeader style={styles.cardTitle}
+            <CardTitle
               title="You Are Viewing"
+              style={{ backgroundColor: "#DBF3E3" }}
+              titleStyle={{ "fontFamily": "Amaranth, sans-serif", "fontWeight": "bold", "fontSize": 15 }}
+              titleColor="#0E254C"
             />
             <CardText>
               {conversation.name}, {conversation.date && dateParser(conversation.date)}
             </CardText>
           </Card>
           <Card style={styles.topLevelCard}>
-            <CardHeader style={styles.cardTitle}
+            <CardTitle
               title="Your Most Used Watchword"
+              style={{ backgroundColor: "#DBF3E3" }}
+              titleStyle={{ "fontFamily": "Amaranth, sans-serif", "fontWeight": "bold", "fontSize": 15 }}
+              titleColor="#0E254C"
             />
             <CardText>
               {this.calcMostUsedWatchWord()}
             </CardText>
           </Card>
           <Card style={styles.topLevelCard}>
-            <CardHeader style={styles.cardTitle}
+            <CardTitle
               title="Your Most Frequent Tone"
+              style={{ backgroundColor: "#DBF3E3" }}
+              titleStyle={{ "fontFamily": "Amaranth, sans-serif", "fontWeight": "bold", "fontSize": 15 }}
+              titleColor="#0E254C"
             />
             <CardText>
               {this.calcMostFrequentTone()}
@@ -102,10 +111,10 @@ export class SingleConversationData extends Component {
             <CardHeader
               title="Watch Words in This Conversation"
             />
-            <BarChart width={425} height={225} data={watchWordsData}>
+            <BarChart width={425} height={225} data={watchWordsData} maxBarSize={50}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="Word" interval={0} tickLine={false} tick={false} />
-              <YAxis />
+              <YAxis allowDecimals={false} />
               <Tooltip />
               <Legend />
               <Bar legendType="none" dataKey="Count" fill="#1a294f" />
@@ -116,24 +125,24 @@ export class SingleConversationData extends Component {
               title="Tones Perceived in This Conversation"
             />
 
-            <RadarChart margin={{top: 5, right: 5, bottom: 5, left: 5}} outerRadius={90} width={425} height={225} data={tonesData}>
+            <RadarChart margin={{ top: 5, right: 5, bottom: 5, left: 5 }} outerRadius={90} width={425} height={225} data={tonesData}>
               <PolarGrid />
               <PolarAngleAxis dataKey="tone" />
               <PolarRadiusAxis domain={[-10, 100]} axisLine={false} tick={false} />
 
-              <Radar name="Document" dataKey="value" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
+              <Radar name="Document" dataKey="value" stroke="#c5dacc" fill="#DBF3E3" fillOpacity={0.7} />
             </RadarChart>
           </Card>
         </div>
         <div>
-        <Dialog
-          title="Record a Conversation"
-          actions={dialogAction}
-          modal={false}
-          open={this.state.dialogOpen}
-          onRequestClose={this.handleDialogClose}
-        >
-          Once you have recorded a conversation, it will apear on this page. You can also use this page to view any past conversation.
+          <Dialog
+            title="Record a Conversation"
+            actions={dialogAction}
+            modal={false}
+            open={this.state.dialogOpen}
+            onRequestClose={this.handleDialogClose}
+          >
+            Once you have recorded a conversation, it will apear on this page. You can also use this page to view any past conversation.
         </Dialog>
         </div>
       </div>
@@ -165,12 +174,5 @@ const styles = {
     marginBottom: 20,
     paddingRight: 20,
     paddingBottom: 20
-  },
-  cardTitle: {
-    fontFamily: 'Amaranth, sans-serif',
-    fontWeight: 'bold',
-    backgroundColor: '#DBF3E3',
-    paddingRight: 0
   }
-
 };

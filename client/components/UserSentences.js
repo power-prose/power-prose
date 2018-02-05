@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import {Card, CardHeader, CardTitle, CardText, Divider, Subheader } from 'material-ui/Card';
+import { Card, CardHeader, CardTitle, CardText, Divider, Subheader } from 'material-ui/Card';
 
 
 const styles = {
@@ -9,11 +9,11 @@ const styles = {
     height: 275,
     marginRight: 20,
     marginBottom: 20,
-    paddingRight: 20,
     maxHeight: 200,
     maxWidth: 913,
     minWidth: 913,
-    overflow: 'auto'
+    paddingRight: 0,
+    overflow: 'auto',
   }
 };
 
@@ -22,20 +22,23 @@ const UserSentences = (props) => {
 
   return (
 
-      <Card style={styles.sentencesCard}>
-        <CardHeader
-          title="Tentative Sentences from This Conversation"
-        />
-        <CardText>
-          {
-            conversation.toneSentences && conversation.toneSentences.map(toneSentence => {
-              return (
-                <div key={toneSentence.id}>{toneSentence.sentence}</div>
-              )
-            })
-          }
-        </CardText>
-      </Card>
+    <Card style={styles.sentencesCard}>
+      <CardTitle
+        title="Tentative Sentences from This Conversation"
+        style={{ backgroundColor: "#f0ddd4" }}
+        titleStyle={{ "fontFamily": "Amaranth, sans-serif", "fontWeight": "bold", "fontSize": 17, paddingRight: 0 }}
+        titleColor="#0E254C"
+      />
+      <CardText>
+        {
+          conversation.toneSentences && conversation.toneSentences.map(toneSentence => {
+            return (
+              <div key={toneSentence.id}>{toneSentence.sentence}</div>
+            )
+          })
+        }
+      </CardText>
+    </Card>
 
   )
 };
