@@ -367,6 +367,8 @@ calcMostFrequentTone = () => {
                     defaultToggled={true}
                     onToggle={() => this.handleWordToggle(watchWord.wordOrPhrase)}
                     style={styles.toggle}
+                    trackSwitchedStyle={{ backgroundColor: '#100E254C' }}
+                    thumbSwitchedStyle={{ backgroundColor: '#0E254C' }}
                   />
                 ))
               }
@@ -394,6 +396,8 @@ calcMostFrequentTone = () => {
                    defaultToggled={true}
                    onToggle={() => this.handleToneToggle(tone)}
                    style={styles.toggle}
+                   trackSwitchedStyle={{ backgroundColor: '#100E254C' }}
+                   thumbSwitchedStyle={{ backgroundColor: '#0E254C' }}
                   />
               ))
             }
@@ -418,6 +422,8 @@ calcMostFrequentTone = () => {
                   defaultToggled={true}
                   onToggle={() => this.handleWordToggle(watchWord.wordOrPhrase)}
                   style={styles.toggle}
+                  trackSwitchedStyle={{ backgroundColor: '#100E254C' }}
+                  thumbSwitchedStyle={{ backgroundColor: '#0E254C' }}
                 />
               ))
             }
@@ -434,6 +440,8 @@ calcMostFrequentTone = () => {
                   defaultToggled={true}
                   onToggle={() => this.handleToneToggle(tone)}
                   style={styles.toggle}
+                  trackSwitchedStyle={{ backgroundColor: '#100E254C' }}
+                  thumbSwitchedStyle={{ backgroundColor: '#0E254C' }}
                  />
              ))
            }
