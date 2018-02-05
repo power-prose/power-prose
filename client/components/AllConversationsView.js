@@ -218,7 +218,7 @@ calcMostFrequentTone = () => {
                 title="Your Last Conversation"
               />
               <CardText>
-                {this.calcLatestConvo()}
+                {conversations.length > 0 && this.calcLatestConvo()}
               </CardText>
             </Card>
           </div>
