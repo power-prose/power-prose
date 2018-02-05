@@ -60,7 +60,7 @@ export class WatchWordList extends Component {
 
   render() {
     const { watchWords, user } = this.props;
-    const { newWatchWord } = this.state;
+
     const dialogAction = [
       <FlatButton
         label="Okay"
@@ -69,8 +69,10 @@ export class WatchWordList extends Component {
       />
     ];
 
+    console.log("STATE", this.state);
+
     return (
-      <div className="container-watchwords">
+      <div className="container-watchwords-component">
         <Card style={{width: "270px"}}>
           <CardTitle
           title="Your WatchWords"
@@ -82,9 +84,8 @@ export class WatchWordList extends Component {
           <CardText>
             {watchWords.length &&
               watchWords.map(word => (
-                <div key={word.id} style={styles.wrapper}>
                   <Chip
-
+                    key={word.id}
                     labelStyle={{ color: "#0e254c" }}
                     backgroundColor="#FFFFFF"
                     onRequestDelete={event =>
@@ -98,14 +99,8 @@ export class WatchWordList extends Component {
                   >
                     {word.wordOrPhrase}
                   </Chip>
-                </div>
-              ))}
 
-          <br />
-          <form
-            style={styles.textFieldStyle}
-            onSubmit={this.props.handleSubmit}
-          >
+              ))}
             <TextField
               style={{marginBottom: '15px'}}
               inputStyle={{color: "#0E254C"}}
@@ -114,13 +109,13 @@ export class WatchWordList extends Component {
               fullWidth={true}
               floatingLabelText="Enter a new watchword"
               name="newwatchword"
-              value={newWatchWord}
+              value={this.state.newWatchWord}
               onChange={this.handleFormChange}
             />
-            <br />
             <FlatButton
-              label="Submit"
+              label="Add New WatchWord"
               secondary={true}
+              fullWidth={true}
               style={{
                 marginBottom: "5px",
                 color: "#0e254c",
@@ -129,8 +124,8 @@ export class WatchWordList extends Component {
               backgroundColor="#f0ddd4"
               hoverColor="rgb(204,242,218)"
               keyboardFocused={false}
+              onClick={(evt) => this.props.handleSubmit(evt, this.state.newWatchWord)}
             />
-          </form>
           </CardText>
         </Card>
 
@@ -167,10 +162,10 @@ const mapDispatch = dispatch => {
       event.preventDefault();
       dispatch(updateUserWatchWord(wordId));
     },
-    handleSubmit(event) {
+    handleSubmit(event, newWatchWord) {
       event.preventDefault();
-      console.log("!!!!!", event.target.newwatchword.value);
-      let wordOrPhrase = event.target.newwatchword.value;
+      console.log("!!!!!", newWatchWord);
+      let wordOrPhrase = newWatchWord
       dispatch(postUserWatchWord({ wordOrPhrase }));
     },
     updateUser(userId, request) {
@@ -180,13 +175,6 @@ const mapDispatch = dispatch => {
 };
 
 export default withRouter(connect(mapState, mapDispatch)(WatchWordList));
-
-const styles = {
-  wrapper: {
-    display: "flex",
-    flexWrap: "wrap"
-  }
-};
 
 // import React from 'react';
 // import Avatar from 'material-ui/Avatar';

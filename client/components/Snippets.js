@@ -105,7 +105,8 @@ class Snippets extends React.Component {
           titleClassName="dialog-title"
           contentStyle={{"width": "550px"}}
           title="Review Your Recording"
-          titleStyle={{"color": "#0E254C", "fontFamily": "Amaranth, sans-serif", "fontWeight": "bold"}}
+          titleStyle={{"fontFamily": "Amaranth, sans-serif", "fontWeight": "bold"}}
+          titleColor="#0E254C"
           actions={actions}
           modal={true}
           open={this.props.open}
