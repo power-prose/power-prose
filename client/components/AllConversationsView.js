@@ -243,6 +243,7 @@ calcMostFrequentTone = () => {
             onChangeIndex={this.handleChange}
           >
           <div style={styles.slide} className="container-inner-horizontal container-inside-tabs">
+            <Card style={{ marginTop: -10, paddingTop: 20 }}>
             <LineChart width={1000} height={500} data={this.createWordData()}
             margin={{top: 5, right: 30, left: 20, bottom: 5}}>
               <XAxis dataKey="name"/>
@@ -265,8 +266,10 @@ calcMostFrequentTone = () => {
                 </LineChart>
               </Brush>
             </LineChart>
+          </Card>
           </div>
           <div style={styles.slide} className="container-inner-horizontal container-inside-tabs">
+          <Card style={{ marginTop: -10, paddingTop: 20 }}>
           <LineChart width={1000} height={500} data={this.createToneData()}
           margin={{top: 5, right: 30, left: 20, bottom: 5}}>
           <XAxis dataKey="name"/>
@@ -289,8 +292,10 @@ calcMostFrequentTone = () => {
           </LineChart>
           </Brush>
           </LineChart>
+          </Card>
           </div>
           <div style={styles.slide} className="container-inner-vertical container-inside-tabs">
+          <Card style={{ marginTop: -10, paddingTop: 20 }}>
           <LineChart width={1000} height={500} data={this.createWordData()} syncId="anyId"
           margin={{top: 5, right: 30, left:20, bottom: 5}}>
           <XAxis dataKey="name"/>
@@ -324,6 +329,7 @@ calcMostFrequentTone = () => {
           </LineChart>
           </Brush>
           </LineChart>
+          </Card>
           </div>
           </SwipeableViews>
           <div>
@@ -507,12 +513,6 @@ const styles = {
   trackOff: {
     backgroundColor: '#ff9d9d',
   },
-  thumbSwitched: {
-    backgroundColor: 'red',
-  },
-  trackSwitched: {
-    backgroundColor: '#ff9d9d',
-  },
   labelStyle: {
     color: 'red',
   },
@@ -528,10 +528,11 @@ const styles = {
     fontWeight: 400,
   },
   slide: {
-    padding: 10,
+    padding: 10
   },
   tab: {
     minWidth: 950,
+    backgroundColor: '#FFFFFF'
   },
   cardStyle: {
     minWidth: 260
