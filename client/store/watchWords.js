@@ -5,6 +5,7 @@ const SET_USER_WATCHWORDS = 'SET_USER_WATCHWORDS';
 const SET_ACTIVE_WATCHWORDS = 'SET_ACTIVE_WATCHWORDS';
 const DISABLE_USER_WATCHWORD = 'DISABLE_USER_WATCHWORD';
 const ADD_USER_WATCHWORD = 'ADD_USER_WATCHWORD';
+const CLEAR_USER_WATCHWORDS = 'CLEAR_USER_WATCHWORDS'
 
 const defaultWatchWords = {
   allWatchWords: [],
@@ -19,7 +20,7 @@ const disableUserWatchWord = watchWordId => {
 const setActiveWatchWords = watchWords => ({ type: SET_ACTIVE_WATCHWORDS, watchWords })
 
 const addUserWatchWord = watchWord => ({ type: ADD_USER_WATCHWORD, watchWord })
-
+const clearUserWatchWords = () => ({ type: CLEAR_USER_WATCHWORDS })
 
 
 export const fetchUserWatchWords = (userId) => dispatch =>
@@ -61,6 +62,9 @@ export default function (state = defaultWatchWords, action) {
 
     case SET_ACTIVE_WATCHWORDS:
       return Object.assign({}, state, { activeWatchWords: action.watchWords })
+
+    case CLEAR_USER_WATCHWORDS:
+      return state
 
     default:
       return state

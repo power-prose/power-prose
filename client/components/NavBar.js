@@ -1,8 +1,7 @@
 import React from "react";
 import { NavLink, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { logout } from "../store";
-// import {Navbar, FormGroup, FormControl, Button, Nav, NavItem} from "react-bootstrap";
+import { logout, clearAllConversations, clearChosenConversation, clearUserWatchWords } from "../store";
 
 const NavBar = props => {
   const { handleClick, isLoggedIn } = props;
@@ -10,7 +9,7 @@ const NavBar = props => {
   const loggedOutNav = (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <NavLink className="navbar-brand" to="/">
-        Power Prose
+      Power Prose
       </NavLink>
       <button
         className="navbar-toggler"
@@ -123,6 +122,9 @@ const mapDispatch = dispatch => {
   return {
     handleClick() {
       dispatch(logout());
+      dispatch(clearAllConversations());
+      dispatch(clearChosenConversation());
+      dispatch(clearUserWatchWords());
     }
   };
 };

@@ -19,6 +19,12 @@ form div {
   display: inline-block;
 }
 
+#logo-navbar {
+  width: 5%;
+  padding: 8px;
+  margin-right: 4px;
+}
+
 #landing-page {
   width: 100%;
   /* padding: 75px; */
@@ -27,12 +33,14 @@ form div {
 
 #top-pane {
   padding: 75px;
+   text-align: center;
 }
 
 #title {
   text-align: center;
   width: 100%;
   padding-bottom: 50px;
+  color: #C98E34;
 }
 
 #top-container > div {

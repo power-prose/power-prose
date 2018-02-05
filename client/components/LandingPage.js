@@ -5,35 +5,43 @@ import { Link } from "react-router-dom";
 
 
 const buttonStyle = {
-    marginLeft: 100,
     paddingLeft: 10,
     paddingRight: 10,
-    marginTop: 20
+    marginTop: 20,
+    backgroundColor: "#f99",
+    "&:hover": {
+        backgroundColor: "#000"
+    }
 };
 
 const LandingPage = props => {
     return (
         <div id="landing-page">
             <div id="top-pane">
-                <h1 id="title">Power Prose</h1>
-                <div id="top-container">
-                    <div>
+                <div id="top-pane-top">
+                    <div className="image-container1">
                         <div className="empty-square1" />
                         <img src="https://i.imgur.com/4IoNZqD.jpg" alt="Woman on Phone" id="top-image" />
                     </div>
+                    <div id="top-pane-middle" />
                     <div id="app-info">
-                        <h2 id="app-headline">A clear, concise headline....... </h2>
-                        <h3 id="app-description">Elaborate on the benefits of using Power Prose why you want to use it what it is for etc.......</h3>
+                        <div id="app-headline">Change your unconscious speech patterns and watch your professional career flourish.</div>
+                        <div id="app-description">Our speech can have a huge impact in how we are perceived. Numerous studies have shown that when women speak, they tend to use qualifier words and phrases which can diminish authority and position. Info here about what qualifier words are?? or on record page? Power Prose aims to help women reduce their use of qualifier words and in doing so increase their clout, confidence and contributions especially in the workplace.</div>
                         <Link to="/signup">
-                        <RaisedButton style={buttonStyle}>Get Started</RaisedButton></Link>
+                            <RaisedButton className="get-started" style={buttonStyle}>Get Started</RaisedButton></Link>
                     </div>
                 </div>
-                <div id="second-image-div">
-                    <div className="empty-square2" />
-                    <img src="https://i.imgur.com/MOHrTU1.jpg" alt="desk" id="bottom-image" />
+                <div id="top-pane-bottom">
+                    <div>
+                        <div className="empty-square2" />
+                        <div className="image-container2">
+                            <img src="https://i.imgur.com/MOHrTU1.jpg" alt="desk" id="bottom-image" />
+                        </div>
+                    </div>
+                    <div id="top-pane-bottom-right-space" />
                 </div>
             </div>
-            <div id="bottom-view">
+            <div id="bottom-pane">
                 <div id="bottom-left">
                     <div id="left-content">
                         <div className="bullet-info">
@@ -41,7 +49,8 @@ const LandingPage = props => {
                                 <img src="/SpeechtoText.svg" className="watson-icon" />
                             </div>
                             <div>
-                                <div className="icon-desc">information about speech to text analysis what it does on the site etc. etc and watch words..........</div>
+                                <div className="icon-desc-title">TITLE TITLE</div>
+                                <div className="icon-desc">Record your conversations and track your use of qualifier "watch words" in your business meetings, phone calls or interview practice.</div>
                             </div>
                         </div>
                         <div className="bullet-info">
@@ -49,7 +58,8 @@ const LandingPage = props => {
                                 <img src="/ToneAnalyzer.svg" className="watson-icon" />
                             </div>
                             <div>
-                                <div className="icon-desc">information about tone analysis  what it does on the site etc. etc watching for tentative tones</div>
+                                <div className="icon-desc-title">TITLE TITLE</div>
+                                <div className="icon-desc">Receive feedback about the overall tones of your recorded conversations and see your sentences perceived as tentative.</div>
                             </div>
                         </div>
 
@@ -58,7 +68,8 @@ const LandingPage = props => {
                                 <img src="/bar-chart.svg" className="watson-icon" />
                             </div>
                             <div>
-                                <div className="icon-desc">Watch yourself improve over time with our data visualization etc...</div>
+                                <div className="icon-desc-title">TITLE TITLE</div>
+                                <div className="icon-desc">Watch yourself improve over time with beautiful charts and graphs designed to track your progress.</div>
                             </div>
                         </div>
 
@@ -67,15 +78,16 @@ const LandingPage = props => {
                                 <img src="/tick.svg" className="watson-icon" />
                             </div>
                             <div>
-                                <div className="icon-desc">Sound more confident and achieve your goals...</div>
+                                <div className="icon-desc-title">SUCCEED</div>
+                                <div className="icon-desc">Sound more confident and achieve your workplace goals.</div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div id="bottom-right">
+                    <div id="second-pane-title" className="icon-desc-title">Something Something at your fingertips/in your pocket (want to show screenshot of data viz on phone here.</div>
                     <div>
                         <img src="https://i.imgur.com/KIjBss7.png" alt="iphone" id="iphone" />
-
                     </div>
                 </div>
             </div>

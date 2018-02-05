@@ -17,6 +17,10 @@ const User = db.define('user', {
   googleId: {
     type: Sequelize.STRING
   },
+  acceptedInitialWatchWords: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
+  },
   firstName: {
     type: Sequelize.STRING
   },
