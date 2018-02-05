@@ -12,14 +12,6 @@ export class SingleConversationData extends Component {
     this.state = { dialogOpen: false };
   }
 
-  componentWillReceiveProps (nextProps) {
-    const { conversations } = nextProps;
-
-    if (!!conversations.defaultConversations && conversations.defaultConversations.length === 0) {
-      this.setState({ dialogOpen: true })
-    }
-  }
-
   handleDialogOpen = () => {
     this.setState({dialogOpen: true});
   };
