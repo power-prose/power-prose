@@ -250,7 +250,7 @@ calcMostFrequentTone = () => {
               <Legend />
                 {
                   displayedWatchWords.length && displayedWatchWords.map((watchWord, index) => (
-                    <Line key={watchWord} type="monotone" dataKey={watchWord} stroke={colors[index]} activeDot={{r: 8}}/>
+                    <Line key={watchWord} type="monotone" dataKey={watchWord} stroke={colors[index]} activeDot={{r: 8}} />
                   ))
                 }
               <Brush>
