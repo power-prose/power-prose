@@ -17,7 +17,8 @@ export class AllConversationsView extends Component {
     this.state = {
       displayedWatchWords: [],
       displayedTones: ['anger', 'fear', 'joy', 'sadness', 'analytical', 'confident', 'tentative'],
-      slideIndex: 0
+      slideIndex: 0,
+      dialogOpen: false
     }
   }
 
@@ -26,10 +27,6 @@ export class AllConversationsView extends Component {
 
     if (this.props.watchWords !== this.state.displayedWatchWords) {
       this.setState({ displayedWatchWords: this.props.watchWords.map(watchWordObj => watchWordObj.wordOrPhrase) })
-    }
-
-    if (conversations.length === 0) {
-      this.setState({ dialogOpen: true })
     }
   }
 
@@ -81,7 +78,7 @@ export class AllConversationsView extends Component {
     const { conversations } = this.props;
     let obj = {}
 
-    conversations.forEach(conversation => {
+    conversations.length && conversations.forEach(conversation => {
       conversation.userWatchWords.forEach(watchWordObj => {
         if (watchWordObj.wordOrPhrase !== undefined) {
           if (obj[watchWordObj.wordOrPhrase] === undefined) {
@@ -108,7 +105,7 @@ calcMostFrequentTone = () => {
     const possibleTones = ['anger', 'fear', 'joy', 'sadness', 'analytical', 'confident', 'tentative'];
     let obj = {}
 
-    conversations.forEach(conversation => {
+    conversations.length && conversations.forEach(conversation => {
       let toneObj = conversation.tone;
 
       possibleTones.forEach(tone => {
@@ -134,7 +131,7 @@ calcMostFrequentTone = () => {
     const { conversations } = this.props;
     let date = ''
 
-    conversations.forEach(conversation => {
+    conversations.length && conversations.forEach(conversation => {
       if (conversation.date > date) date = conversation.date
     })
 
@@ -146,7 +143,7 @@ calcMostFrequentTone = () => {
     const { conversations, watchWords } = this.props;
     let data = []
 
-    conversations.forEach(conversation => {
+    conversations.length && conversations.forEach(conversation => {
       let obj = {}
 
       obj.name = conversation.name
@@ -164,7 +161,7 @@ calcMostFrequentTone = () => {
     let data = [];
     let toneArr = ['anger', 'fear', 'joy', 'sadness', 'analytical', 'confident', 'tentative'];
 
-    conversations.forEach(conversation => {
+    conversations.length && conversations.forEach(conversation => {
       let newObj = {}
       let toneObj = conversation.tone;
       newObj.name = conversation.name;
@@ -191,6 +188,7 @@ calcMostFrequentTone = () => {
         onClick={this.handleDialogClose}
       />
     ];
+    const colors = ['#0E254C', '#2869D8', '#7468B2', '#C98E34', '#7F3C0B', '#5F7F0B', '#581896', '#FCD328', '#0E254C', '#2869D8', '#7468B2', '#C98E34', '#7F3C0B', '#5F7F0B', '#581896', '#FCD328', '#0E254C', '#2869D8', '#7468B2', '#C98E34', '#7F3C0B', '#5F7F0B', '#581896', '#FCD328', '#0E254C', '#2869D8', '#7468B2', '#C98E34', '#7F3C0B', '#5F7F0B', '#581896', '#FCD328', '#0E254C', '#2869D8', '#7468B2', '#C98E34', '#7F3C0B', '#5F7F0B', '#581896', '#FCD328'];
 
     return (
       <div className="container-inner-horizontal">
@@ -220,7 +218,7 @@ calcMostFrequentTone = () => {
                 title="Your Last Conversation"
               />
               <CardText>
-                {this.calcLatestConvo()}
+                {conversations.length > 0 && this.calcLatestConvo()}
               </CardText>
             </Card>
           </div>
@@ -229,6 +227,8 @@ calcMostFrequentTone = () => {
             onChange={this.handleSlideChange}
             value={this.state.slideIndex}
             style={styles.tab}
+            tabItemContainerStyle={{background: '#0E254C'}}
+            inkBarStyle={{background: '#C98E34'}}
           >
             <Tab label="WatchWords" value={0} />
             <Tab label="Tone" value={1} />
@@ -240,6 +240,7 @@ calcMostFrequentTone = () => {
             onChangeIndex={this.handleChange}
           >
           <div style={styles.slide} className="container-inner-horizontal container-inside-tabs">
+            <Card style={{ marginTop: -10, paddingTop: 20 }}>
             <LineChart width={1000} height={500} data={this.createWordData()}
             margin={{top: 5, right: 30, left: 20, bottom: 5}}>
               <XAxis dataKey="name"/>
@@ -247,23 +248,25 @@ calcMostFrequentTone = () => {
               <CartesianGrid strokeDasharray="3 3"/>
               <Tooltip/>
               <Legend />
-              {
-                displayedWatchWords.length && displayedWatchWords.map(watchWord => (
-                  <Line key={watchWord.id} type="monotone" dataKey={watchWord} stroke="#8884d8" activeDot={{r: 8}}/>
-                ))
-              }
+                {
+                  displayedWatchWords.length && displayedWatchWords.map((watchWord, index) => (
+                    <Line key={watchWord} type="monotone" dataKey={watchWord} stroke={colors[index]} activeDot={{r: 8}} />
+                  ))
+                }
               <Brush>
                 <LineChart>
                 {
                   displayedWatchWords.length && displayedWatchWords.filter(word => word === 'sorry').map(word => (
-                    <Line key={word} type="monotone" dataKey={word} stroke="#8884d9" activeDot={{r: 8}}/>
+                    <Line key={word} type="monotone" dataKey={word} stroke="#0E254C" activeDot={{r: 8}}/>
                   ))
                 }
                 </LineChart>
               </Brush>
             </LineChart>
+          </Card>
           </div>
           <div style={styles.slide} className="container-inner-horizontal container-inside-tabs">
+          <Card style={{ marginTop: -10, paddingTop: 20 }}>
           <LineChart width={1000} height={500} data={this.createToneData()}
           margin={{top: 5, right: 30, left: 20, bottom: 5}}>
           <XAxis dataKey="name"/>
@@ -272,22 +275,24 @@ calcMostFrequentTone = () => {
           <Tooltip/>
           <Legend />
           {
-            displayedTones.length && displayedTones.map(tone => (
-              <Line key={tone} type="monotone" dataKey={tone} stroke="#8884d9" activeDot={{r: 8}}/>
+            displayedTones.length && displayedTones.map((tone, index) => (
+              <Line key={tone} type="monotone" dataKey={tone} stroke={colors[index]} activeDot={{r: 8}}/>
             ))
           }
           <Brush>
           <LineChart>
           {
             displayedTones.length && displayedTones.filter(tone => tone === 'tentative').map(tone => (
-              <Line key={tone} type="monotone" dataKey={tone} stroke="#8884d9" activeDot={{r: 8}}/>
+              <Line key={tone} type="monotone" dataKey={tone} stroke="#0E254C" activeDot={{r: 8}}/>
             ))
           }
           </LineChart>
           </Brush>
           </LineChart>
+          </Card>
           </div>
           <div style={styles.slide} className="container-inner-vertical container-inside-tabs">
+          <Card style={{ marginTop: -10, paddingTop: 20 }}>
           <LineChart width={1000} height={500} data={this.createWordData()} syncId="anyId"
           margin={{top: 5, right: 30, left:20, bottom: 5}}>
           <XAxis dataKey="name"/>
@@ -295,8 +300,8 @@ calcMostFrequentTone = () => {
           <CartesianGrid strokeDasharray="3 3"/>
           <Tooltip/>
           {
-            displayedWatchWords.length && displayedWatchWords.map(watchWord => (
-              <Line key={watchWord.id} type="monotone" dataKey={watchWord} stroke="#8884d8" activeDot={{r: 8}}/>
+            displayedWatchWords.length && displayedWatchWords.map((watchWord, index) => (
+              <Line key={watchWord} type="monotone" dataKey={watchWord} stroke={colors[index]} activeDot={{r: 8}}/>
             ))
           }
           </LineChart>
@@ -307,20 +312,21 @@ calcMostFrequentTone = () => {
           <CartesianGrid strokeDasharray="3 3"/>
           <Tooltip/>
           {
-            displayedTones.length && displayedTones.map(tone => (
-              <Line key={tone} type="monotone" dataKey={tone} stroke="#8884d9" activeDot={{r: 8}}/>
+            displayedTones.length && displayedTones.map((tone, index) => (
+              <Line key={tone} type="monotone" dataKey={tone} stroke={colors[index]} activeDot={{r: 8}}/>
             ))
           }
           <Brush>
           <LineChart>
           {
-            displayedTones.length && displayedTones.filter(tone => tone === 'tentative').map(tone => (
-              <Line key={tone} type="monotone" dataKey={tone} stroke="#8884d9" activeDot={{r: 8}}/>
+            displayedWatchWords.length && displayedWatchWords.filter(word => word === 'sorry').map(word => (
+              <Line key={word} type="monotone" dataKey={word} stroke="#0E254C" activeDot={{r: 8}}/>
             ))
           }
           </LineChart>
           </Brush>
           </LineChart>
+          </Card>
           </div>
           </SwipeableViews>
           <div>
@@ -364,6 +370,8 @@ calcMostFrequentTone = () => {
                     defaultToggled={true}
                     onToggle={() => this.handleWordToggle(watchWord.wordOrPhrase)}
                     style={styles.toggle}
+                    trackSwitchedStyle={{ backgroundColor: '#100E254C' }}
+                    thumbSwitchedStyle={{ backgroundColor: '#0E254C' }}
                   />
                 ))
               }
@@ -391,6 +399,8 @@ calcMostFrequentTone = () => {
                    defaultToggled={true}
                    onToggle={() => this.handleToneToggle(tone)}
                    style={styles.toggle}
+                   trackSwitchedStyle={{ backgroundColor: '#100E254C' }}
+                   thumbSwitchedStyle={{ backgroundColor: '#0E254C' }}
                   />
               ))
             }
@@ -415,6 +425,8 @@ calcMostFrequentTone = () => {
                   defaultToggled={true}
                   onToggle={() => this.handleWordToggle(watchWord.wordOrPhrase)}
                   style={styles.toggle}
+                  trackSwitchedStyle={{ backgroundColor: '#100E254C' }}
+                  thumbSwitchedStyle={{ backgroundColor: '#0E254C' }}
                 />
               ))
             }
@@ -431,6 +443,8 @@ calcMostFrequentTone = () => {
                   defaultToggled={true}
                   onToggle={() => this.handleToneToggle(tone)}
                   style={styles.toggle}
+                  trackSwitchedStyle={{ backgroundColor: '#100E254C' }}
+                  thumbSwitchedStyle={{ backgroundColor: '#0E254C' }}
                  />
              ))
            }
@@ -496,12 +510,6 @@ const styles = {
   trackOff: {
     backgroundColor: '#ff9d9d',
   },
-  thumbSwitched: {
-    backgroundColor: 'red',
-  },
-  trackSwitched: {
-    backgroundColor: '#ff9d9d',
-  },
   labelStyle: {
     color: 'red',
   },
@@ -517,10 +525,11 @@ const styles = {
     fontWeight: 400,
   },
   slide: {
-    padding: 10,
+    padding: 10
   },
   tab: {
-    minWidth: 950
+    minWidth: 950,
+    backgroundColor: '#FFFFFF'
   },
   cardStyle: {
     minWidth: 260

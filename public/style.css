@@ -200,7 +200,7 @@ form div {
 }
 
 #left-content {
-  padding-top: 116px;
+  padding-top: 75px;
   padding-bottom: 50px;
   min-height: 1000px;
 }
@@ -467,11 +467,20 @@ nav a {
 
 
 .navbar-light .navbar-brand {
+
   color: #0e254c;
+  background-color: white
+}
+
+.navbar-default {
+  background-color: #ffffff
 }
 
 .footer {
   font-weight: normal;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
   color: #808080;
   justify-content: center;
   height: 6rem;
@@ -485,9 +494,17 @@ nav a {
 }
 
 #outer-most-div {
-  padding-bottom: 4rem;
-  height: auto;
+    /* height: 100vh;
+    width: 100vw;
+    position: absolute;
+    top: 0;
+    left: 0; */
+    padding-bottom: 4rem;
+    height: auto;
+
 }
+
+
 
 
 .navbar-brand {
