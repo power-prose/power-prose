@@ -2,6 +2,7 @@ import React from "react";
 import { NavLink, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout, clearAllConversations, clearChosenConversation, clearUserWatchWords } from "../store";
+import {AppBar, Tabs, Tab, ToolBarGroup} from 'material-ui'
 
 const NavBar = props => {
   const { handleClick, isLoggedIn } = props;
@@ -35,6 +36,23 @@ const NavBar = props => {
     </nav>
     </div>
   );
+
+
+//material UI attempt
+  // const loggedOutNav = (
+  //    <AppBar
+  //    title={<NavLink to="/" className="navbar-brand">Power Prose</NavLink>}
+  //     zDepth={0}
+  //    // titleStyle={{color: "#0e254c", fontSize: "1.5rem", "hoverColor": "red"}}
+  //    className="navbar"
+  //    style={{"backgroundColor": "white", "color": "#808080", "borderBottom": "1px solid #0e254c"}}
+  //    >
+  //    <Tabs>
+  //    <Tab label = "Login" />
+  //    <Tab label="Sign Up" />
+  //    </Tabs>
+  //    </AppBar>
+  //                       )
 
 
 

@@ -469,10 +469,12 @@ nav a {
   margin-right: 0;
   border-bottom: 1px solid #0e254c;
   font-weight: bold;
+  background-color: white;
 }
 
 .navbar .navbar-brand {
   color: #0e254c;
+  font-weight: bold;
 
 }
 .navbar .navbar-brand:hover {
