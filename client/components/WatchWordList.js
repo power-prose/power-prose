@@ -97,7 +97,7 @@ export class WatchWordList extends Component {
               ))}
             <TextField
               style={{marginBottom: '15px'}}
-              inputStyle={{color: "#0E254C"}}
+              inputStyle={{color: "#0E254C", WebkitBoxShadow: '0 0 0 1000px white inset'}}
               underlineFocusStyle={{ borderColor: "#C98E34"}}
               floatingLabelFocusStyle={{color: "#C98E34"}}
               fullWidth={true}

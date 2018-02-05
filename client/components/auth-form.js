@@ -50,7 +50,7 @@ class AuthForm extends React.Component {
         <CardText>
           <div>
             <TextField
-            inputStyle={{color: "#0E254C"}}
+            inputStyle={{color: "#0E254C", WebkitBoxShadow: '0 0 0 1000px white inset'}}
             underlineFocusStyle={{ borderColor: "#C98E34"}}
             floatingLabelFocusStyle={{color: "#C98E34"}}
             fullWidth={true}
@@ -62,7 +62,7 @@ class AuthForm extends React.Component {
           </div>
           <div>
             <TextField
-            inputStyle={{color: "#0E254C"}}
+            inputStyle={{color: "#0E254C", WebkitBoxShadow: '0 0 0 1000px white inset'}}
             underlineFocusStyle={{ borderColor: "#C98E34"}}
             floatingLabelFocusStyle={{color: "#C98E34"}}
             fullWidth={true}

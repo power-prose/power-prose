@@ -431,6 +431,10 @@ form div {
   font-size: 1.5rem;
 }
 
+.log-wrapper {
+  float: right;
+}
+
 .nav-logout {
   font-weight: normal;
 }
