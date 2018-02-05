@@ -79,7 +79,7 @@ class RecordButtons extends Component {
       ? this.props.chosenConversation.snippets
       : [];
     if (snippets) snippetsLength = snippets.length;
-    let buttonColor = this.state.hasStarted ? "rgb(241, 211,200)" : "#0e254c";
+    let buttonColor = this.state.hasStarted ? "rgb(241, 211,200)" : "#DBF3E3";
 
     //"rgb(204,242,218)"
 

@@ -569,3 +569,9 @@ nav {
     margin-top: 30px;
   }
 }
+
+.dialog-title {
+  text-align: center;
+  color: #0E254C;
+  background-color: #DBF3E3;
+}
