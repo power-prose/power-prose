@@ -1,11 +1,11 @@
 import React from "react";
-import { withRouter} from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import Dialog from "material-ui/Dialog";
 import FlatButton from "material-ui/FlatButton";
 import TextField from "material-ui/TextField";
 import { updateConversationThunk } from "../store";
-import {SnippetChip} from './';
+import { SnippetChip } from "./";
 
 class Snippets extends React.Component {
   constructor(props) {
@@ -28,7 +28,6 @@ class Snippets extends React.Component {
       });
     }
   };
-
 
   handleClose = () => {
     const conversationData = { ...this.props.convo };
@@ -77,6 +76,13 @@ class Snippets extends React.Component {
   render() {
     const actions = [
       <FlatButton
+        style={{
+          marginBottom: "5px",
+          color: "#0e254c",
+          border: "1px solid #0e254c"
+        }}
+        backgroundColor="#f0ddd4"
+        hoverColor="rgb(204,242,218)"
         label="Submit"
         secondary={true}
         keyboardFocused={false}
@@ -86,7 +92,7 @@ class Snippets extends React.Component {
     const snippetMenu = this.state.snippets.map((snippet, i) => {
       return (
         <SnippetChip
-        key={i}
+          key={i}
           i={i}
           snippet={snippet}
           onRequestDelete={this.handleRequestDelete}
@@ -94,34 +100,43 @@ class Snippets extends React.Component {
       );
     });
     return (
-      <div>
+
         <Dialog
+          titleClassName="dialog-title"
+          contentStyle={{"width": "550px"}}
           title="Review Your Recording"
+          titleStyle={{"fontFamily": "Amaranth, sans-serif", "fontWeight": "bold"}}
+          titleColor="#0E254C"
           actions={actions}
           modal={true}
           open={this.props.open}
           onRequestClose={this.handleClose}
           autoScrollBodyContent={true}
         >
-        <div>
-        <TextField
-        floatingLabelText="Name your recording"
-      floatingLabelFixed={true}
-          id="rr"
-          name="recordingName"
+          <div>
+            <TextField
+              style={{marginBottom: '15px', marginTop: "15px"}}
+              inputStyle={{color: "#0E254C"}}
+              underlineFocusStyle={{ borderColor: "#C98E34"}}
+              floatingLabelFocusStyle={{color: "#C98E34"}}
+              fullWidth={true}
+              floatingLabelText="Name your recording"
+              floatingLabelFixed={true}
+              id="rr"
+              name="recordingName"
               placeholder={this.props.convo.name}
               value={this.state.recordingName}
               onChange={this.handleChange}
-        />
-        </div>
-          <label>
+            />
+          </div>
+          <label style={{marginBottom: '15px'}}>
             See every time you used a WatchWord below. Are any of them
             exceptions to the rule? Remove them from the list and your data
             won't include them.
           </label>
           {snippetMenu}
         </Dialog>
-      </div>
+
     );
   }
 }

@@ -6,7 +6,7 @@ const SnippetChip = props => {
   const snippet = props.snippet;
   const onClick = props.onClick;
   const onRequestDelete = props.onRequestDelete;
-  const style = { marginBottom: 10 };
+  const style = { marginBottom: 10, border: "0.5px solid #0e254c"};
 
   const createSnip = (snip) => {
     let beginning = snip.text.slice(0, snip.index);
@@ -18,6 +18,8 @@ const SnippetChip = props => {
   return (
     <Chip
       value={`${i + 1}`}
+      labelStyle={{color: "#0e254c"}}
+      backgroundColor="#FFFFFF"
       name="snippetName"
       id={i}
       onClick={onClick}

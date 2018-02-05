@@ -39,18 +39,20 @@ class AuthForm extends React.Component {
     let disableButton;
     if (!this.state.email.length || !this.state.password.length) disableButton = true;
     else disableButton = false
+    const greeting = displayName === 'Login' ? 'Welcome back' : 'Hi there'
 
     return (
       <div id="auth-wrapper">
       <Card
 
       className="login-card">
-        <CardTitle titleColor="#0e254c" titleStyle={{"text-align": "center"}} title={displayName} />
+        <CardTitle titleColor="#0e254c" titleStyle={{"fontFamily": "Amaranth, sans-serif", "fontWeight": "bold", "textAlign": "center"}} title={greeting} />
         <CardText>
           <div>
             <TextField
-            underlineFocusStyle={{"borderColor": "#0e254c"}}
-            floatingLabelFocusStyle={{"color": "#0e254c"}}
+            inputStyle={{color: "#0E254C"}}
+            underlineFocusStyle={{ borderColor: "#C98E34"}}
+            floatingLabelFocusStyle={{color: "#C98E34"}}
             fullWidth={true}
             name="email"
             floatingLabelText="Email"
@@ -60,8 +62,9 @@ class AuthForm extends React.Component {
           </div>
           <div>
             <TextField
-            underlineFocusStyle={{"borderColor": "#0e254c"}}
-            floatingLabelFocusStyle={{"color": "#0e254c"}}
+            inputStyle={{color: "#0E254C"}}
+            underlineFocusStyle={{ borderColor: "#C98E34"}}
+            floatingLabelFocusStyle={{color: "#C98E34"}}
             fullWidth={true}
             name="password"
             type="password"
@@ -77,8 +80,7 @@ class AuthForm extends React.Component {
             style={{"marginBottom": "10px", "color": "#0e254c", "border": "1px solid #0e254c"}}
             fullWidth={true}
             backgroundColor="#f0ddd4"
-            // disabled={disableButton}
-            hoverColor= "#c28459"//"rgb(204,242,218)"
+            hoverColor= "rgb(204,242,218)"//"rgb(204,242,218)"
             label={displayName}
             secondary={true}
             onClick={evt => handleSubmit(evt, name, this.state.email, this.state.password)}

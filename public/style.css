@@ -19,12 +19,6 @@ form div {
   display: inline-block;
 }
 
-#logo-navbar {
-  width: 5%;
-  padding: 8px;
-  margin-right: 4px;
-}
-
 #landing-page {
   width: 100%;
   /* padding: 75px; */
@@ -307,6 +301,14 @@ form div {
   align-items: flex-start;
 }
 
+.container-watchwords-component {
+  margin-top: 3%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 15%;
+}
+
 .container-right {
   padding-left: 1.5%;
   padding-right: 1.5%;
@@ -332,8 +334,6 @@ form div {
   color: navy;
   font-size: 2.5em;
   cursor: pointer;
-  /*background: rgb(204,242,218);*/
-  /*background: rgb(241, 211,200);*/
   border: none;
   position: absolute;
   font-style: bold;
@@ -421,24 +421,30 @@ form div {
   color: #808080;
 }
 
+#logo-navbar {
+  width: 5%;
+  padding: 8px;
+  margin-right: 4px;
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+}
+
 .nav-logout {
   font-weight: normal;
 }
 
 .nav-link:hover {
-  /*color: #696969;*/
   color: #0e254c;
-  /*color: rgb(204,242,218);*/
 }
 
 .navbar-nav .nav-item .nav-link:hover {
   color: #0e254c;
-  /*color: rgb(204,242,218);*/
 }
 
 .navbar-nav .nav-item .nav-link.active {
   color: #0e254c;
-  /*color: rgb(204,242,218);*/
 }
 
 nav a {
@@ -453,10 +459,6 @@ nav a {
   transition-delay: initial;
 }
 
-.speak-button-wrapper {
-  margin-left: 80%;
-}
-
 .navbar-toggler {
   margin-right: 1rem;
 }
@@ -467,17 +469,17 @@ nav a {
   margin-right: 0;
   border-bottom: 1px solid #0e254c;
   font-weight: bold;
+  background-color: white;
 }
 
-
-.navbar-light .navbar-brand {
-
+.navbar .navbar-brand {
   color: #0e254c;
-  background-color: white
-}
+  font-weight: bold;
 
-.navbar-default {
-  background-color: #ffffff
+}
+.navbar .navbar-brand:hover {
+  color: #C98E34;
+
 }
 
 .footer {
@@ -498,14 +500,14 @@ nav a {
 }
 
 #outer-most-div {
-    /* height: 100vh;
-    width: 100vw;
-    position: absolute;
-    top: 0;
-    left: 0; */
     padding-bottom: 4rem;
     height: auto;
 
+}
+
+
+.speak-button-wrapper {
+  margin-left: 80%;
 }
 
 #all-convos-cards {
@@ -520,7 +522,6 @@ nav a {
 .footer a:hover {
   text-decoration: none;
   color: #0e254c;
-
 }
 
 .footer a {
@@ -586,4 +587,10 @@ nav a {
   #iphone {
     margin-top: 30px;
   }
+}
+
+.dialog-title {
+  text-align: center;
+  color: #0E254C;
+  background-color: #DBF3E3;
 }
