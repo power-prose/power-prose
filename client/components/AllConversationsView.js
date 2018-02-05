@@ -230,6 +230,7 @@ calcMostFrequentTone = () => {
             onChange={this.handleSlideChange}
             value={this.state.slideIndex}
             style={styles.tab}
+            tabItemContainerStyle={{background: '#0E254C'}}
             inkBarStyle={{background: '#C98E34'}}
           >
             <Tab label="WatchWords" value={0} />
@@ -522,7 +523,7 @@ const styles = {
     padding: 10,
   },
   tab: {
-    minWidth: 950
+    minWidth: 950,
   },
   cardStyle: {
     minWidth: 260
