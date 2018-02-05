@@ -7,7 +7,8 @@ const NavBar = props => {
   const { handleClick, isLoggedIn } = props;
 
   const loggedOutNav = (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light bg-white">
+  <div id="nav-div">
+    <nav className="navbar navbar-expand-lg navbar-light" style={{"backgroundColor" : "white"}}>
       <NavLink className="navbar-brand" to="/">
       Power Prose
       </NavLink>
@@ -24,49 +25,21 @@ const NavBar = props => {
       </button>
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav mr-auto" />
-        <NavLink className="nav-link" to="/login">
+        <NavLink className="nav-link nav-logout" to="/login">
           Login
         </NavLink>
-        <NavLink className="nav-link" to="/signup">
+        <NavLink className="nav-link nav-logout" to="/signup">
           Sign Up
         </NavLink>
       </div>
     </nav>
+    </div>
   );
 
 
-//react bootstrap attempt - did not work at all
-//   const loggedOutNav = (
-//    <Navbar defaultExpanded={true}>
-//   <Navbar.Header>
-//     <Navbar.Brand>
-//       <a href="#brand">React-Bootstrap</a>
-//     </Navbar.Brand>
-//     <Navbar.Toggle />
-//   </Navbar.Header>
-//   <Navbar.Collapse>
-//     <Nav>
-//       <NavItem eventKey={1} href="#">
-//         Link
-//       </NavItem>
-//       <NavItem eventKey={2} href="#">
-//         Link
-//       </NavItem>
-//     </Nav>
-//     <Nav pullRight>
-//       <NavItem eventKey={1} href="#">
-//         Link Right
-//       </NavItem>
-//       <NavItem eventKey={2} href="#">
-//         Link Right
-//       </NavItem>
-//     </Nav>
-//   </Navbar.Collapse>
-// </Navbar>
-//   );
 
   const loggedInNav = (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className="navbar navbar-expand-lg navbar-light" style={{"backgroundColor" : "white"}}>
       <NavLink className="navbar-brand" to="/">
         Power Prose
       </NavLink>
