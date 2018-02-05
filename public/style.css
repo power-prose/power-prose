@@ -457,7 +457,12 @@ nav a {
   margin-right: 1rem;
 }
 
+nav {
+  background-color: white;
+}
+
 .navbar {
+
   padding: 0em;
   margin-left: 0;
   margin-right: 0;

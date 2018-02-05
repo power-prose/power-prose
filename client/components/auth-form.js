@@ -45,7 +45,7 @@ class AuthForm extends React.Component {
       <Card
 
       className="login-card">
-        <CardTitle titleColor="#0e254c" titleStyle={{"text-align": "center"}} title={displayName} />
+        <CardTitle titleColor="#0e254c" titleStyle={{"textAlign": "center"}} title={displayName} />
         <CardText>
           <div>
             <TextField
@@ -78,7 +78,7 @@ class AuthForm extends React.Component {
             fullWidth={true}
             backgroundColor="#f0ddd4"
             // disabled={disableButton}
-            hoverColor= "#c28459"//"rgb(204,242,218)"
+            hoverColor= "rgb(204,242,218)"//"rgb(204,242,218)"
             label={displayName}
             secondary={true}
             onClick={evt => handleSubmit(evt, name, this.state.email, this.state.password)}

@@ -79,7 +79,11 @@ class RecordButtons extends Component {
       ? this.props.chosenConversation.snippets
       : [];
     if (snippets) snippetsLength = snippets.length;
-    let buttonColor = this.state.hasStarted ? "rgb(241, 211,200)" : "rgb(204,242,218)";
+    let buttonColor = this.state.hasStarted ? "rgb(241, 211,200)" : "#0e254c";
+
+    //"rgb(204,242,218)"
+
+    //
 
     return (
       <div className="speak-button-wrapper">
