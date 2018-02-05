@@ -7,7 +7,7 @@ const NavBar = props => {
   const { handleClick, isLoggedIn } = props;
 
   const loggedOutNav = (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className="navbar navbar-expand-lg navbar-light bg-light bg-white">
       <NavLink className="navbar-brand" to="/">
       Power Prose
       </NavLink>
