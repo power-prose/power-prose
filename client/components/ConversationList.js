@@ -24,6 +24,9 @@ const ConversationList = props => {
                   style={styles.list}
                   key={conversation.id}
                   onClick={e => handleClick(e, conversation.id)}
+                  hoverColor= "#DBF3E3"
+
+                  selectedItemStyle={styles.selectedItemStyle}
                 >
                   {conversation.name}
                 </ListItem>
@@ -86,8 +89,11 @@ const styles = {
     fontSize: 14,
     maxWidth: 260,
     whiteSpace: 'normal',
-    '&:hover': {
-      backgroundColor: '#F0DDD4'
-    }
-  }
+    hoverColor: 'blue'
+  },
+
+  slectedItemStyle: {
+    backgroundColor: 'red'
+   }
+  
 };

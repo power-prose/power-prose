@@ -314,6 +314,10 @@ form div {
   padding-right: 1.5%;
 }
 
+#all-convos-right-container {
+  padding-left: 0.5%;
+}
+
 .single-convo-graphs {
   display: flex;
 }
@@ -499,8 +503,18 @@ nav a {
 
 }
 
+
 .speak-button-wrapper {
   margin-left: 80%;
+}
+
+#all-convos-cards {
+  margin-top: -20px;
+}
+
+
+.navbar-brand {
+  font-size: 1.5rem;
 }
 
 .footer a:hover {
