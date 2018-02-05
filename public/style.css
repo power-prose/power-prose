@@ -1,6 +1,7 @@
 body {
   /* padding-left: 0.5%;
   padding-right: 0.5%;*/
+  background: #f9f1ee;
   font-family: "Roboto", sans-serif;
   /*padding-bottom: 4rem;*/
 }
@@ -203,6 +204,7 @@ form div {
   width: 300px;
   color: navy;
   font-size: 2.5em;
+  cursor: pointer;
   /*background: rgb(204,242,218);*/
   /*background: rgb(241, 211,200);*/
   border: none;
@@ -349,7 +351,7 @@ nav a {
   font-weight: normal;
   color: #808080;
   justify-content: center;
-  height: 4rem;
+  height: 6rem;
   border: none;
 
 }
@@ -364,10 +366,42 @@ nav a {
   height: auto;
 }
 
-.auth-test {
-  height: auto;
-}
 
 .navbar-brand {
   font-size: 1.5rem;
+}
+
+.footer a:hover {
+  text-decoration: none;
+  color: #0e254c;
+
+}
+
+.footer a {
+  color: #808080;
+}
+
+.footer-inner {
+  align-items: center;
+}
+
+.login-card {
+  width: 350px;
+  margin: auto;
+  margin-top: 7%;
+  padding: 15px;
+}
+
+#auth-wrapper {
+  min-height: 450px;
+}
+
+.gAuth-link:hover {
+  text-decoration: none;
+  color: #0e254c;
+
+}
+
+.gAuth-link {
+  color: #808080;
 }
