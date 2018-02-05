@@ -12,10 +12,10 @@ export class SingleConversationData extends Component {
     this.state = { dialogOpen: false };
   }
 
-  componentDidMount () {
-    const { conversations } = this.props;
+  componentWillReceiveProps (nextProps) {
+    const { conversations } = nextProps;
 
-    if (conversations.defaultConversations.length === 0) {
+    if (!!conversations.defaultConversations && conversations.defaultConversations.length === 0) {
       this.setState({ dialogOpen: true })
     }
   }

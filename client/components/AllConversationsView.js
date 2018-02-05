@@ -17,7 +17,8 @@ export class AllConversationsView extends Component {
     this.state = {
       displayedWatchWords: [],
       displayedTones: ['anger', 'fear', 'joy', 'sadness', 'analytical', 'confident', 'tentative'],
-      slideIndex: 0
+      slideIndex: 0,
+      dialogOpen: false
     }
   }
 
@@ -229,6 +230,7 @@ calcMostFrequentTone = () => {
             onChange={this.handleSlideChange}
             value={this.state.slideIndex}
             style={styles.tab}
+            inkBarStyle={{background: '#C98E34'}}
           >
             <Tab label="WatchWords" value={0} />
             <Tab label="Tone" value={1} />
