@@ -89,7 +89,7 @@ export class SingleConversationData extends Component {
             </CardText>
           </Card>
           <Card style={styles.topLevelCard}>
-            <CardHeader
+            <CardHeader style={styles.font}
               title="Your Most Used Watchword"
             />
             <CardText>
@@ -173,5 +173,12 @@ const styles = {
     marginBottom: 20,
     paddingRight: 20,
     paddingBottom: 20
+  },
+  font: {
+    fontFamily: 'Amaranth, sans-serif',
+    fontWeight: 'bold',
+    fontSize: 20,
+    color: '#0E254C'
   }
+
 };
