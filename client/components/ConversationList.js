@@ -14,7 +14,7 @@ const ConversationList = props => {
         title=""
       />
       <Divider inset={true} />
-      <CardHeader title="View another conversation" />
+      <CardHeader title="View Another Conversation" />
       <Paper style={{maxHeight: 480, overflow: 'auto'}}>
         <List>
 

@@ -21,24 +21,25 @@ const UserSentences = (props) => {
   const { conversation } = props;
 
   return (
-
-    <Card style={styles.sentencesCard}>
-      <CardTitle
-        title="Tentative Sentences from This Conversation"
-        style={{ backgroundColor: "#f0ddd4" }}
-        titleStyle={{ "fontFamily": "Amaranth, sans-serif", "fontWeight": "bold", "fontSize": 17, paddingRight: 0 }}
-        titleColor="#0E254C"
-      />
-      <CardText>
-        {
-          conversation.toneSentences && conversation.toneSentences.map(toneSentence => {
-            return (
-              <div key={toneSentence.id}>{toneSentence.sentence}</div>
-            )
-          })
-        }
-      </CardText>
-    </Card>
+    <div id="tentative-sentences">
+      <Card style={styles.sentencesCard}>
+        <CardTitle
+          title="Tentative Sentences from This Conversation"
+          style={{ backgroundColor: "#f0ddd4" }}
+          titleStyle={{ "fontFamily": "Amaranth, sans-serif", "fontWeight": "bold", "fontSize": 17, paddingRight: 0 }}
+          titleColor="#0E254C"
+        />
+        <CardText>
+          {
+            conversation.toneSentences && conversation.toneSentences.map(toneSentence => {
+              return (
+                <div key={toneSentence.id}>{toneSentence.sentence}</div>
+              )
+            })
+          }
+        </CardText>
+      </Card>
+    </div>
 
   )
 };
@@ -52,20 +53,3 @@ const mapState = (state) => {
 const mapProps = null;
 
 export default withRouter(connect(mapState, mapProps)(UserSentences));
-
-// <Card style={styles.chartCard}>
-//   <CardHeader
-//     title="Your Tentative Sentences"
-//   />
-//   <Divider inset={true} />
-//   <Subheader>These sentences were perceived as tentative in nature by our tone analysis system.</Subheader>
-//   <CardText>
-//     {
-//       conversation.toneSentences && conversation.toneSentences.map(toneSentence => {
-//         return (
-//           <div>{toneSentence.sentence}</div>
-//         )
-//       })
-//     }
-//   </CardText>
-// </Card>
