@@ -23,7 +23,7 @@ export class AllConversationsView extends Component {
   }
 
   componentDidMount() {
-    const { conversations } = this.props;
+    const { conversations } = this.props; //move watchWords out
 
     if (this.props.watchWords !== this.state.displayedWatchWords) {
       this.setState({ displayedWatchWords: this.props.watchWords.map(watchWordObj => watchWordObj.wordOrPhrase) })

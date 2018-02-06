@@ -26,7 +26,7 @@ const LandingPage = props => {
                     <div id="top-pane-middle" />
                     <div id="app-info">
                         <div id="app-headline">Change your unconscious speech patterns and watch your professional career flourish.</div>
-                        <div id="app-description">Our speech can have a huge impact in how we are perceived. Numerous studies have shown that women often use qualifiying words and phrases when they speak which can diminish their authority and perceived competency. Things like apologizing before posing a contrary opinion undermines the strength of perspective. Power Prose aims to help women reduce their use of qualifier words and in doing so increase their confidence and contributions especially in the workplace.</div>
+                        <div id="app-description">Our speech can have a huge impact in how we are perceived. Numerous studies have shown that women often use qualifiying words and phrases when they speak which can diminish their authority and perceived competency. Things like apologizing before posing a contrary opinion undermines the strength of perspective. Power Prose aims to help women reduce their use of qualifier words and in doing so increase their clout, confidence and contributions especially in the workplace.</div>
                         <Link to="/signup">
                             <RaisedButton className="get-started" style={buttonStyle}>Get Started</RaisedButton></Link>
                     </div>
