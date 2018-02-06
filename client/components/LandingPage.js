@@ -26,7 +26,7 @@ const LandingPage = props => {
                     <div id="top-pane-middle" />
                     <div id="app-info">
                         <div id="app-headline">Change your unconscious speech patterns and watch your professional career flourish.</div>
-                        <div id="app-description">Our speech can have a huge impact in how we are perceived. Numerous studies have shown that when women speak, they tend to use qualifier words and phrases which can diminish authority and position. Info here about what qualifier words are?? or on record page? Power Prose aims to help women reduce their use of qualifier words and in doing so increase their clout, confidence and contributions especially in the workplace.</div>
+                        <div id="app-description">Our speech can have a huge impact in how we are perceived. Numerous studies have shown that women often use qualifiying words and phrases when they speak which can diminish their authority and perceived competency. Things like apologizing before posing a contrary opinion undermines the strength of perspective. Power Prose aims to help women reduce their use of qualifier words and in doing so increase their confidence and contributions especially in the workplace.</div>
                         <Link to="/signup">
                             <RaisedButton className="get-started" style={buttonStyle}>Get Started</RaisedButton></Link>
                     </div>
@@ -49,7 +49,7 @@ const LandingPage = props => {
                                 <img src="/SpeechtoText.svg" className="watson-icon" />
                             </div>
                             <div>
-                                <div className="icon-desc-title">TITLE TITLE</div>
+                                <div className="icon-desc-title">SPEAK FREELY </div>
                                 <div className="icon-desc">Record your conversations and track your use of qualifier "watch words" in your business meetings, phone calls or interview practice.</div>
                             </div>
                         </div>
@@ -58,8 +58,8 @@ const LandingPage = props => {
                                 <img src="/ToneAnalyzer.svg" className="watson-icon" />
                             </div>
                             <div>
-                                <div className="icon-desc-title">TITLE TITLE</div>
-                                <div className="icon-desc">Receive feedback about the overall tones of your recorded conversations and see your sentences perceived as tentative.</div>
+                                <div className="icon-desc-title">LEARN ABOUT YOURSELF</div>
+                                <div className="icon-desc">Receive feedback about the overall tones of your recorded conversations and which sentences were identified as tentative.</div>
                             </div>
                         </div>
 
@@ -68,7 +68,7 @@ const LandingPage = props => {
                                 <img src="/bar-chart.svg" className="watson-icon" />
                             </div>
                             <div>
-                                <div className="icon-desc-title">TITLE TITLE</div>
+                                <div className="icon-desc-title">REVIEW YOUR DATA</div>
                                 <div className="icon-desc">Watch yourself improve over time with beautiful charts and graphs designed to track your progress.</div>
                             </div>
                         </div>
@@ -87,7 +87,7 @@ const LandingPage = props => {
                 <div id="bottom-right">
                     <div id="second-pane-title" className="icon-desc-title">Something Something at your fingertips/in your pocket (want to show screenshot of data viz on phone here.</div>
                     <div>
-                        <img src="https://i.imgur.com/wSxxiFe.png" alt="iphone" id="iphone" />
+                        <img src="powerprose.png" alt="iphone" id="iphone" />
                     </div>
                 </div>
             </div>
@@ -96,3 +96,5 @@ const LandingPage = props => {
 };
 
 export default withRouter(LandingPage);
+
+// https://i.imgur.com/KIjBss7.png

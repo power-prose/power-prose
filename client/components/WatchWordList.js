@@ -41,10 +41,6 @@ export class WatchWordList extends Component {
     alert("You clicked the delete button.");
   };
 
-  handleChipClick = () => {
-    alert("You clicked the Chip.");
-  };
-
   handleDialogOpen = () => {
     this.setState({ dialogOpen: true });
   };
