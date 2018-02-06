@@ -83,28 +83,32 @@ export class SingleConversationData extends Component {
               {conversation.name}, {conversation.date && dateParser(conversation.date)}
             </CardText>
           </Card>
-          <Card style={styles.topLevelCard}>
-            <CardTitle
-              title="Your Most Used Watchword"
-              style={{ backgroundColor: "#DBF3E3" }}
-              titleStyle={{ "fontFamily": "Amaranth, sans-serif", "fontWeight": "bold", "fontSize": 15 }}
-              titleColor="#0E254C"
-            />
-            <CardText>
-              {this.calcMostUsedWatchWord()}
-            </CardText>
-          </Card>
-          <Card style={styles.topLevelCard}>
-            <CardTitle
-              title="Your Most Frequent Tone"
-              style={{ backgroundColor: "#DBF3E3" }}
-              titleStyle={{ "fontFamily": "Amaranth, sans-serif", "fontWeight": "bold", "fontSize": 15 }}
-              titleColor="#0E254C"
-            />
-            <CardText>
-              {this.calcMostFrequentTone()}
-            </CardText>
-          </Card>
+          <div className="hide-card">
+            <Card style={styles.topLevelCard}>
+              <CardTitle
+                title="Your Most Used Watchword"
+                style={{ backgroundColor: "#DBF3E3" }}
+                titleStyle={{ "fontFamily": "Amaranth, sans-serif", "fontWeight": "bold", "fontSize": 15 }}
+                titleColor="#0E254C"
+              />
+              <CardText>
+                {this.calcMostUsedWatchWord()}
+              </CardText>
+            </Card>
+          </div>
+          <div className="hide-card">
+            <Card style={styles.topLevelCard}>
+              <CardTitle
+                title="Your Most Frequent Tone"
+                style={{ backgroundColor: "#DBF3E3" }}
+                titleStyle={{ "fontFamily": "Amaranth, sans-serif", "fontWeight": "bold", "fontSize": 15 }}
+                titleColor="#0E254C"
+              />
+              <CardText>
+                {this.calcMostFrequentTone()}
+              </CardText>
+            </Card>
+          </div>
         </div>
         <div className="container-inner-horizontal">
           <Card style={styles.chartCard}>
@@ -124,7 +128,6 @@ export class SingleConversationData extends Component {
             <CardHeader
               title="Tones Perceived in This Conversation"
             />
-
             <RadarChart margin={{ top: 5, right: 5, bottom: 5, left: 5 }} outerRadius={90} width={425} height={225} data={tonesData}>
               <PolarGrid />
               <PolarAngleAxis dataKey="tone" />
@@ -164,9 +167,9 @@ export default withRouter(connect(mapState, mapDispatch)(SingleConversationData)
 
 const styles = {
   topLevelCard: {
-    width: 300,
     marginRight: 20,
-    marginBottom: 20
+    marginBottom: 20,
+    width: 290
   },
   chartCard: {
     height: 280,

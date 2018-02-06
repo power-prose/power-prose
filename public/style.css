@@ -591,6 +591,18 @@ nav a {
   #iphone {
     margin-top: 30px;
   }
+  .container-watchwords {
+    display: none;
+  }
+  .hide-card {
+    display: none;
+  }
+  .container-inner-horizontal {
+    display: block;
+  }
+  #tentative-sentences div {
+    min-width: 0px !important;
+  }
 }
 
 .dialog-title {
