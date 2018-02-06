@@ -90,6 +90,7 @@ class Snippets extends React.Component {
       />
     ];
     const snippetMenu = this.state.snippets.map((snippet, i) => {
+      console.log('SNIPPET', snippet)
       return (
         <SnippetChip
           key={i}
@@ -105,8 +106,7 @@ class Snippets extends React.Component {
           titleClassName="dialog-title"
           contentStyle={{"width": "550px"}}
           title="Review Your Recording"
-          titleStyle={{"fontFamily": "Amaranth, sans-serif", "fontWeight": "bold"}}
-          titleColor="#0E254C"
+          titleStyle={{"fontFamily": "Amaranth, sans-serif", "fontWeight": "bold", "color": "#0E254C"}}
           actions={actions}
           modal={true}
           open={this.props.open}

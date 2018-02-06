@@ -3,7 +3,8 @@ const { UserWatchWord } = require("../db/models");
 const findWatchWords = userId => {
   return UserWatchWord.findAll({
     where: {
-      userId
+      userId,
+      active: true
     }
   }).then(words => {
     return words.map(word => {
@@ -32,12 +33,12 @@ const createAllSnippets = (wordArr, text, conversationId) => {
 
     //2 create a snippet at a certain index from the text
     const createSnippet = (index, text) => {
-      let start = index - 30;
-      if (index <= 30) start = 0;
-      else if (index >= text.length - 31) start = text.length - 40;
-      let end = index + 30;
+      let start = index - 40;
+      if (index <= 40) start = 0;
+      else if (index >= text.length - 41) start = text.length - 40;
+      let end = index + 40;
       if (start === 0) end = 40;
-      if (index >= text.length - 30) end = text.length;
+      if (index >= text.length - 40) end = text.length;
       let snip = text.slice(start, end);
 
       const obj = { snipText: `...${snip}...`, index: index - start + 3};
