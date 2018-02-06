@@ -20,7 +20,7 @@ const disableUserWatchWord = watchWordId => {
 const setActiveWatchWords = watchWords => ({ type: SET_ACTIVE_WATCHWORDS, watchWords })
 
 const addUserWatchWord = watchWord => ({ type: ADD_USER_WATCHWORD, watchWord })
-const clearUserWatchWords = () => ({ type: CLEAR_USER_WATCHWORDS })
+export const clearUserWatchWords = () => ({ type: CLEAR_USER_WATCHWORDS })
 
 
 export const fetchUserWatchWords = (userId) => dispatch =>
@@ -64,7 +64,7 @@ export default function (state = defaultWatchWords, action) {
       return Object.assign({}, state, { activeWatchWords: action.watchWords })
 
     case CLEAR_USER_WATCHWORDS:
-      return state
+      return defaultWatchWords
 
     default:
       return state

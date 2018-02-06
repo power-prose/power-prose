@@ -1,7 +1,6 @@
 import axios from 'axios';
 import store, {fetchChosenConversation} from '../store';
 
-
 const SET_ALL_CONVERSATIONS = "SET_ALL_CONVERSATIONS";
 const POST_NEW_CONVERSATION = "POST_NEW_CONVERSATION";
 const SET_RECORDED_TEXT = "SET_RECORDED_TEXT"
@@ -86,7 +85,7 @@ export default function (state = initialConversationState, action) {
     }
 
     case CLEAR_ALL_CONVERSATIONS:
-      return state
+      return initialConversationState
 
     default:
       return state
