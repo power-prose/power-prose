@@ -3,6 +3,9 @@ body {
   padding-right: 0.5%;*/
   background: #f9f1ee;
   font-family: "Roboto", sans-serif;
+  display: flex;
+  flex-direction: column;
+  height: 100%
   /*padding-bottom: 4rem;*/
 }
 
@@ -491,6 +494,7 @@ nav a {
   justify-content: center;
   height: 6rem;
   border: none;
+  flex: none;
 
 }
 
