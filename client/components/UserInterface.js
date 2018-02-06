@@ -29,7 +29,7 @@ class UserInterface extends Component {
             <Route component={Login} />
           </Switch>
         </div>
-        <Footer />
+
       </div>
     );
   }
@@ -50,3 +50,5 @@ const mapDispatch = dispatch => {
 };
 
 export default withRouter(connect(mapState, mapDispatch)(UserInterface));
+
+// <Footer />
