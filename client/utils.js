@@ -41,10 +41,7 @@ export const singleConvoWatchWordsForViz = watchWords => {
 };
 
 export const singleConvoToneForViz = tones => {
-  //let indexArr = [0,1,2,3,4,5,6]
-  //let notTones = ["conversationId", "createdAt", "id", "updatedAt"];
-  //let tonesData = [];
-  //let i;
+
   const toneNames = ['tentative', 'fear', 'sadness', 'anger', 'analytical', 'joy', 'confident']
   return toneNames.map(toneName => {
     let title = toneName[0].toUpperCase() + toneName.substr(1);

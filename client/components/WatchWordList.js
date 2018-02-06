@@ -37,10 +37,6 @@ export class WatchWordList extends Component {
     });
   };
 
-  handleRequestDelete = () => {
-    alert("You clicked the delete button.");
-  };
-
   handleDialogOpen = () => {
     this.setState({ dialogOpen: true });
   };
@@ -52,6 +48,12 @@ export class WatchWordList extends Component {
     this.setState({ dialogOpen: false });
     this.props.updateUser(userId, request);
   };
+
+  watchWordSubmitHandler = (evt) => {
+    this.props.handleSubmit(evt, this.state.newWatchWord);
+    this.setState({newWatchWord: ""})
+  }
+
 
   render() {
     const { watchWords, user } = this.props;
@@ -119,7 +121,9 @@ export class WatchWordList extends Component {
               backgroundColor="#f0ddd4"
               hoverColor="rgb(204,242,218)"
               keyboardFocused={false}
-              onClick={(evt) => this.props.handleSubmit(evt, this.state.newWatchWord)}
+              // OLD
+              // onClick={(evt) => this.props.handleSubmit(evt, this.state.newWatchWord)}
+              onClick={(evt) => this.watchWordSubmitHandler(evt)}
             />
           </CardText>
         </Card>

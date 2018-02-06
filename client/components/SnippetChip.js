@@ -14,7 +14,6 @@ const SnippetChip = props => {
     let middle = snip.text.slice(snip.index, snip.index + snip.word.length)
     return (<span>{beginning}<span style={{ color: "blue", fontWeight: "bold" }}>{middle}</span>{end}</span>)
   }
-
   return (
     <Chip
       value={`${i + 1}`}

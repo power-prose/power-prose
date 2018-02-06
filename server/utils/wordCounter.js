@@ -3,7 +3,8 @@ const { UserWatchWord } = require('../db/models');
 const findWatchWords = (userId) => {
     return UserWatchWord.findAll({
         where: {
-            userId
+            userId,
+            active: true
         }
     })
         .then((words) => {
@@ -28,7 +29,6 @@ const countWords = (spokenText, userId) => {
                 //currently only capturing number of times a word was spoken, *not* the snippet/context around it
                 if (found) wordFrequencies[wordId] = found.length;
             }
-            console.log("!!!!", wordFrequencies)
             return wordFrequencies;
         })
 }
