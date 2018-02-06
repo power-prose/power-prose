@@ -160,7 +160,9 @@ router.put("/:conversationId", (req, res, next) => {
   })
   Promise.all([snippetDelete, wordOccDelete])
     .then((stuff) => WatchWordOccurrence.bulkCreate(watchWordOccNew))
-    .then(() => Conversation.findById(req.params.conversationId))
+    .then(() => Conversation.findById(req.params.conversationId, {
+      include: [{ all: true }]
+    }))
     .then(foundConvo => foundConvo.update(req.body))
     // Conversation.findById(req.params.conversationId)
     // .then(foundConvo =>
