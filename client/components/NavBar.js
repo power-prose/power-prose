@@ -1,107 +1,106 @@
 import React from "react";
 import { NavLink, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { logout, clearAllConversations, clearChosenConversation, clearUserWatchWords } from "../store";
-import {AppBar, Tabs, Tab, ToolBarGroup} from 'material-ui'
+import {
+  logout,
+  clearAllConversations,
+  clearChosenConversation,
+  clearUserWatchWords
+} from "../store";
+import {
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  NavItem
+} from "reactstrap";
 
-const NavBar = props => {
-  const { handleClick, isLoggedIn } = props;
+class NavBar extends React.Component {
+  constructor(props) {
+    super(props);
 
-  const loggedOutNav = (
-  <div id="nav-div">
-    <nav className="navbar navbar-expand-lg navbar-light" style={{"backgroundColor" : "white"}}>
-      <NavLink className="navbar-brand" to="/">
-      Power Prose
-      </NavLink>
-      <button
-        className="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarSupportedContent"
-        aria-controls="#navbarSupportedContent"
-        aria-expanded={false}
-        aria-label="Toggle navigation"
-      >
-        <span className="navbar-toggler-icon" />
-      </button>
-      <div className="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul className="navbar-nav mr-auto" />
-        <NavLink className="nav-link nav-logout" to="/login">
-          Login
-        </NavLink>
-        <NavLink className="nav-link nav-logout" to="/signup">
-          Sign Up
-        </NavLink>
+    this.toggle = this.toggle.bind(this);
+    this.state = {
+      isOpen: false
+    };
+  }
+  toggle() {
+    this.setState({
+      isOpen: !this.state.isOpen
+    });
+  }
+  render() {
+    const { handleClick, isLoggedIn } = this.props;
+    const loggedOutNav = (
+      <div>
+        <Navbar color="faded" light expand="md">
+          <NavLink className="navbar-brand" to="/">
+            Power Prose
+          </NavLink>
+          <NavbarToggler onClick={this.toggle} />
+          <Collapse isOpen={this.state.isOpen} navbar>
+            <Nav className="ml-auto" navbar>
+              <NavItem>
+                <NavLink className="nav-link nav-logout" to="/login">
+                  Login
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink className="nav-link nav-logout" to="/signup">
+                  Sign Up
+                </NavLink>
+              </NavItem>
+            </Nav>
+          </Collapse>
+        </Navbar>
       </div>
-    </nav>
-    </div>
-  );
+    );
 
-
-//material UI attempt
-  // const loggedOutNav = (
-  //    <AppBar
-  //    title={<NavLink to="/" className="navbar-brand">Power Prose</NavLink>}
-  //     zDepth={0}
-  //    // titleStyle={{color: "#0e254c", fontSize: "1.5rem", "hoverColor": "red"}}
-  //    className="navbar"
-  //    style={{"backgroundColor": "white", "color": "#808080", "borderBottom": "1px solid #0e254c"}}
-  //    >
-  //    <Tabs>
-  //    <Tab label = "Login" />
-  //    <Tab label="Sign Up" />
-  //    </Tabs>
-  //    </AppBar>
-  //                       )
-
-
-
-  const loggedInNav = (
-    <nav className="navbar navbar-expand-lg navbar-light" style={{"backgroundColor" : "white"}}>
-      <NavLink className="navbar-brand" to="/">
-        Power Prose
-      </NavLink>
-      <button
-        className="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span className="navbar-toggler-icon" />
-      </button>
-      <div  className="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul id="nav-div" className="navbar-nav mr-auto">
-          <li className="nav-item">
-            <NavLink className="nav-link" to="/speak">
-              Speak
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink className="nav-link" to="/single-conversation">
-              Single Conversation
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink className="nav-link" to="/all-conversations">
-              All Conversations
-            </NavLink>
-          </li>
-        </ul>
-
-        <NavLink className="nav-link nav-logout" onClick={handleClick} to="/">
-          Logout
-        </NavLink>
+    const loggedInNav = (
+      <div>
+        <Navbar color="faded" light expand="md">
+          <NavLink className="navbar-brand" to="/">
+            Power Prose
+          </NavLink>
+          <NavbarToggler onClick={this.toggle} />
+          <Collapse isOpen={this.state.isOpen} navbar>
+            <Nav className="ml-auto" navbar>
+              <NavItem>
+                <NavLink className="nav-link" to="/speak">
+                  Speak
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink className="nav-link" to="/single-conversation">
+                  Single Conversation
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink className="nav-link" to="/all-conversations">
+               All Conversations
+             </NavLink>
+             </NavItem>
+              <NavItem>
+                <a
+                  className="nav-link nav-logout"
+                  onClick={handleClick}
+                  to="/"
+                >
+                  Logout
+                </a>
+              </NavItem>
+            </Nav>
+          </Collapse>
+        </Navbar>
       </div>
-    </nav>
-  );
+    );
 
-  const nav = isLoggedIn ? loggedInNav : loggedOutNav;
+    const nav = isLoggedIn ? loggedInNav : loggedOutNav;
 
-  return nav;
-};
+    return nav;
+  }
+}
 
 const mapState = state => {
   return {

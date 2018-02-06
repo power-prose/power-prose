@@ -49,7 +49,6 @@ export class WatchWordList extends Component {
     const { user } = this.props;
     const userId = user.id;
     const request = { acceptedInitialWatchWords: true };
-    console.log("userId and request", userId, request);
     this.setState({ dialogOpen: false });
     this.props.updateUser(userId, request);
   };
@@ -65,7 +64,7 @@ export class WatchWordList extends Component {
       />
     ];
 
-    console.log("STATE", this.state);
+    let disabled = this.state.newWatchWord.length ? false : true
 
     return (
       <div className="container-watchwords-component">
@@ -87,7 +86,6 @@ export class WatchWordList extends Component {
                     onRequestDelete={event =>
                       this.props.onDeleteClick(event, word.id)
                     }
-                    onClick={this.handleChipClick}
                     style={{
                       marginBottom: 10,
                       border: "0.5px solid #0e254c"
@@ -99,7 +97,7 @@ export class WatchWordList extends Component {
               ))}
             <TextField
               style={{marginBottom: '15px'}}
-              inputStyle={{color: "#0E254C"}}
+              inputStyle={{color: "#0E254C", WebkitBoxShadow: '0 0 0 1000px white inset'}}
               underlineFocusStyle={{ borderColor: "#C98E34"}}
               floatingLabelFocusStyle={{color: "#C98E34"}}
               fullWidth={true}
@@ -117,6 +115,7 @@ export class WatchWordList extends Component {
                 color: "#0e254c",
                 border: "1px solid #0e254c"
               }}
+              disabled={disabled}
               backgroundColor="#f0ddd4"
               hoverColor="rgb(204,242,218)"
               keyboardFocused={false}
@@ -160,9 +159,9 @@ const mapDispatch = dispatch => {
     },
     handleSubmit(event, newWatchWord) {
       event.preventDefault();
-      console.log("!!!!!", newWatchWord);
-      let wordOrPhrase = newWatchWord
-      dispatch(postUserWatchWord({ wordOrPhrase }));
+      if (newWatchWord.length){
+          let wordOrPhrase = newWatchWord
+          dispatch(postUserWatchWord({ wordOrPhrase }));}
     },
     updateUser(userId, request) {
       dispatch(updateUser(userId, request));
