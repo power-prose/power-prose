@@ -87,7 +87,7 @@ const LandingPage = props => {
                 <div id="bottom-right">
                     <div id="second-pane-title" className="icon-desc-title">Something Something at your fingertips/in your pocket (want to show screenshot of data viz on phone here.</div>
                     <div>
-                        <img src="https://i.imgur.com/KIjBss7.png" alt="iphone" id="iphone" />
+                        <img src="https://i.imgur.com/wSxxiFe.png" alt="iphone" id="iphone" />
                     </div>
                 </div>
             </div>
