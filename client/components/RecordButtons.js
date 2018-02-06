@@ -38,6 +38,7 @@ class RecordButtons extends Component {
 
         this.stream.on("data", function(data) {
           handleUpdate(data);
+          console.log('!!!!!!!', data);
         });
 
         this.stream.on("error", function(err) {
@@ -61,7 +62,7 @@ class RecordButtons extends Component {
     this.stream.stop = this.stream.stop.bind(this.stream);
     this.setState({ hasStarted: false });
     this.stream.stop();
-    setTimeout(() => this.props.handleConvoPost(this.state.text), 500);
+    setTimeout(() => this.props.handleConvoPost(this.state.text), 3000);
   }
 
   handleTimer() {
