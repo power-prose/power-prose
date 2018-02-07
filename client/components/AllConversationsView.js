@@ -211,7 +211,7 @@ export class AllConversationsView extends Component {
                 titleStyle={{ "fontFamily": "Amaranth, sans-serif", "fontWeight": "bold", "fontSize": 15 }}
                 titleColor="#0E254C"
               />
-              <CardText>
+              <CardText color="#0E254C" >
                 {this.calcMostUsedWatchWord()}
               </CardText>
             </Card>
@@ -222,7 +222,7 @@ export class AllConversationsView extends Component {
                 titleStyle={{ "fontFamily": "Amaranth, sans-serif", "fontWeight": "bold", "fontSize": 15 }}
                 titleColor="#0E254C"
               />
-              <CardText>
+              <CardText color="#0E254C" >
                 {this.calcMostFrequentTone()}
               </CardText>
             </Card>
@@ -233,7 +233,7 @@ export class AllConversationsView extends Component {
                 titleStyle={{ "fontFamily": "Amaranth, sans-serif", "fontWeight": "bold", "fontSize": 15 }}
                 titleColor="#0E254C"
               />
-              <CardText>
+              <CardText color="#0E254C">
                 {conversations.length > 0 && this.calcLatestConvo()}
               </CardText>
             </Card>

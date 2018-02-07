@@ -24,7 +24,7 @@ const ConversationList = props => {
                   style={styles.list}
                   key={conversation.id}
                   onClick={e => handleClick(e, conversation.id)}
-                  hoverColor= "#DBF3E3"
+                  hoverColor="#DBF3E3"
 
                   selectedItemStyle={styles.selectedItemStyle}
                 >
@@ -95,5 +95,5 @@ const styles = {
   slectedItemStyle: {
     backgroundColor: 'red'
    }
-  
+
 };
