@@ -4,11 +4,14 @@ import { RecordButtons, WatchWordList } from "./";
 
 const Speak = props => {
   return (
-    <div className="container-inner-horizontal">
-      <WatchWordList />
-      <div className="container-right container-vertical ">
-        <RecordButtons />
+    <div>
+      <div className="container-inner-horizontal">
+        <WatchWordList />
+        <div className="container-right container-vertical ">
+          <RecordButtons />
+        </div>
       </div>
+      <div className="bottom-speak-div" />
     </div>
   );
 };

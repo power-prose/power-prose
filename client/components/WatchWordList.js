@@ -49,11 +49,10 @@ export class WatchWordList extends Component {
     this.props.updateUser(userId, request);
   };
 
-  watchWordSubmitHandler = (evt) => {
+  watchWordSubmitHandler = evt => {
     this.props.handleSubmit(evt, this.state.newWatchWord);
-    this.setState({newWatchWord: ""})
-  }
-
+    this.setState({ newWatchWord: "" });
+  };
 
   render() {
     const { watchWords, user } = this.props;
@@ -61,49 +60,61 @@ export class WatchWordList extends Component {
     const dialogAction = [
       <FlatButton
         label="Okay"
-        primary={true}
+        secondary={true}
+        style={{
+          marginBottom: "5px",
+          color: "#0e254c",
+          border: "1px solid #0e254c"
+        }}
+        backgroundColor="#f0ddd4"
+        hoverColor="rgb(204,242,218)"
         onClick={this.handleDialogClose}
       />
     ];
 
-    let disabled = this.state.newWatchWord.length ? false : true
+    let disabled = this.state.newWatchWord.length ? false : true;
 
     return (
       <div className="container-watchwords-component">
-        <Card style={{width: "270px"}}>
+        <Card style={{ width: "270px" }}>
           <CardTitle
-          title="Your WatchWords"
-          style={{backgroundColor: "#DBF3E3"}}
-          titleStyle={{ "fontFamily": "Amaranth, sans-serif", "fontWeight": "bold"}}
-          titleColor="#0E254C"
+            title="Your WatchWords"
+            style={{ backgroundColor: "#DBF3E3" }}
+            titleStyle={{
+              fontFamily: "Amaranth, sans-serif",
+              fontWeight: "bold"
+            }}
+            titleColor="#0E254C"
           />
 
           <CardText>
             {watchWords.length &&
               watchWords.map(word => (
-                  <Chip
-                    key={word.id}
-                    labelStyle={{ color: "#0e254c" }}
-                    backgroundColor="#FFFFFF"
-                    onRequestDelete={event =>
-                      this.props.onDeleteClick(event, word.id)
-                    }
-                    style={{
-                      marginBottom: 10,
-                      border: "0.5px solid #0e254c"
-                    }}
-                  >
-                    {word.wordOrPhrase}
-                  </Chip>
-
+                <Chip
+                  key={word.id}
+                  labelStyle={{ color: "#0e254c" }}
+                  backgroundColor="#FFFFFF"
+                  onRequestDelete={event =>
+                    this.props.onDeleteClick(event, word.id)
+                  }
+                  style={{
+                    marginBottom: 10,
+                    border: "0.5px solid #0e254c"
+                  }}
+                >
+                  {word.wordOrPhrase}
+                </Chip>
               ))}
             <TextField
-              style={{marginBottom: '15px'}}
-              inputStyle={{color: "#0E254C", WebkitBoxShadow: '0 0 0 1000px white inset'}}
-              underlineFocusStyle={{ borderColor: "#C98E34"}}
-              floatingLabelFocusStyle={{color: "#C98E34"}}
+              style={{ marginBottom: "15px" }}
+              inputStyle={{
+                color: "#0E254C",
+                WebkitBoxShadow: "0 0 0 1000px white inset"
+              }}
+              underlineFocusStyle={{ borderColor: "#C98E34" }}
+              floatingLabelFocusStyle={{ color: "#C98E34" }}
               fullWidth={true}
-              floatingLabelText="Enter a new watchword"
+              floatingLabelText="Enter a new WatchWord"
               name="newwatchword"
               value={this.state.newWatchWord}
               onChange={this.handleFormChange}
@@ -121,26 +132,30 @@ export class WatchWordList extends Component {
               backgroundColor="#f0ddd4"
               hoverColor="rgb(204,242,218)"
               keyboardFocused={false}
-              // OLD
-              // onClick={(evt) => this.props.handleSubmit(evt, this.state.newWatchWord)}
-              onClick={(evt) => this.watchWordSubmitHandler(evt)}
+              onClick={evt => this.watchWordSubmitHandler(evt)}
             />
           </CardText>
         </Card>
 
-
-
         <div>
           <Dialog
-            title="Get Started with Watch Words"
+            titleClassName="dialog-title"
+            title="Get Started with WatchWords"
+            titleStyle={{
+              fontFamily: "Amaranth, sans-serif",
+              fontWeight: "bold",
+              color: "#0E254C"
+            }}
             actions={dialogAction}
             modal={false}
             open={this.state.dialogOpen}
             onRequestClose={this.handleDialogClose}
           >
-            Welcome! We have preloaded your account with a set of suggested
-            watch words. Please use the sidebar to the left to personalize your
-            list.
+            <label style={{ marginTop: "15px" }}>
+              Welcome! We have preloaded your account with a set of suggested
+              WatchWords. Please use the sidebar to the left to personalize
+              your list.
+            </label>
           </Dialog>
         </div>
       </div>
@@ -163,9 +178,10 @@ const mapDispatch = dispatch => {
     },
     handleSubmit(event, newWatchWord) {
       event.preventDefault();
-      if (newWatchWord.length){
-          let wordOrPhrase = newWatchWord
-          dispatch(postUserWatchWord({ wordOrPhrase }));}
+      if (newWatchWord.length) {
+        let wordOrPhrase = newWatchWord;
+        dispatch(postUserWatchWord({ wordOrPhrase }));
+      }
     },
     updateUser(userId, request) {
       dispatch(updateUser(userId, request));

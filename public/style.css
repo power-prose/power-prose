@@ -309,7 +309,7 @@ form div {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-left: 15%;
+  margin-left: 20%;
 }
 
 .container-right {
@@ -331,6 +331,7 @@ form div {
 }
 
 .on-button {
+  z-index: 10;
   border-radius: 50%;
   height: 300px;
   width: 300px;
@@ -339,9 +340,37 @@ form div {
   cursor: pointer;
   border: none;
   position: absolute;
+  left: 563px;
+  bottom: 290px;
   font-style: bold;
   letter-spacing: 0.2em;
   box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.1);
+}
+
+.speak-inst-long {
+  font-size: 55px;
+  position: absolute;
+  bottom: 188px;
+  z-index: 30;
+  left: 420px;
+  font-family: 'Amaranth', sans-serif;
+  font-weight: bold;
+  font-style: italic;
+  color: #C98E34;
+
+}
+
+.speak-inst-short {
+  font-size: 55px;
+  position: absolute;
+  bottom: 188px;
+  z-index: 30;
+  left: 486px;
+  font-family: 'Amaranth', sans-serif;
+  font-weight: bold;
+  font-style: italic;
+  color: #C98E34;
+
 }
 
 .mic {
@@ -349,7 +378,9 @@ form div {
 }
 
 .on-button:focus {
+  z-index: 10;
   outline: 0;
+
   animation-name: pulse_animation;
   animation-duration: 3000ms;
   transform-origin: 70% 70%;
@@ -366,11 +397,23 @@ form div {
   }
 }
 
+.bottom-speak-div {
+  background-color: #DBF3E3;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  min-height: 233px;
+}
+
 .pulsate-ring {
+  z-index: 10;
   height: 300px;
   width: 300px;
   position: absolute;
   opacity: 0;
+  left: 563px;
+  bottom: 290px;
   border: 5px solid;
   border-color: rgb(241, 211, 200);
   border-radius: 50%;
@@ -379,8 +422,11 @@ form div {
 }
 
 .pulsate-ring-outer {
+  z-index: 10;
   height: 300px;
   width: 300px;
+  left: 563px;
+  bottom: 290px;
   position: absolute;
   opacity: 0;
   border: 2px solid;
