@@ -11,7 +11,9 @@ class RecordButtons extends Component {
     this.state = {
       text: "",
       ringAnimateClass: "",
-      outerRingAnimateClass: ""
+      outerRingAnimateClass: "",
+      instructionText: "READY. SET. RECORD.",
+      instructionTextClass: "speak-inst-long"
     };
     this.handleStart = this.handleStart.bind(this);
     this.handleStop = this.handleStop.bind(this);
@@ -21,7 +23,7 @@ class RecordButtons extends Component {
 
   // handleStart = () => // we can do this instead of binding in the constructor
   handleStart() {
-    this.setState({ringAnimateClass: "pulsate-ring", outerRingAnimateClass: "pulsate-ring-outer"})
+    this.setState({ringAnimateClass: "pulsate-ring", outerRingAnimateClass: "pulsate-ring-outer", instructionText: "DO YOUR THING.", instructionTextClass: "speak-inst-short"})
     const startTime = new Date();
     this.props.dispatchStartTime(startTime);
     this.setState({ hasStarted: true });
@@ -57,7 +59,7 @@ class RecordButtons extends Component {
 
   handleStop() {
     const endTime = new Date();
-    this.setState({ringAnimateClass: '', outerRingAnimateClass: ''})
+    this.setState({ringAnimateClass: '', outerRingAnimateClass: '', instructionText: "READY. SET. RECORD.", instructionTextClass: "speak-inst-long"})
     this.props.dispatchEndTime(endTime);
     this.stream.stop = this.stream.stop.bind(this.stream);
     this.setState({ hasStarted: false });
@@ -80,11 +82,7 @@ class RecordButtons extends Component {
       ? this.props.chosenConversation.snippets
       : [];
     if (snippets) snippetsLength = snippets.length;
-    let buttonColor = this.state.hasStarted ? "rgb(241, 211,200)" : "#DBF3E3";
-
-    //"rgb(204,242,218)"
-
-    //
+    let buttonColor = this.state.hasStarted ? "rgb(241, 211,200)" : "#0E254C";
 
     return (
       <div className="speak-button-wrapper">
@@ -100,6 +98,7 @@ class RecordButtons extends Component {
           >
             <img className="mic" src="/microphone-black-shape.svg" />
           </button>
+          <div className={this.state.instructionTextClass}>{this.state.instructionText}</div>
         </div>
         <div>
           {snippetsLength ? (
