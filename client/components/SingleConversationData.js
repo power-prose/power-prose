@@ -128,7 +128,7 @@ export class SingleConversationData extends Component {
               }}
               titleColor="#0E254C"
             />
-            <CardText>
+            <CardText color="#0E254C" >
               {conversation.name},{" "}
               {conversation.date && dateParser(conversation.date)}
             </CardText>
@@ -136,7 +136,7 @@ export class SingleConversationData extends Component {
           <div className="hide-card">
             <Card style={styles.topLevelCard}>
               <CardTitle
-                title="Your Most Used Watchword"
+                title="Your Most Used WatchWord"
                 style={{ backgroundColor: "#DBF3E3" }}
                 titleStyle={{
                   fontFamily: "Amaranth, sans-serif",
@@ -145,7 +145,7 @@ export class SingleConversationData extends Component {
                 }}
                 titleColor="#0E254C"
               />
-              <CardText>{this.calcMostUsedWatchWord()}</CardText>
+              <CardText color="#0E254C">{this.calcMostUsedWatchWord()}</CardText>
             </Card>
           </div>
           <div className="hide-card">
@@ -160,7 +160,7 @@ export class SingleConversationData extends Component {
                 }}
                 titleColor="#0E254C"
               />
-              <CardText>{this.calcMostFrequentTone()}</CardText>
+              <CardText color="#0E254C">{this.calcMostFrequentTone()}</CardText>
             </Card>
           </div>
         </div>
