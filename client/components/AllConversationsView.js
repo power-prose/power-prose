@@ -184,7 +184,14 @@ export class AllConversationsView extends Component {
     const dialogAction = [
       <FlatButton
         label="Okay"
-        primary={true}
+        secondary={true}
+        style={{
+          marginBottom: "5px",
+          color: "#0e254c",
+          border: "1px solid #0e254c"
+        }}
+        backgroundColor="#f0ddd4"
+        hoverColor="rgb(204,242,218)"
         onClick={this.handleDialogClose}
       />
     ];
@@ -343,13 +350,21 @@ export class AllConversationsView extends Component {
         </div>
         <div>
           <Dialog
-            title="Record a Conversation"
+            titleClassName="dialog-title"
+            title="You don't have any conversations yet"
+            titleStyle={{
+              fontFamily: "Amaranth, sans-serif",
+              fontWeight: "bold",
+              color: "#0E254C"
+            }}
             actions={dialogAction}
             modal={false}
             open={this.state.dialogOpen}
             onRequestClose={this.handleDialogClose}
           >
+          <label style={{marginTop: '15px'}}>
             Once you have recorded conversations, you will be able to view them all on this page.
+            </label>
           </Dialog>
         </div>
       </div>
