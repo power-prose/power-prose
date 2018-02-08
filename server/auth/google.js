@@ -1,7 +1,7 @@
 const passport = require('passport')
 const router = require('express').Router()
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
-const {User} = require('../db/models')
+const { User, UserWatchWord } = require('../db/models')
 module.exports = router
 
 /**
@@ -39,8 +39,23 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
       .then(foundUser => (foundUser
         ? done(null, foundUser)
         : User.create({name, email, googleId})
-          .then(createdUser => done(null, createdUser))
-      ))
+          .then(createdUser => {
+            return UserWatchWord.bulkCreate([
+              { wordOrPhrase: 'just', userId: createdUser.id },
+              { wordOrPhrase: 'Does that make sense', userId: createdUser.id },
+              { wordOrPhrase: 'no expert', userId: createdUser.id },
+              { wordOrPhrase: 'Am I making sense', userId: createdUser.id },
+              { wordOrPhrase: 'Sorry', userId: createdUser.id },
+              { wordOrPhrase: 'just like to say', userId: createdUser.id },
+              { wordOrPhrase: 'not sure', userId: createdUser.id },
+              { wordOrPhrase: 'I was wondering', userId: createdUser.id }
+            ])
+          })
+          .then(() => {
+            return User.findOne({ where: { googleId } })
+          })
+          .then(user => done(null, user))
+        ))
       .catch(done)
   })
 
@@ -49,7 +64,7 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
   router.get('/', passport.authenticate('google', {scope: 'email'}))
 
   router.get('/verify', passport.authenticate('google', {
-    successRedirect: '/home',
+    successRedirect: '/speak',
     failureRedirect: '/login'
   }))
 
