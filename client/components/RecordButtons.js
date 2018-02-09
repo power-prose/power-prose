@@ -13,7 +13,8 @@ class RecordButtons extends Component {
       ringAnimateClass: "",
       outerRingAnimateClass: "",
       instructionText: "READY. SET. RECORD.",
-      instructionTextClass: "speak-inst-long"
+      instructionTextClass: "speak-inst-long",
+      mainButtonClass: "on-button"
     };
     this.handleStart = this.handleStart.bind(this);
     this.handleStop = this.handleStop.bind(this);
@@ -40,7 +41,7 @@ class RecordButtons extends Component {
 
         this.stream.on("data", function(data) {
           handleUpdate(data);
-          console.log('!!!!!!!', data);
+          // console.log('!!!!!!!', data);
         });
 
         this.stream.on("error", function(err) {
@@ -48,7 +49,7 @@ class RecordButtons extends Component {
         });
       })
       .catch(function(error) {
-        console.log(error); // display errors to user with error component
+         console.log(error); // display errors to user with error component
       });
   }
 
@@ -59,7 +60,7 @@ class RecordButtons extends Component {
 
   handleStop() {
     const endTime = new Date();
-    this.setState({ringAnimateClass: '', outerRingAnimateClass: '', instructionText: "READY. SET. RECORD.", instructionTextClass: "speak-inst-long"})
+    this.setState({ringAnimateClass: '', outerRingAnimateClass: '', instructionText: "ONE MOMENT...", instructionTextClass: "speak-inst-middle", mainButtonClass: "on-button-done"})
     this.props.dispatchEndTime(endTime);
     this.stream.stop = this.stream.stop.bind(this.stream);
     this.setState({ hasStarted: false });
@@ -92,7 +93,7 @@ class RecordButtons extends Component {
         <div className={this.state.ringAnimateClass}>
         </div>
           <button
-            className="on-button" style={{"background": buttonColor}}
+            className={this.state.mainButtonClass} style={{"background": buttonColor}}
 
             onClick={this.togglePlay}
           >

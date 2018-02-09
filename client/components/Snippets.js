@@ -90,7 +90,6 @@ class Snippets extends React.Component {
       />
     ];
     const snippetMenu = this.state.snippets.map((snippet, i) => {
-      console.log('SNIPPET', snippet)
       return (
         <SnippetChip
           key={i}

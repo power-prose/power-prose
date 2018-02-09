@@ -8,10 +8,20 @@ import allConversations from './allConversations'
 import chosenConversation from './chosenConversation'
 
 const reducer = combineReducers({ user, watchWords, allConversations, chosenConversation })
-const middleware = composeWithDevTools(applyMiddleware(
-  thunkMiddleware,
-  createLogger({collapsed: true})
-))
+
+const isProduction = process.env.NODE_ENV === "production"
+
+const middleware = isProduction
+  ? composeWithDevTools(applyMiddleware(thunkMiddleware))
+  : composeWithDevTools(
+      applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
+    )
+
+
+// const middleware = composeWithDevTools(applyMiddleware(
+//   thunkMiddleware//,
+//   //createLogger({collapsed: true})
+// ))
 const store = createStore(reducer, middleware)
 
 export default store

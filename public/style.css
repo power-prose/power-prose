@@ -330,22 +330,6 @@ form div {
   padding: 3em;
 }
 
-.on-button {
-  z-index: 10;
-  border-radius: 50%;
-  height: 300px;
-  width: 300px;
-  color: navy;
-  font-size: 2.5em;
-  cursor: pointer;
-  border: none;
-  position: absolute;
-  left: 563px;
-  bottom: 290px;
-  font-style: bold;
-  letter-spacing: 0.2em;
-  box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.1);
-}
 
 .speak-inst-long {
   font-size: 55px;
@@ -373,6 +357,19 @@ form div {
 
 }
 
+.speak-inst-middle {
+  font-size: 55px;
+  position: absolute;
+  bottom: 188px;
+  z-index: 30;
+  left: 510px;
+  font-family: 'Amaranth', sans-serif;
+  font-weight: bold;
+  font-style: italic;
+  color: #C98E34;
+
+}
+
 .mic {
   height: 70%;
 }
@@ -386,7 +383,50 @@ form div {
   transform-origin: 70% 70%;
   animation-iteration-count: infinite;
   animation-timing-function: ease-out;
+  outline: 0;
 }
+
+.on-button {
+  z-index: 10;
+  border-radius: 50%;
+  height: 300px;
+  width: 300px;
+  color: navy;
+  font-size: 2.5em;
+  cursor: pointer;
+  border: none;
+  position: absolute;
+  left: 563px;
+  bottom: 290px;
+  font-style: bold;
+  letter-spacing: 0.2em;
+  box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.1);
+}
+
+
+.on-button-done {
+  z-index: 10;
+  border-radius: 50%;
+  height: 300px;
+  width: 300px;
+  color: navy;
+  font-size: 2.5em;
+  cursor: pointer;
+  border: none;
+  position: absolute;
+  left: 563px;
+  bottom: 290px;
+  font-style: bold;
+  letter-spacing: 0.2em;
+  box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.1);
+}
+
+.on-button-done:focus {
+  outline: 0;
+}
+
+
+
 
 @keyframes pulse_animation {
   50% {
