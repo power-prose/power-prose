@@ -1,7 +1,7 @@
 const { User, UserWatchWord, Conversation, WatchWordOccurrence, Tone, Snippet, ToneSentence, db } = require('../server/db/models')
 
 const users = [{
-  email: '12345@gmail.com',
+  email: 'julie@gmail.com',
   password: 'testpassword1',
   salt: 'not_sure?',
   googleId: '12345',
