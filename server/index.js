@@ -11,6 +11,7 @@ const sessionStore = new SequelizeStore({db})
 const PORT = process.env.PORT || 8080
 const app = express()
 const socketio = require('socket.io')
+const sslRedirect = require('heroku-ssl-redirect');
 module.exports = app
 
 /**
@@ -41,6 +42,9 @@ const createApp = () => {
 
   // compression middleware
   app.use(compression())
+
+  // enable ssl redirect
+  app.use(sslRedirect());
 
   // session middleware with passport
   app.use(session({
