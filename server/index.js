@@ -46,7 +46,7 @@ const createApp = () => {
   // enable ssl redirect
   //app.use(sslRedirect());
 
-  app.configure('production', () => {
+  if (process.env.NODE_ENV === 'production') {
     app.use((req, res, next) => {
       if (req.header ('x-forwarded-proto') !== 'https')
         res.redirect(`https://${req.header('host')}${req.url}`)
@@ -54,7 +54,7 @@ const createApp = () => {
         next()
       }
     })
-  })
+  }
 
   // session middleware with passport
   app.use(session({
