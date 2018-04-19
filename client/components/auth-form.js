@@ -72,7 +72,9 @@ class AuthForm extends React.Component {
             value={this.state.password}
             onChange={this.handleChange}            />
           </div>
+          <CardText style={{paddingLeft: 0}}>
           {error && error.response && <div> {error.response.data} </div>}
+          </CardText>
         </CardText>
         <CardActions>
         <div>
